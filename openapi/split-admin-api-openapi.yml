@@ -1,0 +1,1371 @@
+openapi: 3.1.0
+info:
+  title: Split Admin API
+  description: >-
+    The Split Admin API is a REST API that enables programmatic management of
+    workspaces (projects), environments, traffic types, attributes, users,
+    groups, API keys, and change requests within the Split platform (now Harness
+    Feature Management and Experimentation). The API uses resource-oriented URLs,
+    returns JSON responses, and requires Admin API keys for authentication.
+    All endpoints are prefixed with /internal/api/v2 on the api.split.io host.
+  version: '2.0'
+  contact:
+    name: Split Support
+    url: https://help.split.io
+  termsOfService: https://www.split.io/terms-of-service/
+externalDocs:
+  description: Split Admin API Documentation
+  url: https://docs.split.io/reference/introduction
+servers:
+  - url: https://api.split.io/internal/api/v2
+    description: Production Server
+tags:
+  - name: Workspaces
+    description: >-
+      Manage workspaces (projects) which organize feature flags and experiments
+      across business units, product lines, and applications.
+  - name: Environments
+    description: >-
+      Manage environments within workspaces for deploying and testing feature
+      flags across stages such as staging and production.
+  - name: Traffic Types
+    description: >-
+      Manage traffic types which define the entities (users, accounts, etc.)
+      that feature flags target.
+  - name: Attributes
+    description: >-
+      Manage attributes used in targeting rules for feature flag definitions.
+  - name: Users
+    description: >-
+      Manage users within the Split account, including inviting new users and
+      updating user roles.
+  - name: Groups
+    description: >-
+      Manage groups for organizing users and assigning permissions.
+  - name: API Keys
+    description: >-
+      Create and delete API keys for authenticating with the Split platform,
+      with configurable roles and scopes.
+  - name: Segments
+    description: >-
+      Manage segments which define reusable groups of identities for targeting.
+  - name: Large Segments
+    description: >-
+      Manage large segments optimized for high-volume identity lists.
+  - name: Change Requests
+    description: >-
+      Manage change requests for controlled approval workflows when modifying
+      feature flag definitions.
+  - name: Identities
+    description: >-
+      Manage identities (keys) within segments.
+security:
+  - bearerAuth: []
+paths:
+  /workspaces:
+    get:
+      operationId: listWorkspaces
+      summary: List workspaces
+      description: >-
+        Retrieves all workspaces (projects) accessible to the authenticated
+        Admin API key. Workspaces allow you to separately manage feature flags
+        and experiments across different business units or applications.
+      tags:
+        - Workspaces
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successful response containing list of workspaces
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+  /environments/ws/{workspaceId}:
+    get:
+      operationId: listEnvironments
+      summary: List environments
+      description: >-
+        Retrieves all environments within the specified workspace. Environments
+        represent deployment stages such as staging and production where feature
+        flag definitions can be configured independently.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+      responses:
+        '200':
+          description: Successful response containing list of environments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Environment'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace not found
+    post:
+      operationId: createEnvironment
+      summary: Create environment
+      description: >-
+        Creates a new environment within the specified workspace.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvironmentCreate'
+      responses:
+        '200':
+          description: Environment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace not found
+  /environments/ws/{workspaceId}/{environmentId}:
+    get:
+      operationId: getEnvironment
+      summary: Get environment
+      description: >-
+        Retrieves a single environment by its identifier within the specified
+        workspace.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/environmentIdParam'
+      responses:
+        '200':
+          description: Successful response containing the environment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Environment or workspace not found
+    patch:
+      operationId: updateEnvironment
+      summary: Update environment
+      description: >-
+        Updates an existing environment within the specified workspace.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/environmentIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvironmentUpdate'
+      responses:
+        '200':
+          description: Environment updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Environment or workspace not found
+    delete:
+      operationId: deleteEnvironment
+      summary: Delete environment
+      description: >-
+        Deletes an environment from the specified workspace.
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/environmentIdParam'
+      responses:
+        '200':
+          description: Environment deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Environment or workspace not found
+  /trafficTypes/ws/{workspaceId}:
+    get:
+      operationId: listTrafficTypes
+      summary: List traffic types
+      description: >-
+        Retrieves all traffic types defined within the specified workspace.
+        Traffic types represent the kinds of entities that feature flags can
+        target, such as users or accounts.
+      tags:
+        - Traffic Types
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+      responses:
+        '200':
+          description: Successful response containing list of traffic types
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TrafficType'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace not found
+  /schema/ws/{workspaceId}/trafficTypes/{trafficTypeId}:
+    get:
+      operationId: listAttributes
+      summary: List attributes
+      description: >-
+        Retrieves all attributes defined for a given traffic type within the
+        specified workspace. Attributes are used in targeting rules for feature
+        flag definitions.
+      tags:
+        - Attributes
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - name: trafficTypeId
+          in: path
+          required: true
+          description: The unique identifier of the traffic type
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing list of attributes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Attribute'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or traffic type not found
+  /users:
+    get:
+      operationId: listUsers
+      summary: List users
+      description: >-
+        Retrieves all users that the Admin API key has access to within the
+        account. Returns user details including status, email, and group
+        memberships.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - name: status
+          in: query
+          description: Filter users by status
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - DEACTIVATED
+              - PENDING
+      responses:
+        '200':
+          description: Successful response containing list of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /users/{userId}:
+    get:
+      operationId: getUser
+      summary: Get user
+      description: >-
+        Retrieves a single user by their unique identifier.
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier of the user
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: User not found
+    put:
+      operationId: updateUser
+      summary: Update user
+      description: >-
+        Updates a user's profile, including their role and group memberships.
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier of the user
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: User not found
+    delete:
+      operationId: deleteUser
+      summary: Deactivate user
+      description: >-
+        Deactivates a user within the account.
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The unique identifier of the user
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User deactivated successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: User not found
+  /users/invite:
+    post:
+      operationId: inviteUser
+      summary: Invite user
+      description: >-
+        Invites a new user to the account by sending an invitation email.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInvite'
+      responses:
+        '200':
+          description: User invited successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /groups:
+    get:
+      operationId: listGroups
+      summary: List groups
+      description: >-
+        Retrieves all active groups in the account. Groups are used to organize
+        users and assign permissions collectively.
+      tags:
+        - Groups
+      responses:
+        '200':
+          description: Successful response containing list of groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group'
+        '401':
+          description: Unauthorized - invalid or missing API key
+    post:
+      operationId: createGroup
+      summary: Create group
+      description: >-
+        Creates a new group with a name and description. Group names are unique
+        within an account.
+      tags:
+        - Groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupCreate'
+      responses:
+        '200':
+          description: Group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: Invalid request body or group name already exists
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /groups/{groupId}:
+    get:
+      operationId: getGroup
+      summary: Get group
+      description: >-
+        Retrieves a single group by its unique identifier.
+      tags:
+        - Groups
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: The unique identifier of the group
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing the group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Group not found
+    delete:
+      operationId: deleteGroup
+      summary: Delete group
+      description: >-
+        Deletes a group from the account.
+      tags:
+        - Groups
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: The unique identifier of the group
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Group deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Group not found
+  /apiKeys:
+    post:
+      operationId: createApiKey
+      summary: Create API key
+      description: >-
+        Creates a new API key with specified roles and scope. API keys can be
+        scoped to specific environments, a workspace, or the entire account.
+      tags:
+        - API Keys
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyCreate'
+      responses:
+        '200':
+          description: API key created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /apiKeys/{apiKeyId}:
+    delete:
+      operationId: deleteApiKey
+      summary: Delete API key
+      description: >-
+        Deletes an existing API key by its unique identifier.
+      tags:
+        - API Keys
+      parameters:
+        - name: apiKeyId
+          in: path
+          required: true
+          description: The unique identifier of the API key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: API key deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: API key not found
+  /segments/ws/{workspaceId}:
+    get:
+      operationId: listSegments
+      summary: List segments
+      description: >-
+        Retrieves all segments defined within the specified workspace.
+      tags:
+        - Segments
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successful response containing list of segments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace not found
+  /segments/ws/{workspaceId}/environments/{environmentId}:
+    get:
+      operationId: listSegmentsInEnvironment
+      summary: List segments in environment
+      description: >-
+        Retrieves all segments activated in the specified environment within
+        the given workspace.
+      tags:
+        - Segments
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/environmentIdParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successful response containing list of segments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or environment not found
+  /segments/{environmentId}/{segmentName}:
+    post:
+      operationId: enableSegmentInEnvironment
+      summary: Enable segment in environment
+      description: >-
+        Activates a segment in the specified environment, making it available
+        for use in feature flag targeting rules.
+      tags:
+        - Segments
+      parameters:
+        - name: environmentId
+          in: path
+          required: true
+          description: The unique identifier of the environment
+          schema:
+            type: string
+        - name: segmentName
+          in: path
+          required: true
+          description: The name of the segment
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Segment enabled successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Segment or environment not found
+    delete:
+      operationId: deactivateSegmentInEnvironment
+      summary: Deactivate segment in environment
+      description: >-
+        Deactivates a segment in the specified environment.
+      tags:
+        - Segments
+      parameters:
+        - name: environmentId
+          in: path
+          required: true
+          description: The unique identifier of the environment
+          schema:
+            type: string
+        - name: segmentName
+          in: path
+          required: true
+          description: The name of the segment
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Segment deactivated successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Segment or environment not found
+  /segments/{environmentId}/{segmentName}/upload:
+    put:
+      operationId: updateSegmentKeysViaCSV
+      summary: Update segment keys via CSV
+      description: >-
+        Replaces all keys in a segment by uploading a CSV file containing
+        the new set of identities.
+      tags:
+        - Identities
+      parameters:
+        - name: environmentId
+          in: path
+          required: true
+          description: The unique identifier of the environment
+          schema:
+            type: string
+        - name: segmentName
+          in: path
+          required: true
+          description: The name of the segment
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          text/csv:
+            schema:
+              type: string
+              description: CSV file with one identity key per line
+      responses:
+        '200':
+          description: Segment keys updated successfully
+        '400':
+          description: Invalid CSV format
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Segment or environment not found
+  /segments/{environmentId}/{segmentName}/keys:
+    get:
+      operationId: listSegmentKeys
+      summary: List segment keys
+      description: >-
+        Retrieves the identity keys belonging to the specified segment in the
+        given environment.
+      tags:
+        - Identities
+      parameters:
+        - name: environmentId
+          in: path
+          required: true
+          description: The unique identifier of the environment
+          schema:
+            type: string
+        - name: segmentName
+          in: path
+          required: true
+          description: The name of the segment
+          schema:
+            type: string
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successful response containing segment keys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentKeysList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Segment or environment not found
+    post:
+      operationId: addSegmentKeys
+      summary: Add keys to segment
+      description: >-
+        Adds identity keys to the specified segment in the given environment.
+      tags:
+        - Identities
+      parameters:
+        - name: environmentId
+          in: path
+          required: true
+          description: The unique identifier of the environment
+          schema:
+            type: string
+        - name: segmentName
+          in: path
+          required: true
+          description: The name of the segment
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentKeysUpdate'
+      responses:
+        '200':
+          description: Keys added successfully
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Segment or environment not found
+    delete:
+      operationId: removeSegmentKeys
+      summary: Remove keys from segment
+      description: >-
+        Removes identity keys from the specified segment in the given
+        environment.
+      tags:
+        - Identities
+      parameters:
+        - name: environmentId
+          in: path
+          required: true
+          description: The unique identifier of the environment
+          schema:
+            type: string
+        - name: segmentName
+          in: path
+          required: true
+          description: The name of the segment
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentKeysUpdate'
+      responses:
+        '200':
+          description: Keys removed successfully
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Segment or environment not found
+  /large-segments/ws/{workspaceId}/environments/{environmentId}:
+    get:
+      operationId: listLargeSegmentsInEnvironment
+      summary: List large segments in environment
+      description: >-
+        Retrieves all large segments configured in the specified environment
+        within the given workspace.
+      tags:
+        - Large Segments
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/environmentIdParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successful response containing list of large segments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LargeSegmentList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or environment not found
+  /changeRequests:
+    get:
+      operationId: listChangeRequests
+      summary: List change requests
+      description: >-
+        Retrieves all change requests, which represent pending modifications
+        to feature flag definitions that require approval before being applied.
+      tags:
+        - Change Requests
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - name: status
+          in: query
+          description: Filter by change request status
+          schema:
+            type: string
+            enum:
+              - OPEN
+              - APPROVED
+              - DECLINED
+              - APPLIED
+              - CANCELLED
+      responses:
+        '200':
+          description: Successful response containing list of change requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeRequestList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /changeRequests/{changeRequestId}/approve:
+    put:
+      operationId: approveChangeRequest
+      summary: Approve change request
+      description: >-
+        Approves a pending change request, allowing the proposed feature flag
+        definition changes to be applied.
+      tags:
+        - Change Requests
+      parameters:
+        - name: changeRequestId
+          in: path
+          required: true
+          description: The unique identifier of the change request
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                  description: Optional approval comment
+      responses:
+        '200':
+          description: Change request approved successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Change request not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Admin API key passed as a Bearer token in the Authorization header.
+  parameters:
+    workspaceIdParam:
+      name: workspaceId
+      in: path
+      required: true
+      description: The unique identifier of the workspace
+      schema:
+        type: string
+    environmentIdParam:
+      name: environmentId
+      in: path
+      required: true
+      description: The unique identifier or name of the environment
+      schema:
+        type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+  schemas:
+    Workspace:
+      type: object
+      description: >-
+        A workspace (project) that organizes feature flags and experiments
+        across business units or applications.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the workspace
+        name:
+          type: string
+          description: Human-readable name of the workspace
+        requiresTitleAndComments:
+          type: boolean
+          description: Whether changes require titles and comments
+    WorkspaceList:
+      type: object
+      description: Paginated list of workspaces
+      properties:
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Workspace'
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        totalCount:
+          type: integer
+          description: Total number of workspaces available
+    Environment:
+      type: object
+      description: >-
+        An environment representing a deployment stage where feature flags
+        can be independently configured.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the environment
+        name:
+          type: string
+          description: Human-readable name of the environment
+        production:
+          type: boolean
+          description: Whether this is a production environment
+    EnvironmentCreate:
+      type: object
+      description: Request body for creating a new environment
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the new environment
+        production:
+          type: boolean
+          description: Whether this is a production environment
+    EnvironmentUpdate:
+      type: object
+      description: Request body for updating an environment
+      properties:
+        name:
+          type: string
+          description: Updated name for the environment
+        production:
+          type: boolean
+          description: Whether this is a production environment
+    TrafficType:
+      type: object
+      description: >-
+        A traffic type defining the kind of entity that feature flags target.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the traffic type
+        name:
+          type: string
+          description: Name of the traffic type (e.g., user, account)
+    Attribute:
+      type: object
+      description: >-
+        An attribute used in targeting rules for feature flag definitions.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the attribute
+        trafficTypeId:
+          type: string
+          description: Identifier of the associated traffic type
+        displayName:
+          type: string
+          description: Human-readable name of the attribute
+        dataType:
+          type: string
+          description: Data type of the attribute
+          enum:
+            - STRING
+            - NUMBER
+            - DATETIME
+            - SET
+        description:
+          type: string
+          description: Description of the attribute
+        isSearchable:
+          type: boolean
+          description: Whether the attribute is searchable
+    User:
+      type: object
+      description: A user within the Split account
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the user
+        email:
+          type: string
+          format: email
+          description: Email address of the user
+        name:
+          type: string
+          description: Full name of the user
+        status:
+          type: string
+          description: Current status of the user
+          enum:
+            - ACTIVE
+            - DEACTIVATED
+            - PENDING
+        type:
+          type: string
+          description: User type or role
+        groups:
+          type: array
+          description: Groups the user belongs to
+          items:
+            $ref: '#/components/schemas/GroupRef'
+    UserList:
+      type: object
+      description: Paginated list of users
+      properties:
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        totalCount:
+          type: integer
+          description: Total number of users available
+    UserUpdate:
+      type: object
+      description: Request body for updating a user
+      properties:
+        name:
+          type: string
+          description: Updated name for the user
+        status:
+          type: string
+          description: Updated status for the user
+          enum:
+            - ACTIVE
+            - DEACTIVATED
+        groups:
+          type: array
+          description: Updated list of group references
+          items:
+            $ref: '#/components/schemas/GroupRef'
+    UserInvite:
+      type: object
+      description: Request body for inviting a new user
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address to send the invitation to
+        groups:
+          type: array
+          description: Groups to add the invited user to
+          items:
+            $ref: '#/components/schemas/GroupRef'
+    Group:
+      type: object
+      description: A group used to organize users and assign permissions
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the group
+        name:
+          type: string
+          description: Name of the group (unique within an account)
+        description:
+          type: string
+          description: Description of the group
+        type:
+          type: string
+          description: Group type
+    GroupRef:
+      type: object
+      description: A reference to a group
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the referenced group
+        type:
+          type: string
+          description: Type of the group reference
+    GroupCreate:
+      type: object
+      description: Request body for creating a new group
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the new group (must be unique)
+        description:
+          type: string
+          description: Description of the new group
+    ApiKey:
+      type: object
+      description: An API key used for authenticating with the Split platform
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the API key
+        name:
+          type: string
+          description: Name of the API key
+        apiKeyType:
+          type: string
+          description: Type of the API key
+          enum:
+            - admin
+            - client-side
+            - server-side
+        key:
+          type: string
+          description: >-
+            The API key value (only returned at creation time)
+        roles:
+          type: array
+          description: Roles assigned to the API key
+          items:
+            type: string
+        createdAt:
+          type: integer
+          format: int64
+          description: Timestamp of when the API key was created
+    ApiKeyCreate:
+      type: object
+      description: Request body for creating a new API key
+      required:
+        - name
+        - apiKeyType
+      properties:
+        name:
+          type: string
+          description: Name for the new API key
+        apiKeyType:
+          type: string
+          description: Type of the API key to create
+          enum:
+            - admin
+            - client-side
+            - server-side
+        roles:
+          type: array
+          description: Roles to assign to the API key
+          items:
+            type: string
+        workspaceId:
+          type: string
+          description: Workspace to scope the API key to
+        environmentIds:
+          type: array
+          description: Environments to scope the API key to
+          items:
+            type: string
+    Segment:
+      type: object
+      description: >-
+        A segment defining a reusable group of identities for targeting.
+      properties:
+        name:
+          type: string
+          description: Name of the segment
+        description:
+          type: string
+          description: Description of the segment
+        trafficType:
+          $ref: '#/components/schemas/TrafficType'
+        creationTime:
+          type: integer
+          format: int64
+          description: Timestamp of when the segment was created
+        tags:
+          type: array
+          description: Tags associated with the segment
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Tag name
+    SegmentList:
+      type: object
+      description: Paginated list of segments
+      properties:
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        totalCount:
+          type: integer
+          description: Total number of segments available
+    SegmentKeysList:
+      type: object
+      description: Paginated list of segment keys (identities)
+      properties:
+        keys:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: The identity key value
+        count:
+          type: integer
+          description: Total number of keys in the segment
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+    SegmentKeysUpdate:
+      type: object
+      description: Request body for adding or removing segment keys
+      required:
+        - keys
+      properties:
+        keys:
+          type: array
+          description: List of identity keys to add or remove
+          items:
+            type: string
+        comment:
+          type: string
+          description: Optional comment describing the change
+    LargeSegmentList:
+      type: object
+      description: Paginated list of large segments
+      properties:
+        objects:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Name of the large segment
+              description:
+                type: string
+                description: Description of the large segment
+              trafficType:
+                $ref: '#/components/schemas/TrafficType'
+              creationTime:
+                type: integer
+                format: int64
+                description: Timestamp of when the large segment was created
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        totalCount:
+          type: integer
+          description: Total number of large segments available
+    ChangeRequest:
+      type: object
+      description: >-
+        A change request representing a pending modification to a feature flag
+        definition that requires approval.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the change request
+        status:
+          type: string
+          description: Current status of the change request
+          enum:
+            - OPEN
+            - APPROVED
+            - DECLINED
+            - APPLIED
+            - CANCELLED
+        title:
+          type: string
+          description: Title of the change request
+        comment:
+          type: string
+          description: Comment describing the proposed change
+        split:
+          type: string
+          description: Name of the feature flag being modified
+        environment:
+          type: string
+          description: Environment in which the change is proposed
+        operationType:
+          type: string
+          description: Type of operation being requested
+        createdAt:
+          type: integer
+          format: int64
+          description: Timestamp of when the change request was created
+        approvers:
+          type: array
+          description: Users who can approve the change request
+          items:
+            $ref: '#/components/schemas/User'
+    ChangeRequestList:
+      type: object
+      description: Paginated list of change requests
+      properties:
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChangeRequest'
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        totalCount:
+          type: integer
+          description: Total number of change requests available

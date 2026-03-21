@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://split.io/schemas/split/segment.json",
+  "title": "Split Segment",
+  "description": "A segment in the Split platform, representing a reusable group of identities (keys) that can be referenced in feature flag targeting rules.",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Unique name of the segment within a workspace"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the segment's purpose"
+    },
+    "trafficType": {
+      "$ref": "#/$defs/TrafficType"
+    },
+    "creationTime": {
+      "type": "integer",
+      "description": "Unix timestamp in milliseconds of when the segment was created"
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags associated with the segment for organization and filtering",
+      "items": {
+        "$ref": "#/$defs/Tag"
+      }
+    },
+    "keys": {
+      "type": "array",
+      "description": "Identity keys belonging to this segment",
+      "items": {
+        "$ref": "#/$defs/SegmentKey"
+      }
+    }
+  },
+  "$defs": {
+    "TrafficType": {
+      "type": "object",
+      "description": "A traffic type defining the kind of entity the segment targets",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the traffic type"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the traffic type (e.g., user, account)"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A tag used to categorize and filter segments",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the tag"
+        }
+      }
+    },
+    "SegmentKey": {
+      "type": "object",
+      "description": "An identity key belonging to a segment",
+      "required": ["key"],
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The identity key value"
+        }
+      }
+    }
+  }
+}

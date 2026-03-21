@@ -1,0 +1,254 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://split.io/schemas/split/feature-flag-definition.json",
+  "title": "Split Feature Flag Definition",
+  "description": "The complete targeting definition of a feature flag within a specific environment, including treatments, targeting rules, percentage-based rollouts, and kill status.",
+  "type": "object",
+  "required": ["name", "treatments", "defaultTreatment", "defaultRule"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the feature flag this definition belongs to"
+    },
+    "environment": {
+      "$ref": "#/$defs/EnvironmentRef"
+    },
+    "trafficType": {
+      "$ref": "#/$defs/TrafficType"
+    },
+    "killed": {
+      "type": "boolean",
+      "description": "Whether the flag is killed, forcing all evaluations to return the default treatment"
+    },
+    "treatments": {
+      "type": "array",
+      "description": "List of possible treatments that this feature flag can return during evaluation",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/Treatment"
+      }
+    },
+    "defaultTreatment": {
+      "type": "string",
+      "description": "The treatment returned when no targeting rules match or when the flag is killed"
+    },
+    "baselineTreatment": {
+      "type": "string",
+      "description": "The control treatment used as a baseline for experimentation comparisons"
+    },
+    "rules": {
+      "type": "array",
+      "description": "Ordered list of targeting rules evaluated top to bottom; the first matching rule determines the treatment",
+      "items": {
+        "$ref": "#/$defs/TargetingRule"
+      }
+    },
+    "defaultRule": {
+      "type": "array",
+      "description": "The default percentage-based rollout applied when no targeting rules match",
+      "items": {
+        "$ref": "#/$defs/Bucket"
+      }
+    },
+    "trafficAllocation": {
+      "type": "integer",
+      "description": "Percentage of traffic included in feature flag evaluation (0-100)",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "lastModified": {
+      "type": "integer",
+      "description": "Unix timestamp of the last modification to this definition"
+    },
+    "creationTime": {
+      "type": "integer",
+      "description": "Unix timestamp of when this definition was created"
+    }
+  },
+  "$defs": {
+    "EnvironmentRef": {
+      "type": "object",
+      "description": "A reference to the environment where this definition is active",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the environment"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the environment"
+        }
+      }
+    },
+    "TrafficType": {
+      "type": "object",
+      "description": "A traffic type defining the kind of entity that feature flags target",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the traffic type"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the traffic type"
+        }
+      }
+    },
+    "Treatment": {
+      "type": "object",
+      "description": "A treatment representing one of the possible values returned by a feature flag evaluation",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the treatment (e.g., on, off, v1, v2)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of what this treatment does"
+        },
+        "configurations": {
+          "type": "string",
+          "description": "JSON string containing dynamic configuration associated with this treatment"
+        }
+      }
+    },
+    "TargetingRule": {
+      "type": "object",
+      "description": "A targeting rule that matches specific conditions and assigns treatments to matching traffic",
+      "required": ["condition", "buckets"],
+      "properties": {
+        "condition": {
+          "$ref": "#/$defs/Condition"
+        },
+        "buckets": {
+          "type": "array",
+          "description": "Percentage-based distribution of treatments for traffic matching this rule",
+          "items": {
+            "$ref": "#/$defs/Bucket"
+          }
+        }
+      }
+    },
+    "Condition": {
+      "type": "object",
+      "description": "A condition defining the matching criteria for a targeting rule",
+      "properties": {
+        "combiner": {
+          "type": "string",
+          "description": "Logical combiner for multiple matchers within this condition",
+          "enum": ["AND"]
+        },
+        "matchers": {
+          "type": "array",
+          "description": "List of matchers that define the matching criteria",
+          "items": {
+            "$ref": "#/$defs/Matcher"
+          }
+        }
+      }
+    },
+    "Matcher": {
+      "type": "object",
+      "description": "A matcher defining a single matching criterion based on attributes, segments, or key values",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of matching to perform",
+          "enum": [
+            "IN_SEGMENT",
+            "WHITELIST",
+            "ALL_KEYS",
+            "EQUAL_TO",
+            "GREATER_THAN_OR_EQUAL_TO",
+            "LESS_THAN_OR_EQUAL_TO",
+            "BETWEEN",
+            "CONTAINS_STRING",
+            "STARTS_WITH",
+            "ENDS_WITH",
+            "MATCHES_STRING",
+            "IN_LIST_STRING",
+            "EQUAL_TO_SET",
+            "CONTAINS_ALL_OF_SET",
+            "CONTAINS_ANY_OF_SET",
+            "PART_OF_SET",
+            "EQUAL_TO_BOOLEAN",
+            "DEPENDS_ON"
+          ]
+        },
+        "negate": {
+          "type": "boolean",
+          "description": "Whether to negate the matcher result"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "The attribute name to match against"
+        },
+        "strings": {
+          "type": "array",
+          "description": "String values used by string-based matchers",
+          "items": {
+            "type": "string"
+          }
+        },
+        "number": {
+          "type": "integer",
+          "description": "Numeric value used by numeric matchers"
+        },
+        "date": {
+          "type": "integer",
+          "description": "Unix timestamp value used by date-based matchers"
+        },
+        "between": {
+          "type": "object",
+          "description": "Range values for the BETWEEN matcher",
+          "properties": {
+            "from": {
+              "type": "integer",
+              "description": "Lower bound of the range"
+            },
+            "to": {
+              "type": "integer",
+              "description": "Upper bound of the range"
+            }
+          }
+        },
+        "depends": {
+          "type": "object",
+          "description": "Dependency configuration for the DEPENDS_ON matcher",
+          "properties": {
+            "splitName": {
+              "type": "string",
+              "description": "Name of the feature flag to depend on"
+            },
+            "treatments": {
+              "type": "array",
+              "description": "Treatments that must be returned by the dependency",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Bucket": {
+      "type": "object",
+      "description": "A bucket defining the percentage of traffic assigned to a specific treatment",
+      "required": ["treatment", "size"],
+      "properties": {
+        "treatment": {
+          "type": "string",
+          "description": "Name of the treatment assigned to this bucket"
+        },
+        "size": {
+          "type": "integer",
+          "description": "Percentage of traffic allocated to this bucket (0-100)",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    }
+  }
+}

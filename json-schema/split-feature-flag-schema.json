@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://split.io/schemas/split/feature-flag.json",
+  "title": "Split Feature Flag",
+  "description": "A feature flag (split) in the Split platform, representing a toggle used to control feature rollouts, targeting rules, and experimentation treatments.",
+  "type": "object",
+  "required": ["name", "trafficType"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Unique name of the feature flag within a workspace",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "maxLength": 256
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the feature flag's purpose"
+    },
+    "trafficType": {
+      "$ref": "#/$defs/TrafficType"
+    },
+    "creationTime": {
+      "type": "integer",
+      "description": "Unix timestamp in milliseconds of when the feature flag was created"
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags associated with the feature flag for organization and filtering",
+      "items": {
+        "$ref": "#/$defs/Tag"
+      }
+    }
+  },
+  "$defs": {
+    "TrafficType": {
+      "type": "object",
+      "description": "A traffic type defining the kind of entity that feature flags target",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the traffic type"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the traffic type (e.g., user, account)"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A tag used to categorize and filter feature flags",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the tag"
+        }
+      }
+    }
+  }
+}

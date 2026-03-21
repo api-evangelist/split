@@ -1,0 +1,155 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "split": "https://api.split.io/vocab/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Workspace": {
+      "@id": "split:Workspace",
+      "@context": {
+        "name": "schema:name",
+        "requiresTitleAndComments": "split:requiresTitleAndComments"
+      }
+    },
+
+    "Environment": {
+      "@id": "split:Environment",
+      "@context": {
+        "name": "schema:name",
+        "production": "split:production"
+      }
+    },
+
+    "TrafficType": {
+      "@id": "split:TrafficType",
+      "@context": {
+        "name": "schema:name"
+      }
+    },
+
+    "FeatureFlag": {
+      "@id": "split:FeatureFlag",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "trafficType": {
+          "@id": "split:trafficType",
+          "@type": "@id"
+        },
+        "creationTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "tags": {
+          "@id": "schema:keywords",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "FeatureFlagDefinition": {
+      "@id": "split:FeatureFlagDefinition",
+      "@context": {
+        "name": "schema:name",
+        "environment": {
+          "@id": "split:environment",
+          "@type": "@id"
+        },
+        "killed": "split:killed",
+        "treatments": {
+          "@id": "split:treatments",
+          "@container": "@set"
+        },
+        "defaultTreatment": "split:defaultTreatment",
+        "baselineTreatment": "split:baselineTreatment",
+        "trafficAllocation": "split:trafficAllocation",
+        "lastModified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "creationTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Treatment": {
+      "@id": "split:Treatment",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "configurations": "split:configurations"
+      }
+    },
+
+    "Segment": {
+      "@id": "split:Segment",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "trafficType": {
+          "@id": "split:trafficType",
+          "@type": "@id"
+        },
+        "creationTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "tags": {
+          "@id": "schema:keywords",
+          "@container": "@set"
+        },
+        "keys": {
+          "@id": "split:keys",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "User": {
+      "@id": "split:User",
+      "@context": {
+        "email": "schema:email",
+        "name": "schema:name",
+        "status": "split:status",
+        "groups": {
+          "@id": "schema:memberOf",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Group": {
+      "@id": "split:Group",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description"
+      }
+    },
+
+    "ApiKey": {
+      "@id": "split:ApiKey",
+      "@context": {
+        "name": "schema:name",
+        "apiKeyType": "split:apiKeyType",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Attribute": {
+      "@id": "split:Attribute",
+      "@context": {
+        "displayName": "schema:name",
+        "description": "schema:description",
+        "dataType": "split:dataType",
+        "isSearchable": "split:isSearchable"
+      }
+    }
+  }
+}

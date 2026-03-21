@@ -1,0 +1,793 @@
+openapi: 3.1.0
+info:
+  title: Split Feature Flag API
+  description: >-
+    The Split Feature Flag API provides endpoints for creating, editing, and
+    deleting feature flags (splits) and their definitions within specific
+    environments. Developers can use this API to define treatments, configure
+    targeting rules, set percentage-based rollouts, and manage feature flag
+    lifecycles programmatically. It supports operations like creating feature
+    flag definitions in environments, updating targeting configurations, and
+    retrieving flag status across workspaces.
+  version: '2.0'
+  contact:
+    name: Split Support
+    url: https://help.split.io
+  termsOfService: https://www.split.io/terms-of-service/
+externalDocs:
+  description: Split Feature Flag API Documentation
+  url: https://docs.split.io/reference/feature-flag-overview
+servers:
+  - url: https://api.split.io/internal/api/v2
+    description: Production Server
+tags:
+  - name: Feature Flags
+    description: >-
+      Create, retrieve, update, and delete feature flags (splits) within
+      workspaces. Feature flags represent the toggles used to control feature
+      rollouts.
+  - name: Feature Flag Definitions
+    description: >-
+      Manage feature flag definitions in specific environments, including
+      targeting rules, treatments, percentage rollouts, and default treatments.
+security:
+  - bearerAuth: []
+paths:
+  /splits/ws/{workspaceId}:
+    get:
+      operationId: listFeatureFlags
+      summary: List feature flags
+      description: >-
+        Retrieves all feature flags within the specified workspace. Returns
+        paginated results including flag name, description, traffic type,
+        creation time, and tags.
+      tags:
+        - Feature Flags
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - name: tags
+          in: query
+          description: Filter feature flags by tag names (comma-separated)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing list of feature flags
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlagList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace not found
+  /splits/ws/{workspaceId}/trafficTypes/{trafficTypeId}:
+    post:
+      operationId: createFeatureFlag
+      summary: Create feature flag
+      description: >-
+        Creates a new feature flag within the specified workspace and traffic
+        type. The flag is created with default treatments of on and off. After
+        creation, a definition must be created in each environment where the
+        flag should be active.
+      tags:
+        - Feature Flags
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - name: trafficTypeId
+          in: path
+          required: true
+          description: >-
+            The identifier or name of the traffic type for the feature flag
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeatureFlagCreate'
+      responses:
+        '200':
+          description: Feature flag created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlag'
+        '400':
+          description: Invalid request body or feature flag name already exists
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or traffic type not found
+  /splits/ws/{workspaceId}/{featureFlagName}:
+    get:
+      operationId: getFeatureFlag
+      summary: Get feature flag
+      description: >-
+        Retrieves a single feature flag by its name within the specified
+        workspace. Returns the flag metadata including name, description,
+        traffic type, creation time, and tags.
+      tags:
+        - Feature Flags
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/featureFlagNameParam'
+      responses:
+        '200':
+          description: Successful response containing the feature flag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlag'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or feature flag not found
+    put:
+      operationId: updateFeatureFlag
+      summary: Update feature flag
+      description: >-
+        Updates the metadata of an existing feature flag, such as its
+        description or tags.
+      tags:
+        - Feature Flags
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/featureFlagNameParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeatureFlagUpdate'
+      responses:
+        '200':
+          description: Feature flag updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlag'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or feature flag not found
+    delete:
+      operationId: deleteFeatureFlag
+      summary: Delete feature flag
+      description: >-
+        Deletes a feature flag from the specified workspace. The flag must first
+        have all its environment definitions removed before it can be deleted.
+      tags:
+        - Feature Flags
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/featureFlagNameParam'
+      responses:
+        '200':
+          description: Feature flag deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or feature flag not found
+        '409':
+          description: >-
+            Feature flag still has active definitions in one or more environments
+  /splits/ws/{workspaceId}/{featureFlagName}/environments/{environmentId}:
+    get:
+      operationId: getFeatureFlagDefinition
+      summary: Get feature flag definition in environment
+      description: >-
+        Retrieves the full definition of a feature flag in a specific
+        environment, including treatments, targeting rules, default treatment,
+        percentage rollout configuration, and kill status.
+      tags:
+        - Feature Flag Definitions
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/featureFlagNameParam'
+        - $ref: '#/components/parameters/environmentIdParam'
+      responses:
+        '200':
+          description: >-
+            Successful response containing the feature flag definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlagDefinition'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: >-
+            Workspace, feature flag, or environment not found
+    post:
+      operationId: createFeatureFlagDefinition
+      summary: Create feature flag definition in environment
+      description: >-
+        Creates a new definition for an existing feature flag in the specified
+        environment. This activates the flag in that environment with the
+        provided targeting rules and treatments.
+      tags:
+        - Feature Flag Definitions
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/featureFlagNameParam'
+        - $ref: '#/components/parameters/environmentIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeatureFlagDefinitionCreate'
+      responses:
+        '200':
+          description: Feature flag definition created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlagDefinition'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: >-
+            Workspace, feature flag, or environment not found
+    patch:
+      operationId: updateFeatureFlagDefinition
+      summary: Update feature flag definition in environment
+      description: >-
+        Partially updates the definition of a feature flag in a specific
+        environment. Supports modifying targeting rules, percentage rollouts,
+        default treatment, and kill status.
+      tags:
+        - Feature Flag Definitions
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/featureFlagNameParam'
+        - $ref: '#/components/parameters/environmentIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeatureFlagDefinitionUpdate'
+      responses:
+        '200':
+          description: Feature flag definition updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlagDefinition'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: >-
+            Workspace, feature flag, or environment not found
+    delete:
+      operationId: deleteFeatureFlagDefinition
+      summary: Delete feature flag definition in environment
+      description: >-
+        Removes the definition of a feature flag from the specified environment,
+        effectively deactivating the flag in that environment.
+      tags:
+        - Feature Flag Definitions
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/featureFlagNameParam'
+        - $ref: '#/components/parameters/environmentIdParam'
+      responses:
+        '200':
+          description: Feature flag definition deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: >-
+            Workspace, feature flag, or environment not found
+  /splits/ws/{workspaceId}/environments/{environmentId}:
+    get:
+      operationId: listFeatureFlagDefinitionsInEnvironment
+      summary: List feature flag definitions in environment
+      description: >-
+        Retrieves all feature flag definitions within the specified environment
+        and workspace. Returns the targeting configuration, treatments, and
+        status of each flag.
+      tags:
+        - Feature Flag Definitions
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/environmentIdParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: >-
+            Successful response containing list of feature flag definitions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlagDefinitionList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or environment not found
+  /splits/ws/{workspaceId}/{featureFlagName}/environments/{environmentId}/kill:
+    put:
+      operationId: killFeatureFlag
+      summary: Kill feature flag in environment
+      description: >-
+        Kills a feature flag in the specified environment, forcing all
+        evaluations to return the default treatment. This is used as an
+        emergency shut-off mechanism.
+      tags:
+        - Feature Flag Definitions
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/featureFlagNameParam'
+        - $ref: '#/components/parameters/environmentIdParam'
+      responses:
+        '200':
+          description: Feature flag killed successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: >-
+            Workspace, feature flag, or environment not found
+  /splits/ws/{workspaceId}/{featureFlagName}/environments/{environmentId}/restore:
+    put:
+      operationId: restoreFeatureFlag
+      summary: Restore feature flag in environment
+      description: >-
+        Restores a previously killed feature flag in the specified environment,
+        resuming normal treatment evaluation based on targeting rules.
+      tags:
+        - Feature Flag Definitions
+      parameters:
+        - $ref: '#/components/parameters/workspaceIdParam'
+        - $ref: '#/components/parameters/featureFlagNameParam'
+        - $ref: '#/components/parameters/environmentIdParam'
+      responses:
+        '200':
+          description: Feature flag restored successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: >-
+            Workspace, feature flag, or environment not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Admin API key passed as a Bearer token in the Authorization header.
+  parameters:
+    workspaceIdParam:
+      name: workspaceId
+      in: path
+      required: true
+      description: The unique identifier of the workspace
+      schema:
+        type: string
+    featureFlagNameParam:
+      name: featureFlagName
+      in: path
+      required: true
+      description: The name of the feature flag
+      schema:
+        type: string
+    environmentIdParam:
+      name: environmentId
+      in: path
+      required: true
+      description: The unique identifier or name of the environment
+      schema:
+        type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+  schemas:
+    FeatureFlag:
+      type: object
+      description: >-
+        A feature flag (split) representing a toggle used to control feature
+        rollouts and experimentation.
+      properties:
+        name:
+          type: string
+          description: Unique name of the feature flag
+        description:
+          type: string
+          description: Human-readable description of the feature flag
+        trafficType:
+          $ref: '#/components/schemas/TrafficType'
+        creationTime:
+          type: integer
+          format: int64
+          description: Unix timestamp of when the feature flag was created
+        tags:
+          type: array
+          description: Tags associated with the feature flag
+          items:
+            $ref: '#/components/schemas/Tag'
+    FeatureFlagList:
+      type: object
+      description: Paginated list of feature flags
+      properties:
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeatureFlag'
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        totalCount:
+          type: integer
+          description: Total number of feature flags available
+    FeatureFlagCreate:
+      type: object
+      description: Request body for creating a new feature flag
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: >-
+            Name of the feature flag. Must be unique within the workspace.
+          pattern: '^[a-zA-Z0-9_-]+$'
+          maxLength: 256
+        description:
+          type: string
+          description: Description of the feature flag
+        tags:
+          type: array
+          description: Tags to associate with the feature flag
+          items:
+            $ref: '#/components/schemas/Tag'
+    FeatureFlagUpdate:
+      type: object
+      description: Request body for updating a feature flag
+      properties:
+        description:
+          type: string
+          description: Updated description of the feature flag
+        tags:
+          type: array
+          description: Updated tags for the feature flag
+          items:
+            $ref: '#/components/schemas/Tag'
+    FeatureFlagDefinition:
+      type: object
+      description: >-
+        The full definition of a feature flag in a specific environment,
+        including treatments, targeting rules, and rollout configuration.
+      properties:
+        name:
+          type: string
+          description: Name of the feature flag
+        environment:
+          $ref: '#/components/schemas/EnvironmentRef'
+        trafficType:
+          $ref: '#/components/schemas/TrafficType'
+        killed:
+          type: boolean
+          description: >-
+            Whether the flag is killed, forcing all evaluations to return
+            the default treatment
+        treatments:
+          type: array
+          description: >-
+            List of possible treatments that this feature flag can return
+          items:
+            $ref: '#/components/schemas/Treatment'
+        defaultTreatment:
+          type: string
+          description: >-
+            The treatment returned when no targeting rules match or when
+            the flag is killed
+        baselineTreatment:
+          type: string
+          description: >-
+            The control treatment used as a baseline for experimentation
+        rules:
+          type: array
+          description: >-
+            Ordered list of targeting rules evaluated top to bottom. The
+            first matching rule determines the treatment.
+          items:
+            $ref: '#/components/schemas/TargetingRule'
+        defaultRule:
+          type: array
+          description: >-
+            The default rule applied when no targeting rules match. Defines
+            the percentage-based rollout for unmatched traffic.
+          items:
+            $ref: '#/components/schemas/Bucket'
+        trafficAllocation:
+          type: integer
+          description: >-
+            Percentage of traffic that is included in the feature flag
+            evaluation (0-100). Traffic outside this allocation receives
+            the default treatment.
+          minimum: 0
+          maximum: 100
+        lastModified:
+          type: integer
+          format: int64
+          description: Unix timestamp of the last modification
+        creationTime:
+          type: integer
+          format: int64
+          description: Unix timestamp of when the definition was created
+    FeatureFlagDefinitionList:
+      type: object
+      description: Paginated list of feature flag definitions
+      properties:
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeatureFlagDefinition'
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        totalCount:
+          type: integer
+          description: Total number of definitions available
+    FeatureFlagDefinitionCreate:
+      type: object
+      description: >-
+        Request body for creating a feature flag definition in an environment
+      required:
+        - treatments
+        - defaultTreatment
+        - defaultRule
+      properties:
+        treatments:
+          type: array
+          description: List of treatments for this definition
+          items:
+            $ref: '#/components/schemas/Treatment'
+        defaultTreatment:
+          type: string
+          description: The default treatment for unmatched traffic
+        baselineTreatment:
+          type: string
+          description: The baseline treatment for experimentation
+        rules:
+          type: array
+          description: Targeting rules for the definition
+          items:
+            $ref: '#/components/schemas/TargetingRule'
+        defaultRule:
+          type: array
+          description: Default percentage-based rollout rule
+          items:
+            $ref: '#/components/schemas/Bucket'
+        trafficAllocation:
+          type: integer
+          description: Percentage of traffic included in evaluation
+          minimum: 0
+          maximum: 100
+    FeatureFlagDefinitionUpdate:
+      type: object
+      description: >-
+        Request body for partially updating a feature flag definition in an
+        environment. Only provided fields are updated.
+      properties:
+        treatments:
+          type: array
+          description: Updated list of treatments
+          items:
+            $ref: '#/components/schemas/Treatment'
+        defaultTreatment:
+          type: string
+          description: Updated default treatment
+        baselineTreatment:
+          type: string
+          description: Updated baseline treatment
+        rules:
+          type: array
+          description: Updated targeting rules
+          items:
+            $ref: '#/components/schemas/TargetingRule'
+        defaultRule:
+          type: array
+          description: Updated default percentage-based rollout rule
+          items:
+            $ref: '#/components/schemas/Bucket'
+        trafficAllocation:
+          type: integer
+          description: Updated traffic allocation percentage
+          minimum: 0
+          maximum: 100
+        comment:
+          type: string
+          description: Comment describing the update
+    Treatment:
+      type: object
+      description: >-
+        A treatment representing one of the possible values returned by a
+        feature flag evaluation.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the treatment (e.g., on, off, v1, v2)
+        description:
+          type: string
+          description: Description of what this treatment does
+        configurations:
+          type: string
+          description: >-
+            JSON string containing dynamic configuration associated with
+            this treatment
+    TargetingRule:
+      type: object
+      description: >-
+        A targeting rule that matches specific conditions and assigns
+        treatments to matching traffic.
+      properties:
+        condition:
+          $ref: '#/components/schemas/Condition'
+        buckets:
+          type: array
+          description: >-
+            Percentage-based distribution of treatments for traffic matching
+            this rule
+          items:
+            $ref: '#/components/schemas/Bucket'
+    Condition:
+      type: object
+      description: >-
+        A condition defining the matching criteria for a targeting rule.
+      properties:
+        combiner:
+          type: string
+          description: >-
+            Logical combiner for multiple matchers within this condition
+          enum:
+            - AND
+        matchers:
+          type: array
+          description: List of matchers that define the matching criteria
+          items:
+            $ref: '#/components/schemas/Matcher'
+    Matcher:
+      type: object
+      description: >-
+        A matcher defining a single matching criterion based on attributes,
+        segments, or key values.
+      properties:
+        type:
+          type: string
+          description: Type of matching to perform
+          enum:
+            - IN_SEGMENT
+            - WHITELIST
+            - ALL_KEYS
+            - EQUAL_TO
+            - GREATER_THAN_OR_EQUAL_TO
+            - LESS_THAN_OR_EQUAL_TO
+            - BETWEEN
+            - CONTAINS_STRING
+            - STARTS_WITH
+            - ENDS_WITH
+            - MATCHES_STRING
+            - IN_LIST_STRING
+            - EQUAL_TO_SET
+            - CONTAINS_ALL_OF_SET
+            - CONTAINS_ANY_OF_SET
+            - PART_OF_SET
+            - EQUAL_TO_BOOLEAN
+            - DEPENDS_ON
+        negate:
+          type: boolean
+          description: Whether to negate the matcher result
+        attribute:
+          type: string
+          description: >-
+            The attribute name to match against. Required for attribute-based
+            matchers.
+        strings:
+          type: array
+          description: String values used by string-based matchers
+          items:
+            type: string
+        number:
+          type: integer
+          description: Numeric value used by numeric matchers
+        date:
+          type: integer
+          format: int64
+          description: Unix timestamp value used by date-based matchers
+        between:
+          type: object
+          description: Range values for the BETWEEN matcher
+          properties:
+            from:
+              type: integer
+              description: Lower bound of the range
+            to:
+              type: integer
+              description: Upper bound of the range
+        depends:
+          type: object
+          description: Dependency configuration for the DEPENDS_ON matcher
+          properties:
+            splitName:
+              type: string
+              description: Name of the feature flag to depend on
+            treatments:
+              type: array
+              description: Treatments that must be returned by the dependency
+              items:
+                type: string
+    Bucket:
+      type: object
+      description: >-
+        A bucket defining the percentage of traffic assigned to a specific
+        treatment within a rule.
+      properties:
+        treatment:
+          type: string
+          description: Name of the treatment assigned to this bucket
+        size:
+          type: integer
+          description: Percentage of traffic allocated to this bucket (0-100)
+          minimum: 0
+          maximum: 100
+    TrafficType:
+      type: object
+      description: >-
+        A traffic type defining the kind of entity targeted by feature flags.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the traffic type
+        name:
+          type: string
+          description: Name of the traffic type
+    EnvironmentRef:
+      type: object
+      description: A reference to an environment
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the environment
+        name:
+          type: string
+          description: Name of the environment
+    Tag:
+      type: object
+      description: A tag associated with a feature flag
+      properties:
+        name:
+          type: string
+          description: Name of the tag

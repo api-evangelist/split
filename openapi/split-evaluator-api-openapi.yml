@@ -1,0 +1,530 @@
+openapi: 3.1.0
+info:
+  title: Split Evaluator API
+  description: >-
+    The Split Evaluator is an HTTP service that wraps Split SDKs to provide
+    feature flag evaluation via a REST API. It enables applications that cannot
+    directly embed an SDK to request treatment evaluations over HTTP, making it
+    suitable for architectures where a centralized evaluation service is
+    preferred. The Evaluator can be deployed as a standalone microservice that
+    processes getTreatment calls and returns the appropriate treatments for
+    given users and feature flags. Swagger documentation is available by default
+    at the /api-docs endpoint.
+  version: '1.0'
+  contact:
+    name: Split Support
+    url: https://help.split.io
+  termsOfService: https://www.split.io/terms-of-service/
+externalDocs:
+  description: Split Evaluator Documentation
+  url: https://help.split.io/hc/en-us/articles/360020037072-Split-Evaluator
+servers:
+  - url: http://localhost:7548
+    description: Default local Evaluator instance
+tags:
+  - name: Service
+    description: >-
+      Endpoints for monitoring the health and status of the Split Evaluator
+      service.
+  - name: Evaluation
+    description: >-
+      Endpoints for evaluating feature flags and retrieving treatment values
+      for given keys and feature flag names.
+  - name: Events
+    description: >-
+      Endpoints for tracking custom events used in experimentation and
+      metrics measurement.
+paths:
+  /admin/ping:
+    get:
+      operationId: ping
+      summary: Ping service
+      description: >-
+        Checks whether the Split Evaluator service is running. If the service
+        is running, it responds with the text pong and HTTP status code 200.
+      tags:
+        - Service
+      responses:
+        '200':
+          description: Service is running
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: pong
+  /admin/version:
+    get:
+      operationId: getVersion
+      summary: Get service version
+      description: >-
+        Returns the current version of the Split Evaluator service.
+      tags:
+        - Service
+      responses:
+        '200':
+          description: Service version information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    description: Version string of the running Evaluator
+  /admin/healthcheck:
+    get:
+      operationId: healthCheck
+      summary: Health check
+      description: >-
+        Checks that the Split Evaluator is connected to Split servers and
+        ready to process evaluation requests. Returns 200 if everything is
+        working as expected or 500 if there is an issue, along with a message
+        explaining the status.
+      tags:
+        - Service
+      responses:
+        '200':
+          description: Service is healthy and ready for evaluations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+        '500':
+          description: Service is unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+  /client/get-treatment:
+    get:
+      operationId: getTreatment
+      summary: Get treatment for a feature flag
+      description: >-
+        Evaluates a single feature flag for the given key and returns the
+        treatment value. Optionally includes dynamic configuration associated
+        with the treatment. This is the primary endpoint for feature flag
+        evaluation.
+      tags:
+        - Evaluation
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: >-
+            The customer key to evaluate the feature flag against
+          schema:
+            type: string
+        - name: split-name
+          in: query
+          required: true
+          description: >-
+            The name of the feature flag to evaluate
+          schema:
+            type: string
+        - name: bucketing-key
+          in: query
+          description: >-
+            Optional bucketing key used for consistent percentage-based
+            treatment assignments
+          schema:
+            type: string
+        - name: attributes
+          in: query
+          description: >-
+            JSON string of attributes used in targeting rule evaluation
+          schema:
+            type: string
+        - name: impressions-disabled
+          in: query
+          description: >-
+            When set to true, disables impression logging for this evaluation
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful evaluation response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentResult'
+        '400':
+          description: Missing or invalid parameters
+        '500':
+          description: Internal server error during evaluation
+    post:
+      operationId: getTreatmentWithAttributes
+      summary: Get treatment with attributes
+      description: >-
+        Evaluates a single feature flag for the given key with attributes
+        passed in the request body. This is preferred over the GET method
+        when attributes contain complex or large data structures.
+      tags:
+        - Evaluation
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: The customer key to evaluate the feature flag against
+          schema:
+            type: string
+        - name: split-name
+          in: query
+          required: true
+          description: The name of the feature flag to evaluate
+          schema:
+            type: string
+        - name: bucketing-key
+          in: query
+          description: Optional bucketing key for consistent assignments
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationAttributes'
+      responses:
+        '200':
+          description: Successful evaluation response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentResult'
+        '400':
+          description: Missing or invalid parameters
+        '500':
+          description: Internal server error during evaluation
+  /client/get-treatments:
+    get:
+      operationId: getTreatments
+      summary: Get treatments for multiple feature flags
+      description: >-
+        Evaluates multiple feature flags for the given key in a single request
+        and returns the treatment values for each. More efficient than making
+        individual get-treatment calls.
+      tags:
+        - Evaluation
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: The customer key to evaluate feature flags against
+          schema:
+            type: string
+        - name: split-names
+          in: query
+          required: true
+          description: >-
+            Comma-separated list of feature flag names to evaluate
+          schema:
+            type: string
+        - name: bucketing-key
+          in: query
+          description: Optional bucketing key for consistent assignments
+          schema:
+            type: string
+        - name: attributes
+          in: query
+          description: JSON string of attributes for targeting rule evaluation
+          schema:
+            type: string
+        - name: impressions-disabled
+          in: query
+          description: >-
+            When set to true, disables impression logging for these evaluations
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful evaluation response with multiple treatments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentsResult'
+        '400':
+          description: Missing or invalid parameters
+        '500':
+          description: Internal server error during evaluation
+    post:
+      operationId: getTreatmentsWithAttributes
+      summary: Get treatments with attributes
+      description: >-
+        Evaluates multiple feature flags for the given key with attributes
+        passed in the request body.
+      tags:
+        - Evaluation
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: The customer key to evaluate feature flags against
+          schema:
+            type: string
+        - name: split-names
+          in: query
+          required: true
+          description: Comma-separated list of feature flag names to evaluate
+          schema:
+            type: string
+        - name: bucketing-key
+          in: query
+          description: Optional bucketing key for consistent assignments
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationAttributes'
+      responses:
+        '200':
+          description: Successful evaluation response with multiple treatments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentsResult'
+        '400':
+          description: Missing or invalid parameters
+        '500':
+          description: Internal server error during evaluation
+  /client/get-all-treatments:
+    get:
+      operationId: getAllTreatments
+      summary: Get all treatments for a key
+      description: >-
+        Evaluates all available feature flags for the given keys and traffic
+        types and returns the treatment values. Useful for retrieving a
+        complete set of flag evaluations for a user session.
+      tags:
+        - Evaluation
+      parameters:
+        - name: keys
+          in: query
+          required: true
+          description: >-
+            JSON string containing an array of key objects with matchingKey
+            and trafficType properties, and optionally a bucketingKey
+          schema:
+            type: string
+        - name: attributes
+          in: query
+          description: JSON string of attributes for targeting rule evaluation
+          schema:
+            type: string
+        - name: impressions-disabled
+          in: query
+          description: >-
+            When set to true, disables impression logging for these evaluations
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: >-
+            Successful response with treatments for all feature flags
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllTreatmentsResult'
+        '400':
+          description: Missing or invalid parameters
+        '500':
+          description: Internal server error during evaluation
+    post:
+      operationId: getAllTreatmentsWithAttributes
+      summary: Get all treatments with attributes
+      description: >-
+        Evaluates all available feature flags for the given keys with
+        attributes passed in the request body.
+      tags:
+        - Evaluation
+      parameters:
+        - name: keys
+          in: query
+          required: true
+          description: >-
+            JSON string containing an array of key objects
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationAttributes'
+      responses:
+        '200':
+          description: >-
+            Successful response with treatments for all feature flags
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllTreatmentsResult'
+        '400':
+          description: Missing or invalid parameters
+        '500':
+          description: Internal server error during evaluation
+  /client/track:
+    get:
+      operationId: trackEvent
+      summary: Track an event
+      description: >-
+        Records a custom event for the given key and event type. Events are
+        used to measure the impact of feature flags on user actions and
+        experimentation metrics.
+      tags:
+        - Events
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: The customer key associated with the event
+          schema:
+            type: string
+        - name: traffic-type
+          in: query
+          required: true
+          description: The traffic type for the event
+          schema:
+            type: string
+        - name: event-type
+          in: query
+          required: true
+          description: >-
+            The type of event being tracked (e.g., purchase, click, signup)
+          schema:
+            type: string
+        - name: value
+          in: query
+          description: Optional numeric value associated with the event
+          schema:
+            type: number
+        - name: properties
+          in: query
+          description: >-
+            JSON string with up to 15 key-value pairs of event properties.
+            Values must be boolean, string, number, or null.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Event tracked successfully
+        '400':
+          description: Missing or invalid parameters
+        '500':
+          description: Internal server error during tracking
+    post:
+      operationId: trackEventWithProperties
+      summary: Track an event with properties
+      description: >-
+        Records a custom event with properties passed in the request body.
+        Preferred for events with complex property structures.
+      tags:
+        - Events
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: The customer key associated with the event
+          schema:
+            type: string
+        - name: traffic-type
+          in: query
+          required: true
+          description: The traffic type for the event
+          schema:
+            type: string
+        - name: event-type
+          in: query
+          required: true
+          description: The type of event being tracked
+          schema:
+            type: string
+        - name: value
+          in: query
+          description: Optional numeric value associated with the event
+          schema:
+            type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventProperties'
+      responses:
+        '200':
+          description: Event tracked successfully
+        '400':
+          description: Missing or invalid parameters
+        '500':
+          description: Internal server error during tracking
+components:
+  schemas:
+    HealthCheckResponse:
+      type: object
+      description: Health check response from the Split Evaluator
+      properties:
+        status:
+          type: string
+          description: Health status of the service
+          enum:
+            - ok
+            - error
+        message:
+          type: string
+          description: Detailed message about the health status
+    TreatmentResult:
+      type: object
+      description: >-
+        The result of evaluating a single feature flag for a given key.
+      properties:
+        splitName:
+          type: string
+          description: Name of the evaluated feature flag
+        treatment:
+          type: string
+          description: >-
+            The treatment value returned by the evaluation (e.g., on, off)
+        config:
+          type: string
+          nullable: true
+          description: >-
+            JSON string of dynamic configuration associated with the
+            treatment, or null if no configuration is defined
+    TreatmentsResult:
+      type: object
+      description: >-
+        The result of evaluating multiple feature flags for a given key.
+        Keys are feature flag names and values are treatment results.
+      additionalProperties:
+        $ref: '#/components/schemas/TreatmentResult'
+    AllTreatmentsResult:
+      type: object
+      description: >-
+        The result of evaluating all feature flags for the given keys. Keyed
+        by feature flag name with treatment result values.
+      additionalProperties:
+        $ref: '#/components/schemas/TreatmentResult'
+    EvaluationAttributes:
+      type: object
+      description: >-
+        Attributes passed in the request body for use in targeting rule
+        evaluation. Attributes can be strings, numbers, booleans, or sets.
+      properties:
+        attributes:
+          type: object
+          description: Key-value pairs of attribute names and their values
+          additionalProperties: true
+        impressionsDisabled:
+          type: boolean
+          description: >-
+            When set to true, disables impression logging for the evaluation
+    EventProperties:
+      type: object
+      description: >-
+        Properties associated with a tracked event.
+      properties:
+        properties:
+          type: object
+          description: >-
+            Key-value pairs of event properties. Maximum 15 keys. Values
+            must be boolean, string, number, or null.
+          additionalProperties: true
+          maxProperties: 15
