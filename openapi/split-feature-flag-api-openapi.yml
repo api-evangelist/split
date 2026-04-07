@@ -21,15 +21,15 @@ servers:
   - url: https://api.split.io/internal/api/v2
     description: Production Server
 tags:
+  - name: Feature Flag Definitions
+    description: >-
+      Manage feature flag definitions in specific environments, including
+      targeting rules, treatments, percentage rollouts, and default treatments.
   - name: Feature Flags
     description: >-
       Create, retrieve, update, and delete feature flags (splits) within
       workspaces. Feature flags represent the toggles used to control feature
       rollouts.
-  - name: Feature Flag Definitions
-    description: >-
-      Manage feature flag definitions in specific environments, including
-      targeting rules, treatments, percentage rollouts, and default treatments.
 security:
   - bearerAuth: []
 paths:

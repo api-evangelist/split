@@ -22,10 +22,6 @@ servers:
   - url: http://localhost:7548
     description: Default local Evaluator instance
 tags:
-  - name: Service
-    description: >-
-      Endpoints for monitoring the health and status of the Split Evaluator
-      service.
   - name: Evaluation
     description: >-
       Endpoints for evaluating feature flags and retrieving treatment values
@@ -42,8 +38,7 @@ paths:
       description: >-
         Checks whether the Split Evaluator service is running. If the service
         is running, it responds with the text pong and HTTP status code 200.
-      tags:
-        - Service
+      tags: []
       responses:
         '200':
           description: Service is running
@@ -58,8 +53,7 @@ paths:
       summary: Get service version
       description: >-
         Returns the current version of the Split Evaluator service.
-      tags:
-        - Service
+      tags: []
       responses:
         '200':
           description: Service version information
@@ -80,8 +74,7 @@ paths:
         ready to process evaluation requests. Returns 200 if everything is
         working as expected or 500 if there is an issue, along with a message
         explaining the status.
-      tags:
-        - Service
+      tags: []
       responses:
         '200':
           description: Service is healthy and ready for evaluations

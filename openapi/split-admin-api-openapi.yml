@@ -20,45 +20,45 @@ servers:
   - url: https://api.split.io/internal/api/v2
     description: Production Server
 tags:
-  - name: Workspaces
-    description: >-
-      Manage workspaces (projects) which organize feature flags and experiments
-      across business units, product lines, and applications.
-  - name: Environments
-    description: >-
-      Manage environments within workspaces for deploying and testing feature
-      flags across stages such as staging and production.
-  - name: Traffic Types
-    description: >-
-      Manage traffic types which define the entities (users, accounts, etc.)
-      that feature flags target.
-  - name: Attributes
-    description: >-
-      Manage attributes used in targeting rules for feature flag definitions.
-  - name: Users
-    description: >-
-      Manage users within the Split account, including inviting new users and
-      updating user roles.
-  - name: Groups
-    description: >-
-      Manage groups for organizing users and assigning permissions.
   - name: API Keys
     description: >-
       Create and delete API keys for authenticating with the Split platform,
       with configurable roles and scopes.
-  - name: Segments
+  - name: Attributes
     description: >-
-      Manage segments which define reusable groups of identities for targeting.
-  - name: Large Segments
-    description: >-
-      Manage large segments optimized for high-volume identity lists.
+      Manage attributes used in targeting rules for feature flag definitions.
   - name: Change Requests
     description: >-
       Manage change requests for controlled approval workflows when modifying
       feature flag definitions.
+  - name: Environments
+    description: >-
+      Manage environments within workspaces for deploying and testing feature
+      flags across stages such as staging and production.
+  - name: Groups
+    description: >-
+      Manage groups for organizing users and assigning permissions.
   - name: Identities
     description: >-
       Manage identities (keys) within segments.
+  - name: Large Segments
+    description: >-
+      Manage large segments optimized for high-volume identity lists.
+  - name: Segments
+    description: >-
+      Manage segments which define reusable groups of identities for targeting.
+  - name: Traffic Types
+    description: >-
+      Manage traffic types which define the entities (users, accounts, etc.)
+      that feature flags target.
+  - name: Users
+    description: >-
+      Manage users within the Split account, including inviting new users and
+      updating user roles.
+  - name: Workspaces
+    description: >-
+      Manage workspaces (projects) which organize feature flags and experiments
+      across business units, product lines, and applications.
 security:
   - bearerAuth: []
 paths:
