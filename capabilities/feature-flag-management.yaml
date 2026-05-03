@@ -1,0 +1,304 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Split Feature Flag Management"
+  description: >-
+    Unified capability for managing Split feature flags across the full lifecycle:
+    creating and configuring flags, managing targeting rules and segments, controlling
+    environments, administering users and groups, and evaluating flag treatments.
+    Combines the Split Admin, Feature Flag, and Evaluator APIs into a single
+    workflow for feature release engineers and platform administrators.
+  tags:
+    - Feature Flags
+    - Feature Management
+    - Experimentation
+    - Rollouts
+    - Administration
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SPLIT_ADMIN_API_KEY: SPLIT_ADMIN_API_KEY
+      SPLIT_EVALUATOR_HOST: SPLIT_EVALUATOR_HOST
+
+capability:
+  consumes:
+    - import: split-admin
+      location: ./shared/split-admin-api.yaml
+    - import: split-flags
+      location: ./shared/split-feature-flag-api.yaml
+    - import: split-evaluator
+      location: ./shared/split-evaluator-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: split-feature-flag-management-api
+      description: "Unified REST API for Split feature flag lifecycle management."
+      resources:
+        - path: /v1/workspaces
+          name: workspaces
+          description: "Split workspaces (projects)."
+          operations:
+            - method: GET
+              name: list-workspaces
+              description: "List all accessible Split workspaces."
+              call: "split-admin.list-workspaces"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/environments
+          name: environments
+          description: "Environments within a Split workspace."
+          operations:
+            - method: GET
+              name: list-environments
+              description: "List all environments in a workspace."
+              call: "split-admin.list-environments"
+              with:
+                workspaceId: "rest.workspaceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/feature-flags
+          name: feature-flags
+          description: "Feature flags within a workspace."
+          operations:
+            - method: GET
+              name: list-feature-flags
+              description: "List all feature flags in a workspace."
+              call: "split-flags.list-feature-flags"
+              with:
+                workspaceId: "rest.workspaceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/feature-flag-definitions
+          name: feature-flag-definitions
+          description: "Feature flag targeting definitions per environment."
+          operations:
+            - method: GET
+              name: get-feature-flag-definition
+              description: "Get a feature flag's targeting definition in an environment."
+              call: "split-flags.get-feature-flag-definition"
+              with:
+                workspaceId: "rest.workspaceId"
+                featureFlagName: "rest.featureFlagName"
+                environmentId: "rest.environmentId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/segments
+          name: segments
+          description: "Targeting segments within a workspace."
+          operations:
+            - method: GET
+              name: list-segments
+              description: "List all segments in a workspace."
+              call: "split-admin.list-segments"
+              with:
+                workspaceId: "rest.workspaceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/treatments
+          name: treatments
+          description: "Feature flag treatment evaluations."
+          operations:
+            - method: GET
+              name: get-treatment
+              description: "Evaluate a feature flag treatment for a customer key."
+              call: "split-evaluator.get-treatment"
+              with:
+                key: "rest.key"
+                split-name: "rest.flagName"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/users
+          name: users
+          description: "Account users."
+          operations:
+            - method: GET
+              name: list-users
+              description: "List all users in the account."
+              call: "split-admin.list-users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/change-requests
+          name: change-requests
+          description: "Change request approval workflows."
+          operations:
+            - method: GET
+              name: list-change-requests
+              description: "List change requests for feature flag modifications."
+              call: "split-admin.list-change-requests"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: split-feature-flag-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted Split feature flag lifecycle management."
+      tools:
+        - name: list-workspaces
+          description: "List all Split workspaces accessible to the Admin API key."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "split-admin.list-workspaces"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-environments
+          description: "List all deployment environments within a Split workspace."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "split-admin.list-environments"
+          with:
+            workspaceId: "tools.workspaceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-feature-flags
+          description: "List all feature flags in a Split workspace, optionally filtered by tag."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "split-flags.list-feature-flags"
+          with:
+            workspaceId: "tools.workspaceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-feature-flag-definition
+          description: "Retrieve the full targeting definition of a feature flag in a specific environment, including treatments and rules."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "split-flags.get-feature-flag-definition"
+          with:
+            workspaceId: "tools.workspaceId"
+            featureFlagName: "tools.featureFlagName"
+            environmentId: "tools.environmentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: kill-feature-flag
+          description: "Kill a feature flag in an environment, forcing all traffic to receive the default treatment. Use as an emergency shut-off."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "split-flags.kill-feature-flag"
+          with:
+            workspaceId: "tools.workspaceId"
+            featureFlagName: "tools.featureFlagName"
+            environmentId: "tools.environmentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: restore-feature-flag
+          description: "Restore a previously killed feature flag to normal targeting rule evaluation."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "split-flags.restore-feature-flag"
+          with:
+            workspaceId: "tools.workspaceId"
+            featureFlagName: "tools.featureFlagName"
+            environmentId: "tools.environmentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-segments
+          description: "List all targeting segments in a Split workspace."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "split-admin.list-segments"
+          with:
+            workspaceId: "tools.workspaceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-treatment
+          description: "Evaluate a feature flag for a customer key and return the treatment value."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "split-evaluator.get-treatment"
+          with:
+            key: "tools.key"
+            split-name: "tools.flagName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-treatments
+          description: "Evaluate multiple feature flags for a customer key in a single request."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "split-evaluator.get-treatments"
+          with:
+            key: "tools.key"
+            split-names: "tools.flagNames"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: track-event
+          description: "Record a custom event for experimentation and metrics measurement."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "split-evaluator.track-event"
+          with:
+            key: "tools.key"
+            traffic-type: "tools.trafficType"
+            event-type: "tools.eventType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-users
+          description: "List all users in the Split account."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "split-admin.list-users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-change-requests
+          description: "List pending change requests for feature flag modifications requiring approval."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "split-admin.list-change-requests"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "http://localhost:7548/client/get-treatment?key=user-123&split-name=checkout_v2",
+    "headers": {
+      "Authorization": "Bearer {SDK_KEY}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "splitName": "checkout_v2",
+      "treatment": "on",
+      "config": "{\"checkoutVersion\":2,\"enableNewFlow\":true}"
+    }
+  }
+}

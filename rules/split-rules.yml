@@ -1,0 +1,98 @@
+extends: [[spectral:oas, recommended]]
+
+rules:
+  split-operation-id-required:
+    description: All operations must have an operationId.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete,head,options]"
+    then:
+      field: operationId
+      function: truthy
+
+  split-operation-id-verb-prefix:
+    description: operationId must start with a standard REST verb.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(get|list|create|update|delete|enable|restore|kill|add|remove|upload|approve|deactivate|invite|track)[A-Z][a-zA-Z0-9]+$"
+
+  split-summary-title-case:
+    description: Operation summaries must use Title Case.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 /()-]+$"
+
+  split-tags-required:
+    description: Every operation must have at least one tag.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  split-bearer-auth-required:
+    description: Operations must use bearerAuth security scheme.
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      field: bearerAuth
+      function: truthy
+
+  split-response-200-required:
+    description: Every operation must define a 200 or 201 success response.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["200"]
+            - required: ["201"]
+
+  split-401-response-required:
+    description: Every operation must define a 401 Unauthorized response.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          required: ["401"]
+
+  split-pagination-params:
+    description: List operations should support limit and offset query parameters.
+    severity: info
+    given: "$.paths[*].get.operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^list"
+
+  split-workspace-id-path-param:
+    description: Workspace-scoped paths must use workspaceId path parameter.
+    severity: info
+    given: "$.paths[~/ws/{workspaceId}]"
+    then:
+      function: truthy
+
+  split-servers-required:
+    description: The API must define at least one server.
+    severity: error
+    given: "$"
+    then:
+      field: servers
+      function: truthy
+
+  split-info-contact-required:
+    description: The info object must include a contact entry.
+    severity: warn
+    given: "$.info"
+    then:
+      field: contact
+      function: truthy

@@ -1,0 +1,149 @@
+name: Split Vocabulary
+description: >-
+  Normative vocabulary for Split (now Harness Feature Management and Experimentation),
+  a feature flag and experimentation platform. Covers feature flag lifecycle, targeting,
+  treatments, segmentation, and experimentation concepts.
+version: "1.0"
+created: "2026-05-02"
+modified: "2026-05-02"
+terms:
+  - term: Feature Flag
+    definition: >-
+      A toggle mechanism that controls whether a specific feature or code path is active
+      for a given user or traffic segment. Also called a "split" in the Split platform.
+      Feature flags enable progressive delivery and experimentation without code deployments.
+    tags:
+      - Core
+      - Feature Management
+
+  - term: Split
+    definition: >-
+      The platform's term for a feature flag. Each split has a name, a traffic type,
+      and one or more treatments. Evaluated by SDK or Evaluator API to return a treatment.
+    tags:
+      - Core
+      - Feature Management
+
+  - term: Treatment
+    definition: >-
+      A named variant that a feature flag can return (e.g., on, off, v1, v2, control).
+      Treatments can carry dynamic configuration (JSON) to adjust behavior without redeployment.
+    tags:
+      - Core
+      - Experimentation
+
+  - term: Workspace
+    definition: >-
+      A project-level namespace in Split that organizes feature flags, environments,
+      and segments. Corresponds to a business unit, application, or team boundary.
+    tags:
+      - Organization
+      - Administration
+
+  - term: Environment
+    definition: >-
+      A deployment context (e.g., staging, production) within a workspace where feature
+      flags can have independent definitions, targeting rules, and rollout configurations.
+    tags:
+      - Organization
+      - Deployment
+
+  - term: Targeting Rule
+    definition: >-
+      A conditional expression that matches a subset of traffic and assigns treatments
+      based on attribute values, segment membership, or percentage-based bucketing.
+      Rules are evaluated in order; the first matching rule determines the treatment.
+    tags:
+      - Targeting
+      - Rollouts
+
+  - term: Segment
+    definition: >-
+      A reusable group of identity keys (e.g., user IDs) used in targeting rules.
+      Segments can be managed via CSV upload or individual key management operations.
+    tags:
+      - Targeting
+      - Identity
+
+  - term: Traffic Type
+    definition: >-
+      Defines the entity kind that a feature flag evaluates against (e.g., user, account,
+      device). Each feature flag is associated with a traffic type at creation.
+    tags:
+      - Targeting
+      - Identity
+
+  - term: Traffic Allocation
+    definition: >-
+      The percentage of incoming traffic that participates in feature flag evaluation
+      (0-100%). Traffic outside this allocation always receives the default treatment.
+    tags:
+      - Rollouts
+      - Experimentation
+
+  - term: Default Treatment
+    definition: >-
+      The treatment returned when no targeting rules match a given key, or when the
+      feature flag is killed. Acts as the safe fallback for all unmatched traffic.
+    tags:
+      - Core
+      - Feature Management
+
+  - term: Kill
+    definition: >-
+      An emergency operation that overrides all targeting rules and forces all
+      evaluations to return the default treatment. Used as an immediate feature shut-off.
+    tags:
+      - Operations
+      - Safety
+
+  - term: Change Request
+    definition: >-
+      A formal request to modify a feature flag definition that requires approval from
+      designated reviewers before being applied. Enables controlled governance workflows.
+    tags:
+      - Administration
+      - Governance
+
+  - term: Impression
+    definition: >-
+      A record of a feature flag evaluation event for a specific key. Impressions are
+      used for monitoring, debugging, and calculating experimentation metrics.
+    tags:
+      - Observability
+      - Experimentation
+
+  - term: Evaluator
+    definition: >-
+      The Split Evaluator is a standalone HTTP microservice that wraps an SDK to provide
+      REST-based feature flag evaluation for applications that cannot embed an SDK directly.
+    tags:
+      - Service
+      - Integration
+
+  - term: Admin API
+    definition: >-
+      The Split REST API for programmatic management of workspaces, environments, flags,
+      segments, users, groups, and API keys. Requires Admin API key authentication.
+    tags:
+      - API
+      - Administration
+
+  - term: SDK
+    definition: >-
+      A language-specific library that embeds Split's evaluation engine locally,
+      synchronizing flag definitions and evaluating treatments with low latency without
+      making per-evaluation network calls. Available for JavaScript, Node.js, Java,
+      Python, Android, iOS, React, and more.
+    tags:
+      - Integration
+      - Client
+
+  - term: Bucket
+    definition: >-
+      A percentage allocation within a targeting rule or default rule that assigns
+      a specific treatment to a portion of matching traffic. Buckets in a rule must
+      sum to 100%.
+    tags:
+      - Rollouts
+      - Targeting

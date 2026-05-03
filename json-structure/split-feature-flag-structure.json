@@ -1,0 +1,61 @@
+{
+  "name": "FeatureFlag",
+  "description": "A Split feature flag (split) representing a toggle for controlled feature rollouts and experimentation.",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Unique name of the feature flag within the workspace.",
+      "required": true
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "Human-readable description of the feature flag.",
+      "required": false
+    },
+    {
+      "name": "trafficType",
+      "type": "object",
+      "description": "The traffic type defining which entity kind the flag targets (e.g., user, account).",
+      "required": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier of the traffic type.",
+          "required": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Name of the traffic type.",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "creationTime",
+      "type": "integer",
+      "description": "Unix timestamp of when the feature flag was created.",
+      "required": false
+    },
+    {
+      "name": "tags",
+      "type": "array",
+      "description": "Tags associated with the feature flag for organization and filtering.",
+      "required": false,
+      "items": {
+        "name": "Tag",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Tag name.",
+            "required": true
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.split.io/internal/api/v2/workspaces?limit=20&offset=0",
+    "headers": {
+      "Authorization": "Bearer {SPLIT_ADMIN_API_KEY}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "objects": [
+        {
+          "id": "wrksp_abc123",
+          "name": "Default",
+          "requiresTitleAndComments": false
+        },
+        {
+          "id": "wrksp_def456",
+          "name": "Mobile",
+          "requiresTitleAndComments": true
+        }
+      ],
+      "offset": 0,
+      "limit": 20,
+      "totalCount": 2
+    }
+  }
+}

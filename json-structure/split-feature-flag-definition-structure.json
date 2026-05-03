@@ -1,0 +1,108 @@
+{
+  "name": "FeatureFlagDefinition",
+  "description": "The full definition of a Split feature flag in a specific environment, including treatments, targeting rules, and rollout configuration.",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Name of the feature flag.",
+      "required": true
+    },
+    {
+      "name": "environment",
+      "type": "object",
+      "description": "Reference to the environment where this definition applies.",
+      "required": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Environment identifier.",
+          "required": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Environment name.",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "killed",
+      "type": "boolean",
+      "description": "When true, all evaluations return the default treatment regardless of targeting rules.",
+      "required": false
+    },
+    {
+      "name": "treatments",
+      "type": "array",
+      "description": "List of possible treatments this flag can return.",
+      "required": true,
+      "items": {
+        "name": "Treatment",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Treatment name (e.g., on, off, v1, v2).",
+            "required": true
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "description": "Description of what this treatment does.",
+            "required": false
+          },
+          {
+            "name": "configurations",
+            "type": "string",
+            "description": "JSON string of dynamic configuration for this treatment.",
+            "required": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "defaultTreatment",
+      "type": "string",
+      "description": "Treatment returned when no rules match or the flag is killed.",
+      "required": true
+    },
+    {
+      "name": "rules",
+      "type": "array",
+      "description": "Ordered list of targeting rules evaluated top to bottom.",
+      "required": false,
+      "items": {
+        "name": "TargetingRule",
+        "fields": [
+          {
+            "name": "condition",
+            "type": "object",
+            "description": "Condition that must be satisfied for this rule to apply.",
+            "required": false
+          },
+          {
+            "name": "buckets",
+            "type": "array",
+            "description": "Percentage distribution of treatments for matching traffic.",
+            "required": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "defaultRule",
+      "type": "array",
+      "description": "Percentage-based rollout applied when no targeting rules match.",
+      "required": true
+    },
+    {
+      "name": "trafficAllocation",
+      "type": "integer",
+      "description": "Percentage of traffic included in flag evaluation (0-100).",
+      "required": false
+    }
+  ]
+}

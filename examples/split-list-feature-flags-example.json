@@ -1,0 +1,35 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.split.io/internal/api/v2/splits/ws/wrksp_abc123?limit=20&offset=0",
+    "headers": {
+      "Authorization": "Bearer {SPLIT_ADMIN_API_KEY}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "objects": [
+        {
+          "name": "checkout_v2",
+          "description": "New checkout flow rollout",
+          "trafficType": {
+            "id": "tt_user",
+            "name": "user"
+          },
+          "creationTime": 1700000000000,
+          "tags": [
+            {"name": "checkout"},
+            {"name": "ecommerce"}
+          ]
+        }
+      ],
+      "offset": 0,
+      "limit": 20,
+      "totalCount": 1
+    }
+  }
+}
