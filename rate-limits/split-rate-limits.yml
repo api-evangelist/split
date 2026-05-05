@@ -1,0 +1,34 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Split.io (Harness FME)
+providerId: split
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Feature Flags
+description: Split.io API rate limits per organization.
+sources:
+  - https://www.harness.io/pricing
+  - https://docs.split.io/reference/rate-limits
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+limits:
+  - name: Admin API
+    scope: org
+    metric: requests_per_minute
+    limit: 80
+    timeFrame: minute
+  - name: SDK datafile fetch
+    scope: environment
+    metric: requests_per_second
+    limit: high (CDN-backed)
+  - name: Events API
+    scope: environment
+    metric: events_per_request
+    limit: 100
+    timeFrame: request

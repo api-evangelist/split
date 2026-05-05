@@ -1,0 +1,79 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Split.io (Harness FME)
+providerId: split
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Feature Flags
+  - Experimentation
+description: Harness Feature Management & Experimentation (formerly Split.io) — Individual + Enterprise
+  plans, sales-quoted.
+sources:
+  - https://www.harness.io/pricing
+plans:
+  - id: split-individual
+    name: Individual
+    type: freemium
+    description: Free for solo developers and prototypes.
+    entries:
+      - label: Per user
+        name: user
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Up to 10 MAU
+      - name: Unlimited feature flags
+      - name: Up to 2 environments
+      - name: Community support
+  - id: split-team
+    name: Team
+    type: paid
+    description: Custom pricing per MAU.
+    entries:
+      - label: Annual (custom)
+        name: annual
+        type: subscription
+        metric: year
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: Per-MAU pricing
+      - name: Unlimited feature flags
+      - name: Unlimited environments
+      - name: Server-side targeting
+      - name: Email support
+  - id: split-enterprise
+    name: Enterprise
+    type: enterprise
+    description: Custom annual contract.
+    entries:
+      - label: Annual (custom)
+        name: annual
+        type: subscription
+        metric: year
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: Statistical Engine for experimentation
+      - name: Causal Impact analysis
+      - name: SCIM/SSO
+      - name: RBAC
+      - name: Dedicated CSM
+      - name: Audit logs
