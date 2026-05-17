@@ -165,7 +165,7 @@ common:
     url: json-structure/split-feature-flag-structure.json
   - type: JSONStructure
     url: json-structure/split-feature-flag-definition-structure.json
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/split-context.jsonld
   - type: SpectralRules
     url: rules/split-rules.yml
