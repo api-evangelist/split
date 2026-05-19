@@ -1,0 +1,261 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Split Feature Flag API — Feature Flag Definitions
+  description: 'Split Feature Flag API — Feature Flag Definitions. 7 operations. Lead operation: List feature flag definitions
+    in environment. Self-contained Naftiko capability covering one Split business surface.'
+  tags:
+  - Split
+  - Feature Flag Definitions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPLIT_API_KEY: SPLIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: feature-flag-feature-flag-definitions
+    baseUri: https://api.split.io/internal/api/v2
+    description: Split Feature Flag API — Feature Flag Definitions business capability. Self-contained, no shared references.
+    resources:
+    - name: splits-ws-workspaceId-environments-environmentId
+      path: /splits/ws/{workspaceId}/environments/{environmentId}
+      operations:
+      - name: listfeatureflagdefinitionsinenvironment
+        method: GET
+        description: List feature flag definitions in environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: splits-ws-workspaceId-featureFlagName-environments-environmentId
+      path: /splits/ws/{workspaceId}/{featureFlagName}/environments/{environmentId}
+      operations:
+      - name: getfeatureflagdefinition
+        method: GET
+        description: Get feature flag definition in environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createfeatureflagdefinition
+        method: POST
+        description: Create feature flag definition in environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: updatefeatureflagdefinition
+        method: PATCH
+        description: Update feature flag definition in environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletefeatureflagdefinition
+        method: DELETE
+        description: Delete feature flag definition in environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: splits-ws-workspaceId-featureFlagName-environments-environmentId-kill
+      path: /splits/ws/{workspaceId}/{featureFlagName}/environments/{environmentId}/kill
+      operations:
+      - name: killfeatureflag
+        method: PUT
+        description: Kill feature flag in environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: splits-ws-workspaceId-featureFlagName-environments-environmentId-restore
+      path: /splits/ws/{workspaceId}/{featureFlagName}/environments/{environmentId}/restore
+      operations:
+      - name: restorefeatureflag
+        method: PUT
+        description: Restore feature flag in environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SPLIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: feature-flag-feature-flag-definitions-rest
+    port: 8080
+    description: REST adapter for Split Feature Flag API — Feature Flag Definitions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/splits/ws/{workspaceid}/environments/{environmentid}
+      name: splits-ws-workspaceid-environments-environmentid
+      description: REST surface for splits-ws-workspaceId-environments-environmentId.
+      operations:
+      - method: GET
+        name: listfeatureflagdefinitionsinenvironment
+        description: List feature flag definitions in environment
+        call: feature-flag-feature-flag-definitions.listfeatureflagdefinitionsinenvironment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/splits/ws/{workspaceid}/{featureflagname}/environments/{environmentid}
+      name: splits-ws-workspaceid-featureflagname-environments-environmentid
+      description: REST surface for splits-ws-workspaceId-featureFlagName-environments-environmentId.
+      operations:
+      - method: GET
+        name: getfeatureflagdefinition
+        description: Get feature flag definition in environment
+        call: feature-flag-feature-flag-definitions.getfeatureflagdefinition
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createfeatureflagdefinition
+        description: Create feature flag definition in environment
+        call: feature-flag-feature-flag-definitions.createfeatureflagdefinition
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatefeatureflagdefinition
+        description: Update feature flag definition in environment
+        call: feature-flag-feature-flag-definitions.updatefeatureflagdefinition
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletefeatureflagdefinition
+        description: Delete feature flag definition in environment
+        call: feature-flag-feature-flag-definitions.deletefeatureflagdefinition
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/splits/ws/{workspaceid}/{featureflagname}/environments/{environmentid}/kill
+      name: splits-ws-workspaceid-featureflagname-environments-environmentid-kill
+      description: REST surface for splits-ws-workspaceId-featureFlagName-environments-environmentId-kill.
+      operations:
+      - method: PUT
+        name: killfeatureflag
+        description: Kill feature flag in environment
+        call: feature-flag-feature-flag-definitions.killfeatureflag
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/splits/ws/{workspaceid}/{featureflagname}/environments/{environmentid}/restore
+      name: splits-ws-workspaceid-featureflagname-environments-environmentid-restore
+      description: REST surface for splits-ws-workspaceId-featureFlagName-environments-environmentId-restore.
+      operations:
+      - method: PUT
+        name: restorefeatureflag
+        description: Restore feature flag in environment
+        call: feature-flag-feature-flag-definitions.restorefeatureflag
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: feature-flag-feature-flag-definitions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Split Feature Flag API — Feature Flag Definitions. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-feature-flag-definitions-environment
+      description: List feature flag definitions in environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: feature-flag-feature-flag-definitions.listfeatureflagdefinitionsinenvironment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-feature-flag-definition-environment
+      description: Get feature flag definition in environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: feature-flag-feature-flag-definitions.getfeatureflagdefinition
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-feature-flag-definition-environment
+      description: Create feature flag definition in environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: feature-flag-feature-flag-definitions.createfeatureflagdefinition
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-feature-flag-definition-environment
+      description: Update feature flag definition in environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: feature-flag-feature-flag-definitions.updatefeatureflagdefinition
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-feature-flag-definition-environment
+      description: Delete feature flag definition in environment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: feature-flag-feature-flag-definitions.deletefeatureflagdefinition
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kill-feature-flag-environment
+      description: Kill feature flag in environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: feature-flag-feature-flag-definitions.killfeatureflag
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: restore-feature-flag-environment
+      description: Restore feature flag in environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: feature-flag-feature-flag-definitions.restorefeatureflag
+      outputParameters:
+      - type: object
+        mapping: $.

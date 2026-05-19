@@ -1,0 +1,376 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Split Evaluator API — Evaluation
+  description: 'Split Evaluator API — Evaluation. 6 operations. Lead operation: Get all treatments for a key. Self-contained
+    Naftiko capability covering one Split business surface.'
+  tags:
+  - Split
+  - Evaluation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPLIT_API_KEY: SPLIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: evaluator-evaluation
+    baseUri: http://localhost:7548
+    description: Split Evaluator API — Evaluation business capability. Self-contained, no shared references.
+    resources:
+    - name: client-get-all-treatments
+      path: /client/get-all-treatments
+      operations:
+      - name: getalltreatments
+        method: GET
+        description: Get all treatments for a key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: keys
+          in: query
+          type: string
+          description: JSON string containing an array of key objects with matchingKey and trafficType properties, and optionally
+            a bucketingKey
+          required: true
+        - name: attributes
+          in: query
+          type: string
+          description: JSON string of attributes for targeting rule evaluation
+        - name: impressions-disabled
+          in: query
+          type: boolean
+          description: When set to true, disables impression logging for these evaluations
+      - name: getalltreatmentswithattributes
+        method: POST
+        description: Get all treatments with attributes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: keys
+          in: query
+          type: string
+          description: JSON string containing an array of key objects
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: client-get-treatment
+      path: /client/get-treatment
+      operations:
+      - name: gettreatment
+        method: GET
+        description: Get treatment for a feature flag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: query
+          type: string
+          description: The customer key to evaluate the feature flag against
+          required: true
+        - name: split-name
+          in: query
+          type: string
+          description: The name of the feature flag to evaluate
+          required: true
+        - name: bucketing-key
+          in: query
+          type: string
+          description: Optional bucketing key used for consistent percentage-based treatment assignments
+        - name: attributes
+          in: query
+          type: string
+          description: JSON string of attributes used in targeting rule evaluation
+        - name: impressions-disabled
+          in: query
+          type: boolean
+          description: When set to true, disables impression logging for this evaluation
+      - name: gettreatmentwithattributes
+        method: POST
+        description: Get treatment with attributes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: query
+          type: string
+          description: The customer key to evaluate the feature flag against
+          required: true
+        - name: split-name
+          in: query
+          type: string
+          description: The name of the feature flag to evaluate
+          required: true
+        - name: bucketing-key
+          in: query
+          type: string
+          description: Optional bucketing key for consistent assignments
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: client-get-treatments
+      path: /client/get-treatments
+      operations:
+      - name: gettreatments
+        method: GET
+        description: Get treatments for multiple feature flags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: query
+          type: string
+          description: The customer key to evaluate feature flags against
+          required: true
+        - name: split-names
+          in: query
+          type: string
+          description: Comma-separated list of feature flag names to evaluate
+          required: true
+        - name: bucketing-key
+          in: query
+          type: string
+          description: Optional bucketing key for consistent assignments
+        - name: attributes
+          in: query
+          type: string
+          description: JSON string of attributes for targeting rule evaluation
+        - name: impressions-disabled
+          in: query
+          type: boolean
+          description: When set to true, disables impression logging for these evaluations
+      - name: gettreatmentswithattributes
+        method: POST
+        description: Get treatments with attributes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: query
+          type: string
+          description: The customer key to evaluate feature flags against
+          required: true
+        - name: split-names
+          in: query
+          type: string
+          description: Comma-separated list of feature flag names to evaluate
+          required: true
+        - name: bucketing-key
+          in: query
+          type: string
+          description: Optional bucketing key for consistent assignments
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+  exposes:
+  - type: rest
+    namespace: evaluator-evaluation-rest
+    port: 8080
+    description: REST adapter for Split Evaluator API — Evaluation. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/client/get-all-treatments
+      name: client-get-all-treatments
+      description: REST surface for client-get-all-treatments.
+      operations:
+      - method: GET
+        name: getalltreatments
+        description: Get all treatments for a key
+        call: evaluator-evaluation.getalltreatments
+        with:
+          keys: rest.keys
+          attributes: rest.attributes
+          impressions-disabled: rest.impressions-disabled
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: getalltreatmentswithattributes
+        description: Get all treatments with attributes
+        call: evaluator-evaluation.getalltreatmentswithattributes
+        with:
+          keys: rest.keys
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/client/get-treatment
+      name: client-get-treatment
+      description: REST surface for client-get-treatment.
+      operations:
+      - method: GET
+        name: gettreatment
+        description: Get treatment for a feature flag
+        call: evaluator-evaluation.gettreatment
+        with:
+          key: rest.key
+          split-name: rest.split-name
+          bucketing-key: rest.bucketing-key
+          attributes: rest.attributes
+          impressions-disabled: rest.impressions-disabled
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: gettreatmentwithattributes
+        description: Get treatment with attributes
+        call: evaluator-evaluation.gettreatmentwithattributes
+        with:
+          key: rest.key
+          split-name: rest.split-name
+          bucketing-key: rest.bucketing-key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/client/get-treatments
+      name: client-get-treatments
+      description: REST surface for client-get-treatments.
+      operations:
+      - method: GET
+        name: gettreatments
+        description: Get treatments for multiple feature flags
+        call: evaluator-evaluation.gettreatments
+        with:
+          key: rest.key
+          split-names: rest.split-names
+          bucketing-key: rest.bucketing-key
+          attributes: rest.attributes
+          impressions-disabled: rest.impressions-disabled
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: gettreatmentswithattributes
+        description: Get treatments with attributes
+        call: evaluator-evaluation.gettreatmentswithattributes
+        with:
+          key: rest.key
+          split-names: rest.split-names
+          bucketing-key: rest.bucketing-key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: evaluator-evaluation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Split Evaluator API — Evaluation. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-all-treatments-key
+      description: Get all treatments for a key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: evaluator-evaluation.getalltreatments
+      with:
+        keys: tools.keys
+        attributes: tools.attributes
+        impressions-disabled: tools.impressions-disabled
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-treatments-attributes
+      description: Get all treatments with attributes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: evaluator-evaluation.getalltreatmentswithattributes
+      with:
+        keys: tools.keys
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-treatment-feature-flag
+      description: Get treatment for a feature flag
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: evaluator-evaluation.gettreatment
+      with:
+        key: tools.key
+        split-name: tools.split-name
+        bucketing-key: tools.bucketing-key
+        attributes: tools.attributes
+        impressions-disabled: tools.impressions-disabled
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-treatment-attributes
+      description: Get treatment with attributes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: evaluator-evaluation.gettreatmentwithattributes
+      with:
+        key: tools.key
+        split-name: tools.split-name
+        bucketing-key: tools.bucketing-key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-treatments-multiple-feature-flags
+      description: Get treatments for multiple feature flags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: evaluator-evaluation.gettreatments
+      with:
+        key: tools.key
+        split-names: tools.split-names
+        bucketing-key: tools.bucketing-key
+        attributes: tools.attributes
+        impressions-disabled: tools.impressions-disabled
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-treatments-attributes
+      description: Get treatments with attributes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: evaluator-evaluation.gettreatmentswithattributes
+      with:
+        key: tools.key
+        split-names: tools.split-names
+        bucketing-key: tools.bucketing-key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

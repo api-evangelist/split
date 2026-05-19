@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Split Admin API — Attributes
+  description: 'Split Admin API — Attributes. 1 operations. Lead operation: List attributes. Self-contained Naftiko capability
+    covering one Split business surface.'
+  tags:
+  - Split
+  - Attributes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPLIT_API_KEY: SPLIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-attributes
+    baseUri: https://api.split.io/internal/api/v2
+    description: Split Admin API — Attributes business capability. Self-contained, no shared references.
+    resources:
+    - name: schema-ws-workspaceId-trafficTypes-trafficTypeId
+      path: /schema/ws/{workspaceId}/trafficTypes/{trafficTypeId}
+      operations:
+      - name: listattributes
+        method: GET
+        description: List attributes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: trafficTypeId
+          in: path
+          type: string
+          description: The unique identifier of the traffic type
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SPLIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-attributes-rest
+    port: 8080
+    description: REST adapter for Split Admin API — Attributes. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/schema/ws/{workspaceid}/traffictypes/{traffictypeid}
+      name: schema-ws-workspaceid-traffictypes-traffictypeid
+      description: REST surface for schema-ws-workspaceId-trafficTypes-trafficTypeId.
+      operations:
+      - method: GET
+        name: listattributes
+        description: List attributes
+        call: admin-attributes.listattributes
+        with:
+          trafficTypeId: rest.trafficTypeId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-attributes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Split Admin API — Attributes. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-attributes
+      description: List attributes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-attributes.listattributes
+      with:
+        trafficTypeId: tools.trafficTypeId
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,193 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Split Admin API — Segments
+  description: 'Split Admin API — Segments. 4 operations. Lead operation: List segments. Self-contained Naftiko capability
+    covering one Split business surface.'
+  tags:
+  - Split
+  - Segments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPLIT_API_KEY: SPLIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-segments
+    baseUri: https://api.split.io/internal/api/v2
+    description: Split Admin API — Segments business capability. Self-contained, no shared references.
+    resources:
+    - name: segments-ws-workspaceId
+      path: /segments/ws/{workspaceId}
+      operations:
+      - name: listsegments
+        method: GET
+        description: List segments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: segments-ws-workspaceId-environments-environmentId
+      path: /segments/ws/{workspaceId}/environments/{environmentId}
+      operations:
+      - name: listsegmentsinenvironment
+        method: GET
+        description: List segments in environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: segments-environmentId-segmentName
+      path: /segments/{environmentId}/{segmentName}
+      operations:
+      - name: enablesegmentinenvironment
+        method: POST
+        description: Enable segment in environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: path
+          type: string
+          description: The unique identifier of the environment
+          required: true
+        - name: segmentName
+          in: path
+          type: string
+          description: The name of the segment
+          required: true
+      - name: deactivatesegmentinenvironment
+        method: DELETE
+        description: Deactivate segment in environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: path
+          type: string
+          description: The unique identifier of the environment
+          required: true
+        - name: segmentName
+          in: path
+          type: string
+          description: The name of the segment
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SPLIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-segments-rest
+    port: 8080
+    description: REST adapter for Split Admin API — Segments. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/segments/ws/{workspaceid}
+      name: segments-ws-workspaceid
+      description: REST surface for segments-ws-workspaceId.
+      operations:
+      - method: GET
+        name: listsegments
+        description: List segments
+        call: admin-segments.listsegments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/segments/ws/{workspaceid}/environments/{environmentid}
+      name: segments-ws-workspaceid-environments-environmentid
+      description: REST surface for segments-ws-workspaceId-environments-environmentId.
+      operations:
+      - method: GET
+        name: listsegmentsinenvironment
+        description: List segments in environment
+        call: admin-segments.listsegmentsinenvironment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/segments/{environmentid}/{segmentname}
+      name: segments-environmentid-segmentname
+      description: REST surface for segments-environmentId-segmentName.
+      operations:
+      - method: POST
+        name: enablesegmentinenvironment
+        description: Enable segment in environment
+        call: admin-segments.enablesegmentinenvironment
+        with:
+          environmentId: rest.environmentId
+          segmentName: rest.segmentName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deactivatesegmentinenvironment
+        description: Deactivate segment in environment
+        call: admin-segments.deactivatesegmentinenvironment
+        with:
+          environmentId: rest.environmentId
+          segmentName: rest.segmentName
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-segments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Split Admin API — Segments. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-segments
+      description: List segments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-segments.listsegments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-segments-environment
+      description: List segments in environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-segments.listsegmentsinenvironment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: enable-segment-environment
+      description: Enable segment in environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-segments.enablesegmentinenvironment
+      with:
+        environmentId: tools.environmentId
+        segmentName: tools.segmentName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deactivate-segment-environment
+      description: Deactivate segment in environment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-segments.deactivatesegmentinenvironment
+      with:
+        environmentId: tools.environmentId
+        segmentName: tools.segmentName
+      outputParameters:
+      - type: object
+        mapping: $.

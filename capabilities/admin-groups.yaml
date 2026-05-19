@@ -1,0 +1,182 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Split Admin API — Groups
+  description: 'Split Admin API — Groups. 4 operations. Lead operation: List groups. Self-contained Naftiko capability covering
+    one Split business surface.'
+  tags:
+  - Split
+  - Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPLIT_API_KEY: SPLIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-groups
+    baseUri: https://api.split.io/internal/api/v2
+    description: Split Admin API — Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: groups
+      path: /groups
+      operations:
+      - name: listgroups
+        method: GET
+        description: List groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: creategroup
+        method: POST
+        description: Create group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: groups-groupId
+      path: /groups/{groupId}
+      operations:
+      - name: getgroup
+        method: GET
+        description: Get group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: The unique identifier of the group
+          required: true
+      - name: deletegroup
+        method: DELETE
+        description: Delete group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: The unique identifier of the group
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SPLIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-groups-rest
+    port: 8080
+    description: REST adapter for Split Admin API — Groups. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/groups
+      name: groups
+      description: REST surface for groups.
+      operations:
+      - method: GET
+        name: listgroups
+        description: List groups
+        call: admin-groups.listgroups
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: creategroup
+        description: Create group
+        call: admin-groups.creategroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups/{groupid}
+      name: groups-groupid
+      description: REST surface for groups-groupId.
+      operations:
+      - method: GET
+        name: getgroup
+        description: Get group
+        call: admin-groups.getgroup
+        with:
+          groupId: rest.groupId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletegroup
+        description: Delete group
+        call: admin-groups.deletegroup
+        with:
+          groupId: rest.groupId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Split Admin API — Groups. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-groups
+      description: List groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-groups.listgroups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-group
+      description: Create group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-groups.creategroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-group
+      description: Get group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-groups.getgroup
+      with:
+        groupId: tools.groupId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-group
+      description: Delete group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-groups.deletegroup
+      with:
+        groupId: tools.groupId
+      outputParameters:
+      - type: object
+        mapping: $.

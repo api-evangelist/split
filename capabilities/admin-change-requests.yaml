@@ -1,0 +1,128 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Split Admin API — Change Requests
+  description: 'Split Admin API — Change Requests. 2 operations. Lead operation: List change requests. Self-contained Naftiko
+    capability covering one Split business surface.'
+  tags:
+  - Split
+  - Change Requests
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPLIT_API_KEY: SPLIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-change-requests
+    baseUri: https://api.split.io/internal/api/v2
+    description: Split Admin API — Change Requests business capability. Self-contained, no shared references.
+    resources:
+    - name: changeRequests
+      path: /changeRequests
+      operations:
+      - name: listchangerequests
+        method: GET
+        description: List change requests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter by change request status
+    - name: changeRequests-changeRequestId-approve
+      path: /changeRequests/{changeRequestId}/approve
+      operations:
+      - name: approvechangerequest
+        method: PUT
+        description: Approve change request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: changeRequestId
+          in: path
+          type: string
+          description: The unique identifier of the change request
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.SPLIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-change-requests-rest
+    port: 8080
+    description: REST adapter for Split Admin API — Change Requests. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/changerequests
+      name: changerequests
+      description: REST surface for changeRequests.
+      operations:
+      - method: GET
+        name: listchangerequests
+        description: List change requests
+        call: admin-change-requests.listchangerequests
+        with:
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/changerequests/{changerequestid}/approve
+      name: changerequests-changerequestid-approve
+      description: REST surface for changeRequests-changeRequestId-approve.
+      operations:
+      - method: PUT
+        name: approvechangerequest
+        description: Approve change request
+        call: admin-change-requests.approvechangerequest
+        with:
+          changeRequestId: rest.changeRequestId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-change-requests-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Split Admin API — Change Requests. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-change-requests
+      description: List change requests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-change-requests.listchangerequests
+      with:
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: approve-change-request
+      description: Approve change request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-change-requests.approvechangerequest
+      with:
+        changeRequestId: tools.changeRequestId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
