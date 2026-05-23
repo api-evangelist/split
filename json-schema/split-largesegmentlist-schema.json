@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LargeSegmentList",
+  "title": "LargeSegmentList",
+  "type": "object",
+  "description": "Paginated list of large segments",
+  "properties": {
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the large segment"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the large segment"
+          },
+          "trafficType": {
+            "$ref": "#/components/schemas/TrafficType"
+          },
+          "creationTime": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Timestamp of when the large segment was created"
+          }
+        }
+      }
+    },
+    "offset": {
+      "type": "integer",
+      "description": "Current offset in the result set"
+    },
+    "limit": {
+      "type": "integer",
+      "description": "Maximum number of results returned"
+    },
+    "totalCount": {
+      "type": "integer",
+      "description": "Total number of large segments available"
+    }
+  }
+}

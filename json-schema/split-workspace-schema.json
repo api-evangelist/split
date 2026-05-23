@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Workspace",
+  "title": "Workspace",
+  "type": "object",
+  "description": "A workspace (project) that organizes feature flags and experiments across business units or applications.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the workspace"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the workspace"
+    },
+    "requiresTitleAndComments": {
+      "type": "boolean",
+      "description": "Whether changes require titles and comments"
+    }
+  }
+}

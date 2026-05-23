@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EventProperties",
+  "title": "EventProperties",
+  "type": "object",
+  "description": "Properties associated with a tracked event.",
+  "properties": {
+    "properties": {
+      "type": "object",
+      "description": "Key-value pairs of event properties. Maximum 15 keys. Values must be boolean, string, number, or null.",
+      "additionalProperties": true,
+      "maxProperties": 15
+    }
+  }
+}

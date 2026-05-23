@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Tag",
+  "title": "Tag",
+  "type": "object",
+  "description": "A tag associated with a feature flag",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the tag"
+    }
+  }
+}

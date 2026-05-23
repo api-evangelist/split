@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Attribute",
+  "title": "Attribute",
+  "type": "object",
+  "description": "An attribute used in targeting rules for feature flag definitions.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the attribute"
+    },
+    "trafficTypeId": {
+      "type": "string",
+      "description": "Identifier of the associated traffic type"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable name of the attribute"
+    },
+    "dataType": {
+      "type": "string",
+      "description": "Data type of the attribute",
+      "enum": [
+        "STRING",
+        "NUMBER",
+        "DATETIME",
+        "SET"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the attribute"
+    },
+    "isSearchable": {
+      "type": "boolean",
+      "description": "Whether the attribute is searchable"
+    }
+  }
+}

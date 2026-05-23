@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Environment",
+  "title": "Environment",
+  "type": "object",
+  "description": "An environment representing a deployment stage where feature flags can be independently configured.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the environment"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the environment"
+    },
+    "production": {
+      "type": "boolean",
+      "description": "Whether this is a production environment"
+    }
+  }
+}

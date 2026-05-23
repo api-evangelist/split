@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Bucket",
+  "title": "Bucket",
+  "type": "object",
+  "description": "A bucket defining the percentage of traffic assigned to a specific treatment within a rule.",
+  "properties": {
+    "treatment": {
+      "type": "string",
+      "description": "Name of the treatment assigned to this bucket"
+    },
+    "size": {
+      "type": "integer",
+      "description": "Percentage of traffic allocated to this bucket (0-100)",
+      "minimum": 0,
+      "maximum": 100
+    }
+  }
+}

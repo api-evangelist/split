@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FeatureFlagDefinitionCreate",
+  "title": "FeatureFlagDefinitionCreate",
+  "type": "object",
+  "description": "Request body for creating a feature flag definition in an environment",
+  "required": [
+    "treatments",
+    "defaultTreatment",
+    "defaultRule"
+  ],
+  "properties": {
+    "treatments": {
+      "type": "array",
+      "description": "List of treatments for this definition",
+      "items": {
+        "$ref": "#/components/schemas/Treatment"
+      }
+    },
+    "defaultTreatment": {
+      "type": "string",
+      "description": "The default treatment for unmatched traffic"
+    },
+    "baselineTreatment": {
+      "type": "string",
+      "description": "The baseline treatment for experimentation"
+    },
+    "rules": {
+      "type": "array",
+      "description": "Targeting rules for the definition",
+      "items": {
+        "$ref": "#/components/schemas/TargetingRule"
+      }
+    },
+    "defaultRule": {
+      "type": "array",
+      "description": "Default percentage-based rollout rule",
+      "items": {
+        "$ref": "#/components/schemas/Bucket"
+      }
+    },
+    "trafficAllocation": {
+      "type": "integer",
+      "description": "Percentage of traffic included in evaluation",
+      "minimum": 0,
+      "maximum": 100
+    }
+  }
+}

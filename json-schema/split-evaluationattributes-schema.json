@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EvaluationAttributes",
+  "title": "EvaluationAttributes",
+  "type": "object",
+  "description": "Attributes passed in the request body for use in targeting rule evaluation. Attributes can be strings, numbers, booleans, or sets.",
+  "properties": {
+    "attributes": {
+      "type": "object",
+      "description": "Key-value pairs of attribute names and their values",
+      "additionalProperties": true
+    },
+    "impressionsDisabled": {
+      "type": "boolean",
+      "description": "When set to true, disables impression logging for the evaluation"
+    }
+  }
+}

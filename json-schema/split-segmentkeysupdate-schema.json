@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SegmentKeysUpdate",
+  "title": "SegmentKeysUpdate",
+  "type": "object",
+  "description": "Request body for adding or removing segment keys",
+  "required": [
+    "keys"
+  ],
+  "properties": {
+    "keys": {
+      "type": "array",
+      "description": "List of identity keys to add or remove",
+      "items": {
+        "type": "string"
+      }
+    },
+    "comment": {
+      "type": "string",
+      "description": "Optional comment describing the change"
+    }
+  }
+}

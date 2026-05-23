@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/User",
+  "title": "User",
+  "type": "object",
+  "description": "A user within the Split account",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the user"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address of the user"
+    },
+    "name": {
+      "type": "string",
+      "description": "Full name of the user"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the user",
+      "enum": [
+        "ACTIVE",
+        "DEACTIVATED",
+        "PENDING"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "User type or role"
+    },
+    "groups": {
+      "type": "array",
+      "description": "Groups the user belongs to",
+      "items": {
+        "$ref": "#/components/schemas/GroupRef"
+      }
+    }
+  }
+}

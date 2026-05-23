@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TreatmentResult",
+  "title": "TreatmentResult",
+  "type": "object",
+  "description": "The result of evaluating a single feature flag for a given key.",
+  "properties": {
+    "splitName": {
+      "type": "string",
+      "description": "Name of the evaluated feature flag"
+    },
+    "treatment": {
+      "type": "string",
+      "description": "The treatment value returned by the evaluation (e.g., on, off)"
+    },
+    "config": {
+      "type": "string",
+      "nullable": true,
+      "description": "JSON string of dynamic configuration associated with the treatment, or null if no configuration is defined"
+    }
+  }
+}

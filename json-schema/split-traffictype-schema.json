@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TrafficType",
+  "title": "TrafficType",
+  "type": "object",
+  "description": "A traffic type defining the kind of entity that feature flags target.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the traffic type"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the traffic type (e.g., user, account)"
+    }
+  }
+}

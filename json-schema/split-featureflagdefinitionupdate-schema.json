@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FeatureFlagDefinitionUpdate",
+  "title": "FeatureFlagDefinitionUpdate",
+  "type": "object",
+  "description": "Request body for partially updating a feature flag definition in an environment. Only provided fields are updated.",
+  "properties": {
+    "treatments": {
+      "type": "array",
+      "description": "Updated list of treatments",
+      "items": {
+        "$ref": "#/components/schemas/Treatment"
+      }
+    },
+    "defaultTreatment": {
+      "type": "string",
+      "description": "Updated default treatment"
+    },
+    "baselineTreatment": {
+      "type": "string",
+      "description": "Updated baseline treatment"
+    },
+    "rules": {
+      "type": "array",
+      "description": "Updated targeting rules",
+      "items": {
+        "$ref": "#/components/schemas/TargetingRule"
+      }
+    },
+    "defaultRule": {
+      "type": "array",
+      "description": "Updated default percentage-based rollout rule",
+      "items": {
+        "$ref": "#/components/schemas/Bucket"
+      }
+    },
+    "trafficAllocation": {
+      "type": "integer",
+      "description": "Updated traffic allocation percentage",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "comment": {
+      "type": "string",
+      "description": "Comment describing the update"
+    }
+  }
+}

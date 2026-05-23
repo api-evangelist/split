@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApiKeyCreate",
+  "title": "ApiKeyCreate",
+  "type": "object",
+  "description": "Request body for creating a new API key",
+  "required": [
+    "name",
+    "apiKeyType"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name for the new API key"
+    },
+    "apiKeyType": {
+      "type": "string",
+      "description": "Type of the API key to create",
+      "enum": [
+        "admin",
+        "client-side",
+        "server-side"
+      ]
+    },
+    "roles": {
+      "type": "array",
+      "description": "Roles to assign to the API key",
+      "items": {
+        "type": "string"
+      }
+    },
+    "workspaceId": {
+      "type": "string",
+      "description": "Workspace to scope the API key to"
+    },
+    "environmentIds": {
+      "type": "array",
+      "description": "Environments to scope the API key to",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

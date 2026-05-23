@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TargetingRule",
+  "title": "TargetingRule",
+  "type": "object",
+  "description": "A targeting rule that matches specific conditions and assigns treatments to matching traffic.",
+  "properties": {
+    "condition": {
+      "$ref": "#/components/schemas/Condition"
+    },
+    "buckets": {
+      "type": "array",
+      "description": "Percentage-based distribution of treatments for traffic matching this rule",
+      "items": {
+        "$ref": "#/components/schemas/Bucket"
+      }
+    }
+  }
+}

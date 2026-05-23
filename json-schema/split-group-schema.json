@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Group",
+  "title": "Group",
+  "type": "object",
+  "description": "A group used to organize users and assign permissions",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the group"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the group (unique within an account)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the group"
+    },
+    "type": {
+      "type": "string",
+      "description": "Group type"
+    }
+  }
+}

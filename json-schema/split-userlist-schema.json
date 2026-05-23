@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UserList",
+  "title": "UserList",
+  "type": "object",
+  "description": "Paginated list of users",
+  "properties": {
+    "objects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/User"
+      }
+    },
+    "offset": {
+      "type": "integer",
+      "description": "Current offset in the result set"
+    },
+    "limit": {
+      "type": "integer",
+      "description": "Maximum number of results returned"
+    },
+    "totalCount": {
+      "type": "integer",
+      "description": "Total number of users available"
+    }
+  }
+}

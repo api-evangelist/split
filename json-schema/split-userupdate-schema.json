@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UserUpdate",
+  "title": "UserUpdate",
+  "type": "object",
+  "description": "Request body for updating a user",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Updated name for the user"
+    },
+    "status": {
+      "type": "string",
+      "description": "Updated status for the user",
+      "enum": [
+        "ACTIVE",
+        "DEACTIVATED"
+      ]
+    },
+    "groups": {
+      "type": "array",
+      "description": "Updated list of group references",
+      "items": {
+        "$ref": "#/components/schemas/GroupRef"
+      }
+    }
+  }
+}

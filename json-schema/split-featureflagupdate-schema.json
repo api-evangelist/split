@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FeatureFlagUpdate",
+  "title": "FeatureFlagUpdate",
+  "type": "object",
+  "description": "Request body for updating a feature flag",
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "Updated description of the feature flag"
+    },
+    "tags": {
+      "type": "array",
+      "description": "Updated tags for the feature flag",
+      "items": {
+        "$ref": "#/components/schemas/Tag"
+      }
+    }
+  }
+}

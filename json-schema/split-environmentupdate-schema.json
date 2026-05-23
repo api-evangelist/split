@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EnvironmentUpdate",
+  "title": "EnvironmentUpdate",
+  "type": "object",
+  "description": "Request body for updating an environment",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Updated name for the environment"
+    },
+    "production": {
+      "type": "boolean",
+      "description": "Whether this is a production environment"
+    }
+  }
+}

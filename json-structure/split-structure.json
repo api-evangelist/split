@@ -1,0 +1,431 @@
+{
+  "provider": "Split",
+  "providerId": "split",
+  "kind": "json-structure",
+  "description": "Structural overview of the Split API surface; extracted from openapi/.",
+  "schemaCount": 23,
+  "operationCount": 30,
+  "schemas": [
+    {
+      "name": "Workspace",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "WorkspaceList",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Environment",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "EnvironmentCreate",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "EnvironmentUpdate",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "TrafficType",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Attribute",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "User",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "UserList",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "UserUpdate",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "UserInvite",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "email"
+      ]
+    },
+    {
+      "name": "Group",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "GroupRef",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "GroupCreate",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "ApiKey",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "ApiKeyCreate",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "name",
+        "apiKeyType"
+      ]
+    },
+    {
+      "name": "Segment",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "SegmentList",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "SegmentKeysList",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "SegmentKeysUpdate",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "keys"
+      ]
+    },
+    {
+      "name": "LargeSegmentList",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ChangeRequest",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "ChangeRequestList",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/workspaces",
+      "operationId": "listWorkspaces",
+      "summary": "List workspaces",
+      "tags": [
+        "Workspaces"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/environments/ws/{workspaceId}",
+      "operationId": "listEnvironments",
+      "summary": "List environments",
+      "tags": [
+        "Environments"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/environments/ws/{workspaceId}",
+      "operationId": "createEnvironment",
+      "summary": "Create environment",
+      "tags": [
+        "Environments"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/environments/ws/{workspaceId}/{environmentId}",
+      "operationId": "getEnvironment",
+      "summary": "Get environment",
+      "tags": [
+        "Environments"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/environments/ws/{workspaceId}/{environmentId}",
+      "operationId": "deleteEnvironment",
+      "summary": "Delete environment",
+      "tags": [
+        "Environments"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/environments/ws/{workspaceId}/{environmentId}",
+      "operationId": "updateEnvironment",
+      "summary": "Update environment",
+      "tags": [
+        "Environments"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/trafficTypes/ws/{workspaceId}",
+      "operationId": "listTrafficTypes",
+      "summary": "List traffic types",
+      "tags": [
+        "Traffic Types"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/schema/ws/{workspaceId}/trafficTypes/{trafficTypeId}",
+      "operationId": "listAttributes",
+      "summary": "List attributes",
+      "tags": [
+        "Attributes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/users",
+      "operationId": "listUsers",
+      "summary": "List users",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/users/{userId}",
+      "operationId": "getUser",
+      "summary": "Get user",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/users/{userId}",
+      "operationId": "updateUser",
+      "summary": "Update user",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/users/{userId}",
+      "operationId": "deleteUser",
+      "summary": "Deactivate user",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/users/invite",
+      "operationId": "inviteUser",
+      "summary": "Invite user",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/groups",
+      "operationId": "listGroups",
+      "summary": "List groups",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/groups",
+      "operationId": "createGroup",
+      "summary": "Create group",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/groups/{groupId}",
+      "operationId": "getGroup",
+      "summary": "Get group",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/groups/{groupId}",
+      "operationId": "deleteGroup",
+      "summary": "Delete group",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/apiKeys",
+      "operationId": "createApiKey",
+      "summary": "Create API key",
+      "tags": [
+        "API Keys"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/apiKeys/{apiKeyId}",
+      "operationId": "deleteApiKey",
+      "summary": "Delete API key",
+      "tags": [
+        "API Keys"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/segments/ws/{workspaceId}",
+      "operationId": "listSegments",
+      "summary": "List segments",
+      "tags": [
+        "Segments"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/segments/ws/{workspaceId}/environments/{environmentId}",
+      "operationId": "listSegmentsInEnvironment",
+      "summary": "List segments in environment",
+      "tags": [
+        "Segments"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/segments/{environmentId}/{segmentName}",
+      "operationId": "enableSegmentInEnvironment",
+      "summary": "Enable segment in environment",
+      "tags": [
+        "Segments"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/segments/{environmentId}/{segmentName}",
+      "operationId": "deactivateSegmentInEnvironment",
+      "summary": "Deactivate segment in environment",
+      "tags": [
+        "Segments"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/segments/{environmentId}/{segmentName}/upload",
+      "operationId": "updateSegmentKeysViaCSV",
+      "summary": "Update segment keys via CSV",
+      "tags": [
+        "Identities"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/segments/{environmentId}/{segmentName}/keys",
+      "operationId": "listSegmentKeys",
+      "summary": "List segment keys",
+      "tags": [
+        "Identities"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/segments/{environmentId}/{segmentName}/keys",
+      "operationId": "addSegmentKeys",
+      "summary": "Add keys to segment",
+      "tags": [
+        "Identities"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/segments/{environmentId}/{segmentName}/keys",
+      "operationId": "removeSegmentKeys",
+      "summary": "Remove keys from segment",
+      "tags": [
+        "Identities"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/large-segments/ws/{workspaceId}/environments/{environmentId}",
+      "operationId": "listLargeSegmentsInEnvironment",
+      "summary": "List large segments in environment",
+      "tags": [
+        "Large Segments"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/changeRequests",
+      "operationId": "listChangeRequests",
+      "summary": "List change requests",
+      "tags": [
+        "Change Requests"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/changeRequests/{changeRequestId}/approve",
+      "operationId": "approveChangeRequest",
+      "summary": "Approve change request",
+      "tags": [
+        "Change Requests"
+      ]
+    }
+  ]
+}

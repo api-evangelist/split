@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UserInvite",
+  "title": "UserInvite",
+  "type": "object",
+  "description": "Request body for inviting a new user",
+  "required": [
+    "email"
+  ],
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address to send the invitation to"
+    },
+    "groups": {
+      "type": "array",
+      "description": "Groups to add the invited user to",
+      "items": {
+        "$ref": "#/components/schemas/GroupRef"
+      }
+    }
+  }
+}

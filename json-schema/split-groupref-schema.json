@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GroupRef",
+  "title": "GroupRef",
+  "type": "object",
+  "description": "A reference to a group",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the referenced group"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of the group reference"
+    }
+  }
+}

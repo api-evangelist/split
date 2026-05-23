@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/HealthCheckResponse",
+  "title": "HealthCheckResponse",
+  "type": "object",
+  "description": "Health check response from the Split Evaluator",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Health status of the service",
+      "enum": [
+        "ok",
+        "error"
+      ]
+    },
+    "message": {
+      "type": "string",
+      "description": "Detailed message about the health status"
+    }
+  }
+}

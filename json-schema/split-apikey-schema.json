@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApiKey",
+  "title": "ApiKey",
+  "type": "object",
+  "description": "An API key used for authenticating with the Split platform",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the API key"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the API key"
+    },
+    "apiKeyType": {
+      "type": "string",
+      "description": "Type of the API key",
+      "enum": [
+        "admin",
+        "client-side",
+        "server-side"
+      ]
+    },
+    "key": {
+      "type": "string",
+      "description": "The API key value (only returned at creation time)"
+    },
+    "roles": {
+      "type": "array",
+      "description": "Roles assigned to the API key",
+      "items": {
+        "type": "string"
+      }
+    },
+    "createdAt": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Timestamp of when the API key was created"
+    }
+  }
+}

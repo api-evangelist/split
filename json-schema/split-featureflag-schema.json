@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FeatureFlag",
+  "title": "FeatureFlag",
+  "type": "object",
+  "description": "A feature flag (split) representing a toggle used to control feature rollouts and experimentation.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Unique name of the feature flag"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the feature flag"
+    },
+    "trafficType": {
+      "$ref": "#/components/schemas/TrafficType"
+    },
+    "creationTime": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Unix timestamp of when the feature flag was created"
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags associated with the feature flag",
+      "items": {
+        "$ref": "#/components/schemas/Tag"
+      }
+    }
+  }
+}

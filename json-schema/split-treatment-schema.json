@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Treatment",
+  "title": "Treatment",
+  "type": "object",
+  "description": "A treatment representing one of the possible values returned by a feature flag evaluation.",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the treatment (e.g., on, off, v1, v2)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what this treatment does"
+    },
+    "configurations": {
+      "type": "string",
+      "description": "JSON string containing dynamic configuration associated with this treatment"
+    }
+  }
+}

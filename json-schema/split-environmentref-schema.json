@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EnvironmentRef",
+  "title": "EnvironmentRef",
+  "type": "object",
+  "description": "A reference to an environment",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the environment"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the environment"
+    }
+  }
+}

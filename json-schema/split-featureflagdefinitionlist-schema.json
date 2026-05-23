@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FeatureFlagDefinitionList",
+  "title": "FeatureFlagDefinitionList",
+  "type": "object",
+  "description": "Paginated list of feature flag definitions",
+  "properties": {
+    "objects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/FeatureFlagDefinition"
+      }
+    },
+    "offset": {
+      "type": "integer",
+      "description": "Current offset in the result set"
+    },
+    "limit": {
+      "type": "integer",
+      "description": "Maximum number of results returned"
+    },
+    "totalCount": {
+      "type": "integer",
+      "description": "Total number of definitions available"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TreatmentsResult",
+  "title": "TreatmentsResult",
+  "type": "object",
+  "description": "The result of evaluating multiple feature flags for a given key. Keys are feature flag names and values are treatment results.",
+  "additionalProperties": {
+    "$ref": "#/components/schemas/TreatmentResult"
+  }
+}

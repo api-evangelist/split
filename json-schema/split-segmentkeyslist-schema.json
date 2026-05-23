@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SegmentKeysList",
+  "title": "SegmentKeysList",
+  "type": "object",
+  "description": "Paginated list of segment keys (identities)",
+  "properties": {
+    "keys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The identity key value"
+          }
+        }
+      }
+    },
+    "count": {
+      "type": "integer",
+      "description": "Total number of keys in the segment"
+    },
+    "offset": {
+      "type": "integer",
+      "description": "Current offset in the result set"
+    },
+    "limit": {
+      "type": "integer",
+      "description": "Maximum number of results returned"
+    }
+  }
+}

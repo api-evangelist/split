@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Matcher",
+  "title": "Matcher",
+  "type": "object",
+  "description": "A matcher defining a single matching criterion based on attributes, segments, or key values.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Type of matching to perform",
+      "enum": [
+        "IN_SEGMENT",
+        "WHITELIST",
+        "ALL_KEYS",
+        "EQUAL_TO",
+        "GREATER_THAN_OR_EQUAL_TO",
+        "LESS_THAN_OR_EQUAL_TO",
+        "BETWEEN",
+        "CONTAINS_STRING",
+        "STARTS_WITH",
+        "ENDS_WITH",
+        "MATCHES_STRING",
+        "IN_LIST_STRING",
+        "EQUAL_TO_SET",
+        "CONTAINS_ALL_OF_SET",
+        "CONTAINS_ANY_OF_SET",
+        "PART_OF_SET",
+        "EQUAL_TO_BOOLEAN",
+        "DEPENDS_ON"
+      ]
+    },
+    "negate": {
+      "type": "boolean",
+      "description": "Whether to negate the matcher result"
+    },
+    "attribute": {
+      "type": "string",
+      "description": "The attribute name to match against. Required for attribute-based matchers."
+    },
+    "strings": {
+      "type": "array",
+      "description": "String values used by string-based matchers",
+      "items": {
+        "type": "string"
+      }
+    },
+    "number": {
+      "type": "integer",
+      "description": "Numeric value used by numeric matchers"
+    },
+    "date": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Unix timestamp value used by date-based matchers"
+    },
+    "between": {
+      "type": "object",
+      "description": "Range values for the BETWEEN matcher",
+      "properties": {
+        "from": {
+          "type": "integer",
+          "description": "Lower bound of the range"
+        },
+        "to": {
+          "type": "integer",
+          "description": "Upper bound of the range"
+        }
+      }
+    },
+    "depends": {
+      "type": "object",
+      "description": "Dependency configuration for the DEPENDS_ON matcher",
+      "properties": {
+        "splitName": {
+          "type": "string",
+          "description": "Name of the feature flag to depend on"
+        },
+        "treatments": {
+          "type": "array",
+          "description": "Treatments that must be returned by the dependency",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

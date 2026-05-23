@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChangeRequestList",
+  "title": "ChangeRequestList",
+  "type": "object",
+  "description": "Paginated list of change requests",
+  "properties": {
+    "objects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ChangeRequest"
+      }
+    },
+    "offset": {
+      "type": "integer",
+      "description": "Current offset in the result set"
+    },
+    "limit": {
+      "type": "integer",
+      "description": "Maximum number of results returned"
+    },
+    "totalCount": {
+      "type": "integer",
+      "description": "Total number of change requests available"
+    }
+  }
+}

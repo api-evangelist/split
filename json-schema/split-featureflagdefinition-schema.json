@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FeatureFlagDefinition",
+  "title": "FeatureFlagDefinition",
+  "type": "object",
+  "description": "The full definition of a feature flag in a specific environment, including treatments, targeting rules, and rollout configuration.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the feature flag"
+    },
+    "environment": {
+      "$ref": "#/components/schemas/EnvironmentRef"
+    },
+    "trafficType": {
+      "$ref": "#/components/schemas/TrafficType"
+    },
+    "killed": {
+      "type": "boolean",
+      "description": "Whether the flag is killed, forcing all evaluations to return the default treatment"
+    },
+    "treatments": {
+      "type": "array",
+      "description": "List of possible treatments that this feature flag can return",
+      "items": {
+        "$ref": "#/components/schemas/Treatment"
+      }
+    },
+    "defaultTreatment": {
+      "type": "string",
+      "description": "The treatment returned when no targeting rules match or when the flag is killed"
+    },
+    "baselineTreatment": {
+      "type": "string",
+      "description": "The control treatment used as a baseline for experimentation"
+    },
+    "rules": {
+      "type": "array",
+      "description": "Ordered list of targeting rules evaluated top to bottom. The first matching rule determines the treatment.",
+      "items": {
+        "$ref": "#/components/schemas/TargetingRule"
+      }
+    },
+    "defaultRule": {
+      "type": "array",
+      "description": "The default rule applied when no targeting rules match. Defines the percentage-based rollout for unmatched traffic.",
+      "items": {
+        "$ref": "#/components/schemas/Bucket"
+      }
+    },
+    "trafficAllocation": {
+      "type": "integer",
+      "description": "Percentage of traffic that is included in the feature flag evaluation (0-100). Traffic outside this allocation receives the default treatment.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "lastModified": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Unix timestamp of the last modification"
+    },
+    "creationTime": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Unix timestamp of when the definition was created"
+    }
+  }
+}

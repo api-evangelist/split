@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Condition",
+  "title": "Condition",
+  "type": "object",
+  "description": "A condition defining the matching criteria for a targeting rule.",
+  "properties": {
+    "combiner": {
+      "type": "string",
+      "description": "Logical combiner for multiple matchers within this condition",
+      "enum": [
+        "AND"
+      ]
+    },
+    "matchers": {
+      "type": "array",
+      "description": "List of matchers that define the matching criteria",
+      "items": {
+        "$ref": "#/components/schemas/Matcher"
+      }
+    }
+  }
+}

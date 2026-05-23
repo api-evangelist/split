@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChangeRequest",
+  "title": "ChangeRequest",
+  "type": "object",
+  "description": "A change request representing a pending modification to a feature flag definition that requires approval.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the change request"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the change request",
+      "enum": [
+        "OPEN",
+        "APPROVED",
+        "DECLINED",
+        "APPLIED",
+        "CANCELLED"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the change request"
+    },
+    "comment": {
+      "type": "string",
+      "description": "Comment describing the proposed change"
+    },
+    "split": {
+      "type": "string",
+      "description": "Name of the feature flag being modified"
+    },
+    "environment": {
+      "type": "string",
+      "description": "Environment in which the change is proposed"
+    },
+    "operationType": {
+      "type": "string",
+      "description": "Type of operation being requested"
+    },
+    "createdAt": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Timestamp of when the change request was created"
+    },
+    "approvers": {
+      "type": "array",
+      "description": "Users who can approve the change request",
+      "items": {
+        "$ref": "#/components/schemas/User"
+      }
+    }
+  }
+}
