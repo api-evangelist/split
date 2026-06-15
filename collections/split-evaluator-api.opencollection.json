@@ -1,0 +1,361 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Split Evaluator API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ping service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7548/admin/ping"
+          },
+          "docs": "Checks whether the Split Evaluator service is running. If the service is running, it responds with the text pong and HTTP status code 200."
+        },
+        {
+          "info": {
+            "name": "Get service version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7548/admin/version"
+          },
+          "docs": "Returns the current version of the Split Evaluator service."
+        },
+        {
+          "info": {
+            "name": "Health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7548/admin/healthcheck"
+          },
+          "docs": "Checks that the Split Evaluator is connected to Split servers and ready to process evaluation requests. Returns 200 if everything is working as expected or 500 if there is an issue, along with a message explaining the status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Evaluation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get treatment for a feature flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7548/client/get-treatment",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "The customer key to evaluate the feature flag against"
+              },
+              {
+                "name": "split-name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the feature flag to evaluate"
+              },
+              {
+                "name": "bucketing-key",
+                "value": "",
+                "type": "query",
+                "description": "Optional bucketing key used for consistent percentage-based treatment assignments"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "JSON string of attributes used in targeting rule evaluation"
+              },
+              {
+                "name": "impressions-disabled",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, disables impression logging for this evaluation"
+              }
+            ]
+          },
+          "docs": "Evaluates a single feature flag for the given key and returns the treatment value. Optionally includes dynamic configuration associated with the treatment. This is the primary endpoint for feature flag evaluation."
+        },
+        {
+          "info": {
+            "name": "Get treatment with attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:7548/client/get-treatment",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "The customer key to evaluate the feature flag against"
+              },
+              {
+                "name": "split-name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the feature flag to evaluate"
+              },
+              {
+                "name": "bucketing-key",
+                "value": "",
+                "type": "query",
+                "description": "Optional bucketing key for consistent assignments"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluates a single feature flag for the given key with attributes passed in the request body. This is preferred over the GET method when attributes contain complex or large data structures."
+        },
+        {
+          "info": {
+            "name": "Get treatments for multiple feature flags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7548/client/get-treatments",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "The customer key to evaluate feature flags against"
+              },
+              {
+                "name": "split-names",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of feature flag names to evaluate"
+              },
+              {
+                "name": "bucketing-key",
+                "value": "",
+                "type": "query",
+                "description": "Optional bucketing key for consistent assignments"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "JSON string of attributes for targeting rule evaluation"
+              },
+              {
+                "name": "impressions-disabled",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, disables impression logging for these evaluations"
+              }
+            ]
+          },
+          "docs": "Evaluates multiple feature flags for the given key in a single request and returns the treatment values for each. More efficient than making individual get-treatment calls."
+        },
+        {
+          "info": {
+            "name": "Get treatments with attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:7548/client/get-treatments",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "The customer key to evaluate feature flags against"
+              },
+              {
+                "name": "split-names",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of feature flag names to evaluate"
+              },
+              {
+                "name": "bucketing-key",
+                "value": "",
+                "type": "query",
+                "description": "Optional bucketing key for consistent assignments"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluates multiple feature flags for the given key with attributes passed in the request body."
+        },
+        {
+          "info": {
+            "name": "Get all treatments for a key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7548/client/get-all-treatments",
+            "params": [
+              {
+                "name": "keys",
+                "value": "",
+                "type": "query",
+                "description": "JSON string containing an array of key objects with matchingKey and trafficType properties, and optionally a bucketingKey"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "JSON string of attributes for targeting rule evaluation"
+              },
+              {
+                "name": "impressions-disabled",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, disables impression logging for these evaluations"
+              }
+            ]
+          },
+          "docs": "Evaluates all available feature flags for the given keys and traffic types and returns the treatment values. Useful for retrieving a complete set of flag evaluations for a user session."
+        },
+        {
+          "info": {
+            "name": "Get all treatments with attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:7548/client/get-all-treatments",
+            "params": [
+              {
+                "name": "keys",
+                "value": "",
+                "type": "query",
+                "description": "JSON string containing an array of key objects"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluates all available feature flags for the given keys with attributes passed in the request body."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Track an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:7548/client/track",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "The customer key associated with the event"
+              },
+              {
+                "name": "traffic-type",
+                "value": "",
+                "type": "query",
+                "description": "The traffic type for the event"
+              },
+              {
+                "name": "event-type",
+                "value": "",
+                "type": "query",
+                "description": "The type of event being tracked (e.g., purchase, click, signup)"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Optional numeric value associated with the event"
+              },
+              {
+                "name": "properties",
+                "value": "",
+                "type": "query",
+                "description": "JSON string with up to 15 key-value pairs of event properties. Values must be boolean, string, number, or null."
+              }
+            ]
+          },
+          "docs": "Records a custom event for the given key and event type. Events are used to measure the impact of feature flags on user actions and experimentation metrics."
+        },
+        {
+          "info": {
+            "name": "Track an event with properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:7548/client/track",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "The customer key associated with the event"
+              },
+              {
+                "name": "traffic-type",
+                "value": "",
+                "type": "query",
+                "description": "The traffic type for the event"
+              },
+              {
+                "name": "event-type",
+                "value": "",
+                "type": "query",
+                "description": "The type of event being tracked"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Optional numeric value associated with the event"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Records a custom event with properties passed in the request body. Preferred for events with complex property structures."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

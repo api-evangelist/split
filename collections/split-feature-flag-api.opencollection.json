@@ -1,0 +1,408 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Split Feature Flag API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feature Flags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List feature flags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/splits/ws/:workspaceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Filter feature flags by tag names (comma-separated)"
+              }
+            ]
+          },
+          "docs": "Retrieves all feature flags within the specified workspace. Returns paginated results including flag name, description, traffic type, creation time, and tags."
+        },
+        {
+          "info": {
+            "name": "Create feature flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.split.io/internal/api/v2/splits/ws/:workspaceId/trafficTypes/:trafficTypeId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "trafficTypeId",
+                "value": "",
+                "type": "path",
+                "description": "The identifier or name of the traffic type for the feature flag"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new feature flag within the specified workspace and traffic type. The flag is created with default treatments of on and off. After creation, a definition must be created in each environment where the flag should be active."
+        },
+        {
+          "info": {
+            "name": "Get feature flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/splits/ws/:workspaceId/:featureFlagName",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "featureFlagName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the feature flag"
+              }
+            ]
+          },
+          "docs": "Retrieves a single feature flag by its name within the specified workspace. Returns the flag metadata including name, description, traffic type, creation time, and tags."
+        },
+        {
+          "info": {
+            "name": "Update feature flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.split.io/internal/api/v2/splits/ws/:workspaceId/:featureFlagName",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "featureFlagName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the feature flag"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the metadata of an existing feature flag, such as its description or tags."
+        },
+        {
+          "info": {
+            "name": "Delete feature flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.split.io/internal/api/v2/splits/ws/:workspaceId/:featureFlagName",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "featureFlagName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the feature flag"
+              }
+            ]
+          },
+          "docs": "Deletes a feature flag from the specified workspace. The flag must first have all its environment definitions removed before it can be deleted."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Feature Flag Definitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get feature flag definition in environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "featureFlagName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the feature flag"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              }
+            ]
+          },
+          "docs": "Retrieves the full definition of a feature flag in a specific environment, including treatments, targeting rules, default treatment, percentage rollout configuration, and kill status."
+        },
+        {
+          "info": {
+            "name": "Create feature flag definition in environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.split.io/internal/api/v2/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "featureFlagName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the feature flag"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new definition for an existing feature flag in the specified environment. This activates the flag in that environment with the provided targeting rules and treatments."
+        },
+        {
+          "info": {
+            "name": "Update feature flag definition in environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.split.io/internal/api/v2/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "featureFlagName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the feature flag"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially updates the definition of a feature flag in a specific environment. Supports modifying targeting rules, percentage rollouts, default treatment, and kill status."
+        },
+        {
+          "info": {
+            "name": "Delete feature flag definition in environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.split.io/internal/api/v2/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "featureFlagName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the feature flag"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              }
+            ]
+          },
+          "docs": "Removes the definition of a feature flag from the specified environment, effectively deactivating the flag in that environment."
+        },
+        {
+          "info": {
+            "name": "List feature flag definitions in environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/splits/ws/:workspaceId/environments/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves all feature flag definitions within the specified environment and workspace. Returns the targeting configuration, treatments, and status of each flag."
+        },
+        {
+          "info": {
+            "name": "Kill feature flag in environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.split.io/internal/api/v2/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId/kill",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "featureFlagName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the feature flag"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              }
+            ]
+          },
+          "docs": "Kills a feature flag in the specified environment, forcing all evaluations to return the default treatment. This is used as an emergency shut-off mechanism."
+        },
+        {
+          "info": {
+            "name": "Restore feature flag in environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.split.io/internal/api/v2/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId/restore",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "featureFlagName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the feature flag"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              }
+            ]
+          },
+          "docs": "Restores a previously killed feature flag in the specified environment, resuming normal treatment evaluation based on targeting rules."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

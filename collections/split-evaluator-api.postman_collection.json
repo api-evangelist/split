@@ -1,0 +1,2031 @@
+{
+  "item": [
+    {
+      "id": "f8e892fb-bef9-45d6-b457-e799da024a1c",
+      "name": "Evaluation",
+      "description": {
+        "content": "Endpoints for evaluating feature flags and retrieving treatment values for given keys and feature flag names.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ad68af8c-ce03-4357-94fa-85a80efdbb37",
+          "name": "Get treatment for a feature flag",
+          "request": {
+            "name": "Get treatment for a feature flag",
+            "description": {
+              "content": "Evaluates a single feature flag for the given key and returns the treatment value. Optionally includes dynamic configuration associated with the treatment. This is the primary endpoint for feature flag evaluation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "client",
+                "get-treatment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) The customer key to evaluate the feature flag against"
+                },
+                {
+                  "disabled": false,
+                  "key": "split-name",
+                  "value": "<string>",
+                  "description": "(Required) The name of the feature flag to evaluate"
+                },
+                {
+                  "disabled": false,
+                  "key": "bucketing-key",
+                  "value": "<string>",
+                  "description": "Optional bucketing key used for consistent percentage-based treatment assignments"
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "JSON string of attributes used in targeting rule evaluation"
+                },
+                {
+                  "disabled": false,
+                  "key": "impressions-disabled",
+                  "value": "<boolean>",
+                  "description": "When set to true, disables impression logging for this evaluation"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fe78964-8384-431e-ac37-53d94add572e",
+              "name": "Successful evaluation response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-treatment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "split-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "impressions-disabled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"splitName\": \"string\",\n  \"treatment\": \"string\",\n  \"config\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7969b7bc-bb0a-4728-aa8e-5b9e13b23844",
+              "name": "Missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-treatment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "split-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "impressions-disabled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e9f9e819-47a1-4ade-975c-ef78475517fe",
+              "name": "Internal server error during evaluation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-treatment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "split-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "impressions-disabled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9253dcad-7bbf-4cad-8803-88c73c1beca4",
+          "name": "Get treatment with attributes",
+          "request": {
+            "name": "Get treatment with attributes",
+            "description": {
+              "content": "Evaluates a single feature flag for the given key with attributes passed in the request body. This is preferred over the GET method when attributes contain complex or large data structures.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "client",
+                "get-treatment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) The customer key to evaluate the feature flag against"
+                },
+                {
+                  "disabled": false,
+                  "key": "split-name",
+                  "value": "<string>",
+                  "description": "(Required) The name of the feature flag to evaluate"
+                },
+                {
+                  "disabled": false,
+                  "key": "bucketing-key",
+                  "value": "<string>",
+                  "description": "Optional bucketing key for consistent assignments"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "328a9fee-31c2-4570-9846-224901545dae",
+              "name": "Successful evaluation response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-treatment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "split-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6330.82966782975\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"splitName\": \"string\",\n  \"treatment\": \"string\",\n  \"config\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef13609d-b4b1-4047-8fc1-063fcf0d8d70",
+              "name": "Missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-treatment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "split-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6330.82966782975\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "51624025-0c98-4e09-94d2-ff10566615a7",
+              "name": "Internal server error during evaluation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-treatment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "split-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6330.82966782975\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0167c233-37f8-4797-aaa2-34947bad419f",
+          "name": "Get treatments for multiple feature flags",
+          "request": {
+            "name": "Get treatments for multiple feature flags",
+            "description": {
+              "content": "Evaluates multiple feature flags for the given key in a single request and returns the treatment values for each. More efficient than making individual get-treatment calls.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "client",
+                "get-treatments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) The customer key to evaluate feature flags against"
+                },
+                {
+                  "disabled": false,
+                  "key": "split-names",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of feature flag names to evaluate"
+                },
+                {
+                  "disabled": false,
+                  "key": "bucketing-key",
+                  "value": "<string>",
+                  "description": "Optional bucketing key for consistent assignments"
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "JSON string of attributes for targeting rule evaluation"
+                },
+                {
+                  "disabled": false,
+                  "key": "impressions-disabled",
+                  "value": "<boolean>",
+                  "description": "When set to true, disables impression logging for these evaluations"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "867f530c-cfad-42a1-95ad-d4453cd06123",
+              "name": "Successful evaluation response with multiple treatments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-treatments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "split-names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "impressions-disabled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"splitName\": \"string\",\n    \"treatment\": \"string\",\n    \"config\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cef8619-6900-4971-9571-57baca012847",
+              "name": "Missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-treatments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "split-names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "impressions-disabled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c7189fc6-8214-4ec1-87c7-fbdf35894bcf",
+              "name": "Internal server error during evaluation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-treatments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "split-names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "impressions-disabled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4d4c140-ac3c-443e-88ab-4ae684a2b0d5",
+          "name": "Get treatments with attributes",
+          "request": {
+            "name": "Get treatments with attributes",
+            "description": {
+              "content": "Evaluates multiple feature flags for the given key with attributes passed in the request body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "client",
+                "get-treatments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) The customer key to evaluate feature flags against"
+                },
+                {
+                  "disabled": false,
+                  "key": "split-names",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of feature flag names to evaluate"
+                },
+                {
+                  "disabled": false,
+                  "key": "bucketing-key",
+                  "value": "<string>",
+                  "description": "Optional bucketing key for consistent assignments"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "499eb585-6e31-47c3-8c37-ede0c0263caa",
+              "name": "Successful evaluation response with multiple treatments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-treatments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "split-names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6330.82966782975\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"splitName\": \"string\",\n    \"treatment\": \"string\",\n    \"config\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8817778-aa47-4345-9ce7-4cd5c40dd2a1",
+              "name": "Missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-treatments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "split-names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6330.82966782975\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f954b3c9-fef1-44fa-88c9-388faf6ee081",
+              "name": "Internal server error during evaluation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-treatments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "split-names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6330.82966782975\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "277333cf-03be-42a8-b0f8-1de61e60a586",
+          "name": "Get all treatments for a key",
+          "request": {
+            "name": "Get all treatments for a key",
+            "description": {
+              "content": "Evaluates all available feature flags for the given keys and traffic types and returns the treatment values. Useful for retrieving a complete set of flag evaluations for a user session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "client",
+                "get-all-treatments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "keys",
+                  "value": "<string>",
+                  "description": "(Required) JSON string containing an array of key objects with matchingKey and trafficType properties, and optionally a bucketingKey"
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "JSON string of attributes for targeting rule evaluation"
+                },
+                {
+                  "disabled": false,
+                  "key": "impressions-disabled",
+                  "value": "<boolean>",
+                  "description": "When set to true, disables impression logging for these evaluations"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8207b822-2ec8-4516-9fea-535e7da07d37",
+              "name": "Successful response with treatments for all feature flags",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-all-treatments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keys",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "impressions-disabled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"splitName\": \"string\",\n    \"treatment\": \"string\",\n    \"config\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90aa9735-9f23-41f2-b98e-f944158ac96e",
+              "name": "Missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-all-treatments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keys",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "impressions-disabled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f224bd9-b4c1-4e77-a217-bc72291edde5",
+              "name": "Internal server error during evaluation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-all-treatments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keys",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "impressions-disabled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1bec545-0206-4e5e-8d53-0a74d33e3dc3",
+          "name": "Get all treatments with attributes",
+          "request": {
+            "name": "Get all treatments with attributes",
+            "description": {
+              "content": "Evaluates all available feature flags for the given keys with attributes passed in the request body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "client",
+                "get-all-treatments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "keys",
+                  "value": "<string>",
+                  "description": "(Required) JSON string containing an array of key objects"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "707a4433-caa3-476b-bf01-fe62000e31c6",
+              "name": "Successful response with treatments for all feature flags",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-all-treatments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keys",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6330.82966782975\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"splitName\": \"string\",\n    \"treatment\": \"string\",\n    \"config\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8513c443-6c62-40e9-94e9-21dc64752f53",
+              "name": "Missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-all-treatments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keys",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6330.82966782975\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a780354b-677e-4491-a86d-239736003562",
+              "name": "Internal server error during evaluation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "get-all-treatments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keys",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6330.82966782975\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b65b059e-625e-4785-850b-99da7cebf3ea",
+      "name": "Events",
+      "description": {
+        "content": "Endpoints for tracking custom events used in experimentation and metrics measurement.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "85c1878c-4918-4c40-ac9f-ee3758f0c53c",
+          "name": "Track an event",
+          "request": {
+            "name": "Track an event",
+            "description": {
+              "content": "Records a custom event for the given key and event type. Events are used to measure the impact of feature flags on user actions and experimentation metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "client",
+                "track"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) The customer key associated with the event"
+                },
+                {
+                  "disabled": false,
+                  "key": "traffic-type",
+                  "value": "<string>",
+                  "description": "(Required) The traffic type for the event"
+                },
+                {
+                  "disabled": false,
+                  "key": "event-type",
+                  "value": "<string>",
+                  "description": "(Required) The type of event being tracked (e.g., purchase, click, signup)"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<number>",
+                  "description": "Optional numeric value associated with the event"
+                },
+                {
+                  "disabled": false,
+                  "key": "properties",
+                  "value": "<string>",
+                  "description": "JSON string with up to 15 key-value pairs of event properties. Values must be boolean, string, number, or null."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7587f1a5-ad4d-4762-a013-2eb84a93e06a",
+              "name": "Event tracked successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "traffic-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "event-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "properties",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cbeceee3-eb54-4226-aac6-1331c76166be",
+              "name": "Missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "traffic-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "event-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "properties",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "07b964fb-e4c7-4874-9ca2-dbd47ed998c3",
+              "name": "Internal server error during tracking",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "traffic-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "event-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "properties",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d783198-3bfe-4539-be0b-343db7e48780",
+          "name": "Track an event with properties",
+          "request": {
+            "name": "Track an event with properties",
+            "description": {
+              "content": "Records a custom event with properties passed in the request body. Preferred for events with complex property structures.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "client",
+                "track"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) The customer key associated with the event"
+                },
+                {
+                  "disabled": false,
+                  "key": "traffic-type",
+                  "value": "<string>",
+                  "description": "(Required) The traffic type for the event"
+                },
+                {
+                  "disabled": false,
+                  "key": "event-type",
+                  "value": "<string>",
+                  "description": "(Required) The type of event being tracked"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<number>",
+                  "description": "Optional numeric value associated with the event"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"properties\": {\n    \"key_0\": 3169.5808258251946,\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": true,\n    \"key_4\": 2815.8009171863864,\n    \"key_5\": true,\n    \"key_6\": 3977.520411991435,\n    \"key_7\": false,\n    \"key_8\": 2914.8631132394344,\n    \"key_9\": \"string\",\n    \"key_10\": true,\n    \"key_11\": true,\n    \"key_12\": 4549\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "55cab2b6-b1fb-452d-bd4e-1d14620d2d16",
+              "name": "Event tracked successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "traffic-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "event-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"key_0\": 5816.417950783649\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "50cfd4d9-fdee-47c5-b9e4-e7fe4175b8d6",
+              "name": "Missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "traffic-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "event-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"key_0\": 5816.417950783649\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "18970518-5785-40b1-aa20-2623a963879b",
+              "name": "Internal server error during tracking",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "client",
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "traffic-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "event-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"key_0\": 5816.417950783649\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "837df14c-3fd5-4286-b05f-a92244eb7460",
+      "name": "Ping service",
+      "request": {
+        "name": "Ping service",
+        "description": {
+          "content": "Checks whether the Split Evaluator service is running. If the service is running, it responds with the text pong and HTTP status code 200.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "admin",
+            "ping"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/plain"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "7eff158e-15ce-4c7f-b4b2-1e1b17d7a8c8",
+          "name": "Service is running",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "admin",
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "pong",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "6b8fcd14-2c3c-4e03-901f-60354fefb126",
+      "name": "Get service version",
+      "request": {
+        "name": "Get service version",
+        "description": {
+          "content": "Returns the current version of the Split Evaluator service.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "admin",
+            "version"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "0c84a56d-0ba2-404b-b489-8ab8d4d24d7e",
+          "name": "Service version information",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "admin",
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"version\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "dd130fa9-e09c-499f-938d-6b1a306ed605",
+      "name": "Health check",
+      "request": {
+        "name": "Health check",
+        "description": {
+          "content": "Checks that the Split Evaluator is connected to Split servers and ready to process evaluation requests. Returns 200 if everything is working as expected or 500 if there is an issue, along with a message explaining the status.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "admin",
+            "healthcheck"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "b286e312-81db-46cf-82e1-edb201aa4862",
+          "name": "Service is healthy and ready for evaluations",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "admin",
+                "healthcheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": \"ok\",\n  \"message\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "2c80bc6d-7073-4fe3-997d-131c397d9ffb",
+          "name": "Service is unhealthy",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "admin",
+                "healthcheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": \"ok\",\n  \"message\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:7548",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "04b8a655-effa-41ad-a062-4a5c42731b96",
+    "name": "Split Evaluator API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Split Evaluator is an HTTP service that wraps Split SDKs to provide feature flag evaluation via a REST API. It enables applications that cannot directly embed an SDK to request treatment evaluations over HTTP, making it suitable for architectures where a centralized evaluation service is preferred. The Evaluator can be deployed as a standalone microservice that processes getTreatment calls and returns the appropriate treatments for given users and feature flags. Swagger documentation is available by default at the /api-docs endpoint.\n\nContact Support:\n Name: Split Support",
+      "type": "text/plain"
+    }
+  }
+}

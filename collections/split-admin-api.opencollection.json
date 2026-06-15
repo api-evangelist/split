@@ -1,0 +1,828 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Split Admin API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/workspaces",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves all workspaces (projects) accessible to the authenticated Admin API key. Workspaces allow you to separately manage feature flags and experiments across different business units or applications."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Environments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/environments/ws/:workspaceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              }
+            ]
+          },
+          "docs": "Retrieves all environments within the specified workspace. Environments represent deployment stages such as staging and production where feature flag definitions can be configured independently."
+        },
+        {
+          "info": {
+            "name": "Create environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.split.io/internal/api/v2/environments/ws/:workspaceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new environment within the specified workspace."
+        },
+        {
+          "info": {
+            "name": "Get environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/environments/ws/:workspaceId/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              }
+            ]
+          },
+          "docs": "Retrieves a single environment by its identifier within the specified workspace."
+        },
+        {
+          "info": {
+            "name": "Update environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.split.io/internal/api/v2/environments/ws/:workspaceId/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing environment within the specified workspace."
+        },
+        {
+          "info": {
+            "name": "Delete environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.split.io/internal/api/v2/environments/ws/:workspaceId/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              }
+            ]
+          },
+          "docs": "Deletes an environment from the specified workspace."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Traffic Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List traffic types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/trafficTypes/ws/:workspaceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              }
+            ]
+          },
+          "docs": "Retrieves all traffic types defined within the specified workspace. Traffic types represent the kinds of entities that feature flags can target, such as users or accounts."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/schema/ws/:workspaceId/trafficTypes/:trafficTypeId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "trafficTypeId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the traffic type"
+              }
+            ]
+          },
+          "docs": "Retrieves all attributes defined for a given traffic type within the specified workspace. Attributes are used in targeting rules for feature flag definitions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/users",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter users by status"
+              }
+            ]
+          },
+          "docs": "Retrieves all users that the Admin API key has access to within the account. Returns user details including status, email, and group memberships."
+        },
+        {
+          "info": {
+            "name": "Get user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user"
+              }
+            ]
+          },
+          "docs": "Retrieves a single user by their unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.split.io/internal/api/v2/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a user's profile, including their role and group memberships."
+        },
+        {
+          "info": {
+            "name": "Deactivate user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.split.io/internal/api/v2/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user"
+              }
+            ]
+          },
+          "docs": "Deactivates a user within the account."
+        },
+        {
+          "info": {
+            "name": "Invite user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.split.io/internal/api/v2/users/invite",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Invites a new user to the account by sending an invitation email."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/groups"
+          },
+          "docs": "Retrieves all active groups in the account. Groups are used to organize users and assign permissions collectively."
+        },
+        {
+          "info": {
+            "name": "Create group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.split.io/internal/api/v2/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new group with a name and description. Group names are unique within an account."
+        },
+        {
+          "info": {
+            "name": "Get group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group"
+              }
+            ]
+          },
+          "docs": "Retrieves a single group by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Delete group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.split.io/internal/api/v2/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group"
+              }
+            ]
+          },
+          "docs": "Deletes a group from the account."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "API Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.split.io/internal/api/v2/apiKeys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new API key with specified roles and scope. API keys can be scoped to specific environments, a workspace, or the entire account."
+        },
+        {
+          "info": {
+            "name": "Delete API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.split.io/internal/api/v2/apiKeys/:apiKeyId",
+            "params": [
+              {
+                "name": "apiKeyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the API key"
+              }
+            ]
+          },
+          "docs": "Deletes an existing API key by its unique identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List segments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/segments/ws/:workspaceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves all segments defined within the specified workspace."
+        },
+        {
+          "info": {
+            "name": "List segments in environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/segments/ws/:workspaceId/environments/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves all segments activated in the specified environment within the given workspace."
+        },
+        {
+          "info": {
+            "name": "Enable segment in environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.split.io/internal/api/v2/segments/:environmentId/:segmentName",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the environment"
+              },
+              {
+                "name": "segmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the segment"
+              }
+            ]
+          },
+          "docs": "Activates a segment in the specified environment, making it available for use in feature flag targeting rules."
+        },
+        {
+          "info": {
+            "name": "Deactivate segment in environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.split.io/internal/api/v2/segments/:environmentId/:segmentName",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the environment"
+              },
+              {
+                "name": "segmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the segment"
+              }
+            ]
+          },
+          "docs": "Deactivates a segment in the specified environment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Identities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update segment keys via CSV",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.split.io/internal/api/v2/segments/:environmentId/:segmentName/upload",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the environment"
+              },
+              {
+                "name": "segmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the segment"
+              }
+            ]
+          },
+          "docs": "Replaces all keys in a segment by uploading a CSV file containing the new set of identities."
+        },
+        {
+          "info": {
+            "name": "List segment keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/segments/:environmentId/:segmentName/keys",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the environment"
+              },
+              {
+                "name": "segmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the segment"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves the identity keys belonging to the specified segment in the given environment."
+        },
+        {
+          "info": {
+            "name": "Add keys to segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.split.io/internal/api/v2/segments/:environmentId/:segmentName/keys",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the environment"
+              },
+              {
+                "name": "segmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the segment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds identity keys to the specified segment in the given environment."
+        },
+        {
+          "info": {
+            "name": "Remove keys from segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.split.io/internal/api/v2/segments/:environmentId/:segmentName/keys",
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the environment"
+              },
+              {
+                "name": "segmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the segment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes identity keys from the specified segment in the given environment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Large Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List large segments in environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/large-segments/ws/:workspaceId/environments/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves all large segments configured in the specified environment within the given workspace."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Change Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List change requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/changeRequests",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by change request status"
+              }
+            ]
+          },
+          "docs": "Retrieves all change requests, which represent pending modifications to feature flag definitions that require approval before being applied."
+        },
+        {
+          "info": {
+            "name": "Approve change request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.split.io/internal/api/v2/changeRequests/:changeRequestId/approve",
+            "params": [
+              {
+                "name": "changeRequestId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the change request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approves a pending change request, allowing the proposed feature flag definition changes to be applied."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
