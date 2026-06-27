@@ -203,7 +203,7 @@ common:
     sources:
       - https://www.harness.io/pricing
     updated: '2026-05-04'
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://docs.split.io/llms.txt
 maintainers:
   - FN: Kin Lane
