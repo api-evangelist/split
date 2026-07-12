@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/split-admin-api-openapi.yml, openapi/split-feature-flag-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Admin API key passed as a Bearer token in the Authorization header.
+  sources:
+  - openapi/split-admin-api-openapi.yml
+  - openapi/split-feature-flag-api-openapi.yml

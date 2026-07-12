@@ -146,6 +146,10 @@ apis:
       - type: Documentation
         url: https://help.split.io/hc/en-us/articles/360038825091-React-SDK
 common:
+  - type: DomainSecurity
+    url: security/split-domain-security.yml
+  - type: Authentication
+    url: authentication/split-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/splitio
   - type: LinkedIn
