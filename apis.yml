@@ -146,6 +146,8 @@ apis:
       - type: Documentation
         url: https://help.split.io/hc/en-us/articles/360038825091-React-SDK
 common:
+  - type: AgenticAccess
+    url: agentic-access/split-agentic-access.yml
   - type: DomainSecurity
     url: security/split-domain-security.yml
   - type: Authentication
