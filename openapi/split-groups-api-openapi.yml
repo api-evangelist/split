@@ -1,0 +1,142 @@
+openapi: 3.1.0
+info:
+  title: Split Admin Groups API
+  description: The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.
+  version: '2.0'
+  contact:
+    name: Split Support
+    url: https://help.split.io
+  termsOfService: https://www.split.io/terms-of-service/
+servers:
+- url: https://api.split.io/internal/api/v2
+  description: Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Groups
+  description: Manage groups for organizing users and assigning permissions.
+paths:
+  /groups:
+    get:
+      operationId: listGroups
+      summary: List groups
+      description: Retrieves all active groups in the account. Groups are used to organize users and assign permissions collectively.
+      tags:
+      - Groups
+      responses:
+        '200':
+          description: Successful response containing list of groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group'
+        '401':
+          description: Unauthorized - invalid or missing API key
+    post:
+      operationId: createGroup
+      summary: Create group
+      description: Creates a new group with a name and description. Group names are unique within an account.
+      tags:
+      - Groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupCreate'
+      responses:
+        '200':
+          description: Group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: Invalid request body or group name already exists
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /groups/{groupId}:
+    get:
+      operationId: getGroup
+      summary: Get group
+      description: Retrieves a single group by its unique identifier.
+      tags:
+      - Groups
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        description: The unique identifier of the group
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response containing the group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Group not found
+    delete:
+      operationId: deleteGroup
+      summary: Delete group
+      description: Deletes a group from the account.
+      tags:
+      - Groups
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        description: The unique identifier of the group
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Group deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Group not found
+components:
+  schemas:
+    GroupCreate:
+      type: object
+      description: Request body for creating a new group
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the new group (must be unique)
+        description:
+          type: string
+          description: Description of the new group
+    Group:
+      type: object
+      description: A group used to organize users and assign permissions
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the group
+        name:
+          type: string
+          description: Name of the group (unique within an account)
+        description:
+          type: string
+          description: Description of the group
+        type:
+          type: string
+          description: Group type
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Admin API key passed as a Bearer token in the Authorization header.
+externalDocs:
+  description: Split Admin API Documentation
+  url: https://docs.split.io/reference/introduction

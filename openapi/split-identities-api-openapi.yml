@@ -1,0 +1,218 @@
+openapi: 3.1.0
+info:
+  title: Split Admin Identities API
+  description: The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.
+  version: '2.0'
+  contact:
+    name: Split Support
+    url: https://help.split.io
+  termsOfService: https://www.split.io/terms-of-service/
+servers:
+- url: https://api.split.io/internal/api/v2
+  description: Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Identities
+  description: Manage identities (keys) within segments.
+paths:
+  /segments/{environmentId}/{segmentName}/upload:
+    put:
+      operationId: updateSegmentKeysViaCSV
+      summary: Update segment keys via CSV
+      description: Replaces all keys in a segment by uploading a CSV file containing the new set of identities.
+      tags:
+      - Identities
+      parameters:
+      - name: environmentId
+        in: path
+        required: true
+        description: The unique identifier of the environment
+        schema:
+          type: string
+      - name: segmentName
+        in: path
+        required: true
+        description: The name of the segment
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          text/csv:
+            schema:
+              type: string
+              description: CSV file with one identity key per line
+      responses:
+        '200':
+          description: Segment keys updated successfully
+        '400':
+          description: Invalid CSV format
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Segment or environment not found
+  /segments/{environmentId}/{segmentName}/keys:
+    get:
+      operationId: listSegmentKeys
+      summary: List segment keys
+      description: Retrieves the identity keys belonging to the specified segment in the given environment.
+      tags:
+      - Identities
+      parameters:
+      - name: environmentId
+        in: path
+        required: true
+        description: The unique identifier of the environment
+        schema:
+          type: string
+      - name: segmentName
+        in: path
+        required: true
+        description: The name of the segment
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successful response containing segment keys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentKeysList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Segment or environment not found
+    post:
+      operationId: addSegmentKeys
+      summary: Add keys to segment
+      description: Adds identity keys to the specified segment in the given environment.
+      tags:
+      - Identities
+      parameters:
+      - name: environmentId
+        in: path
+        required: true
+        description: The unique identifier of the environment
+        schema:
+          type: string
+      - name: segmentName
+        in: path
+        required: true
+        description: The name of the segment
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentKeysUpdate'
+      responses:
+        '200':
+          description: Keys added successfully
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Segment or environment not found
+    delete:
+      operationId: removeSegmentKeys
+      summary: Remove keys from segment
+      description: Removes identity keys from the specified segment in the given environment.
+      tags:
+      - Identities
+      parameters:
+      - name: environmentId
+        in: path
+        required: true
+        description: The unique identifier of the environment
+        schema:
+          type: string
+      - name: segmentName
+        in: path
+        required: true
+        description: The name of the segment
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentKeysUpdate'
+      responses:
+        '200':
+          description: Keys removed successfully
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Segment or environment not found
+components:
+  schemas:
+    SegmentKeysList:
+      type: object
+      description: Paginated list of segment keys (identities)
+      properties:
+        keys:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: The identity key value
+        count:
+          type: integer
+          description: Total number of keys in the segment
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+    SegmentKeysUpdate:
+      type: object
+      description: Request body for adding or removing segment keys
+      required:
+      - keys
+      properties:
+        keys:
+          type: array
+          description: List of identity keys to add or remove
+          items:
+            type: string
+        comment:
+          type: string
+          description: Optional comment describing the change
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Admin API key passed as a Bearer token in the Authorization header.
+externalDocs:
+  description: Split Admin API Documentation
+  url: https://docs.split.io/reference/introduction

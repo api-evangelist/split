@@ -1,0 +1,123 @@
+openapi: 3.1.0
+info:
+  title: Split Admin Large Segments API
+  description: The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.
+  version: '2.0'
+  contact:
+    name: Split Support
+    url: https://help.split.io
+  termsOfService: https://www.split.io/terms-of-service/
+servers:
+- url: https://api.split.io/internal/api/v2
+  description: Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Large Segments
+  description: Manage large segments optimized for high-volume identity lists.
+paths:
+  /large-segments/ws/{workspaceId}/environments/{environmentId}:
+    get:
+      operationId: listLargeSegmentsInEnvironment
+      summary: List large segments in environment
+      description: Retrieves all large segments configured in the specified environment within the given workspace.
+      tags:
+      - Large Segments
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      - $ref: '#/components/parameters/environmentIdParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successful response containing list of large segments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LargeSegmentList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or environment not found
+components:
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+    environmentIdParam:
+      name: environmentId
+      in: path
+      required: true
+      description: The unique identifier or name of the environment
+      schema:
+        type: string
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    workspaceIdParam:
+      name: workspaceId
+      in: path
+      required: true
+      description: The unique identifier of the workspace
+      schema:
+        type: string
+  schemas:
+    TrafficType:
+      type: object
+      description: A traffic type defining the kind of entity that feature flags target.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the traffic type
+        name:
+          type: string
+          description: Name of the traffic type (e.g., user, account)
+    LargeSegmentList:
+      type: object
+      description: Paginated list of large segments
+      properties:
+        objects:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Name of the large segment
+              description:
+                type: string
+                description: Description of the large segment
+              trafficType:
+                $ref: '#/components/schemas/TrafficType'
+              creationTime:
+                type: integer
+                format: int64
+                description: Timestamp of when the large segment was created
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        totalCount:
+          type: integer
+          description: Total number of large segments available
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Admin API key passed as a Bearer token in the Authorization header.
+externalDocs:
+  description: Split Admin API Documentation
+  url: https://docs.split.io/reference/introduction

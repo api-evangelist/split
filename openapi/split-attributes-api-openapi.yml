@@ -1,0 +1,91 @@
+openapi: 3.1.0
+info:
+  title: Split Admin Attributes API
+  description: The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.
+  version: '2.0'
+  contact:
+    name: Split Support
+    url: https://help.split.io
+  termsOfService: https://www.split.io/terms-of-service/
+servers:
+- url: https://api.split.io/internal/api/v2
+  description: Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Attributes
+  description: Manage attributes used in targeting rules for feature flag definitions.
+paths:
+  /schema/ws/{workspaceId}/trafficTypes/{trafficTypeId}:
+    get:
+      operationId: listAttributes
+      summary: List attributes
+      description: Retrieves all attributes defined for a given traffic type within the specified workspace. Attributes are used in targeting rules for feature flag definitions.
+      tags:
+      - Attributes
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      - name: trafficTypeId
+        in: path
+        required: true
+        description: The unique identifier of the traffic type
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response containing list of attributes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Attribute'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or traffic type not found
+components:
+  parameters:
+    workspaceIdParam:
+      name: workspaceId
+      in: path
+      required: true
+      description: The unique identifier of the workspace
+      schema:
+        type: string
+  schemas:
+    Attribute:
+      type: object
+      description: An attribute used in targeting rules for feature flag definitions.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the attribute
+        trafficTypeId:
+          type: string
+          description: Identifier of the associated traffic type
+        displayName:
+          type: string
+          description: Human-readable name of the attribute
+        dataType:
+          type: string
+          description: Data type of the attribute
+          enum:
+          - STRING
+          - NUMBER
+          - DATETIME
+          - SET
+        description:
+          type: string
+          description: Description of the attribute
+        isSearchable:
+          type: boolean
+          description: Whether the attribute is searchable
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Admin API key passed as a Bearer token in the Authorization header.
+externalDocs:
+  description: Split Admin API Documentation
+  url: https://docs.split.io/reference/introduction

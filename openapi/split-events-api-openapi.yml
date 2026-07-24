@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: Split Admin Events API
+  description: The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.
+  version: '2.0'
+  contact:
+    name: Split Support
+    url: https://help.split.io
+  termsOfService: https://www.split.io/terms-of-service/
+servers:
+- url: https://api.split.io/internal/api/v2
+  description: Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Events
+  description: Endpoints for tracking custom events used in experimentation and metrics measurement.
+paths:
+  /client/track:
+    get:
+      operationId: trackEvent
+      summary: Track an event
+      description: Records a custom event for the given key and event type. Events are used to measure the impact of feature flags on user actions and experimentation metrics.
+      tags:
+      - Events
+      parameters:
+      - name: key
+        in: query
+        required: true
+        description: The customer key associated with the event
+        schema:
+          type: string
+      - name: traffic-type
+        in: query
+        required: true
+        description: The traffic type for the event
+        schema:
+          type: string
+      - name: event-type
+        in: query
+        required: true
+        description: The type of event being tracked (e.g., purchase, click, signup)
+        schema:
+          type: string
+      - name: value
+        in: query
+        description: Optional numeric value associated with the event
+        schema:
+          type: number
+      - name: properties
+        in: query
+        description: JSON string with up to 15 key-value pairs of event properties. Values must be boolean, string, number, or null.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Event tracked successfully
+        '400':
+          description: Missing or invalid parameters
+        '500':
+          description: Internal server error during tracking
+    post:
+      operationId: trackEventWithProperties
+      summary: Track an event with properties
+      description: Records a custom event with properties passed in the request body. Preferred for events with complex property structures.
+      tags:
+      - Events
+      parameters:
+      - name: key
+        in: query
+        required: true
+        description: The customer key associated with the event
+        schema:
+          type: string
+      - name: traffic-type
+        in: query
+        required: true
+        description: The traffic type for the event
+        schema:
+          type: string
+      - name: event-type
+        in: query
+        required: true
+        description: The type of event being tracked
+        schema:
+          type: string
+      - name: value
+        in: query
+        description: Optional numeric value associated with the event
+        schema:
+          type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventProperties'
+      responses:
+        '200':
+          description: Event tracked successfully
+        '400':
+          description: Missing or invalid parameters
+        '500':
+          description: Internal server error during tracking
+components:
+  schemas:
+    EventProperties:
+      type: object
+      description: Properties associated with a tracked event.
+      properties:
+        properties:
+          type: object
+          description: Key-value pairs of event properties. Maximum 15 keys. Values must be boolean, string, number, or null.
+          additionalProperties: true
+          maxProperties: 15
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Admin API key passed as a Bearer token in the Authorization header.
+externalDocs:
+  description: Split Admin API Documentation
+  url: https://docs.split.io/reference/introduction

@@ -1,0 +1,132 @@
+openapi: 3.1.0
+info:
+  title: Split Admin API Keys API
+  description: The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.
+  version: '2.0'
+  contact:
+    name: Split Support
+    url: https://help.split.io
+  termsOfService: https://www.split.io/terms-of-service/
+servers:
+- url: https://api.split.io/internal/api/v2
+  description: Production Server
+security:
+- bearerAuth: []
+tags:
+- name: API Keys
+  description: Create and delete API keys for authenticating with the Split platform, with configurable roles and scopes.
+paths:
+  /apiKeys:
+    post:
+      operationId: createApiKey
+      summary: Create API key
+      description: Creates a new API key with specified roles and scope. API keys can be scoped to specific environments, a workspace, or the entire account.
+      tags:
+      - API Keys
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyCreate'
+      responses:
+        '200':
+          description: API key created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /apiKeys/{apiKeyId}:
+    delete:
+      operationId: deleteApiKey
+      summary: Delete API key
+      description: Deletes an existing API key by its unique identifier.
+      tags:
+      - API Keys
+      parameters:
+      - name: apiKeyId
+        in: path
+        required: true
+        description: The unique identifier of the API key
+        schema:
+          type: string
+      responses:
+        '200':
+          description: API key deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: API key not found
+components:
+  schemas:
+    ApiKeyCreate:
+      type: object
+      description: Request body for creating a new API key
+      required:
+      - name
+      - apiKeyType
+      properties:
+        name:
+          type: string
+          description: Name for the new API key
+        apiKeyType:
+          type: string
+          description: Type of the API key to create
+          enum:
+          - admin
+          - client-side
+          - server-side
+        roles:
+          type: array
+          description: Roles to assign to the API key
+          items:
+            type: string
+        workspaceId:
+          type: string
+          description: Workspace to scope the API key to
+        environmentIds:
+          type: array
+          description: Environments to scope the API key to
+          items:
+            type: string
+    ApiKey:
+      type: object
+      description: An API key used for authenticating with the Split platform
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the API key
+        name:
+          type: string
+          description: Name of the API key
+        apiKeyType:
+          type: string
+          description: Type of the API key
+          enum:
+          - admin
+          - client-side
+          - server-side
+        key:
+          type: string
+          description: The API key value (only returned at creation time)
+        roles:
+          type: array
+          description: Roles assigned to the API key
+          items:
+            type: string
+        createdAt:
+          type: integer
+          format: int64
+          description: Timestamp of when the API key was created
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Admin API key passed as a Bearer token in the Authorization header.
+externalDocs:
+  description: Split Admin API Documentation
+  url: https://docs.split.io/reference/introduction

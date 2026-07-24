@@ -1,0 +1,274 @@
+openapi: 3.1.0
+info:
+  title: Split Admin Feature Flags API
+  description: The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.
+  version: '2.0'
+  contact:
+    name: Split Support
+    url: https://help.split.io
+  termsOfService: https://www.split.io/terms-of-service/
+servers:
+- url: https://api.split.io/internal/api/v2
+  description: Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Feature Flags
+  description: Create, retrieve, update, and delete feature flags (splits) within workspaces. Feature flags represent the toggles used to control feature rollouts.
+paths:
+  /splits/ws/{workspaceId}:
+    get:
+      operationId: listFeatureFlags
+      summary: List feature flags
+      description: Retrieves all feature flags within the specified workspace. Returns paginated results including flag name, description, traffic type, creation time, and tags.
+      tags:
+      - Feature Flags
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - name: tags
+        in: query
+        description: Filter feature flags by tag names (comma-separated)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response containing list of feature flags
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlagList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace not found
+  /splits/ws/{workspaceId}/trafficTypes/{trafficTypeId}:
+    post:
+      operationId: createFeatureFlag
+      summary: Create feature flag
+      description: Creates a new feature flag within the specified workspace and traffic type. The flag is created with default treatments of on and off. After creation, a definition must be created in each environment where the flag should be active.
+      tags:
+      - Feature Flags
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      - name: trafficTypeId
+        in: path
+        required: true
+        description: The identifier or name of the traffic type for the feature flag
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeatureFlagCreate'
+      responses:
+        '200':
+          description: Feature flag created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlag'
+        '400':
+          description: Invalid request body or feature flag name already exists
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or traffic type not found
+  /splits/ws/{workspaceId}/{featureFlagName}:
+    get:
+      operationId: getFeatureFlag
+      summary: Get feature flag
+      description: Retrieves a single feature flag by its name within the specified workspace. Returns the flag metadata including name, description, traffic type, creation time, and tags.
+      tags:
+      - Feature Flags
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      - $ref: '#/components/parameters/featureFlagNameParam'
+      responses:
+        '200':
+          description: Successful response containing the feature flag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlag'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or feature flag not found
+    put:
+      operationId: updateFeatureFlag
+      summary: Update feature flag
+      description: Updates the metadata of an existing feature flag, such as its description or tags.
+      tags:
+      - Feature Flags
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      - $ref: '#/components/parameters/featureFlagNameParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeatureFlagUpdate'
+      responses:
+        '200':
+          description: Feature flag updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlag'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or feature flag not found
+    delete:
+      operationId: deleteFeatureFlag
+      summary: Delete feature flag
+      description: Deletes a feature flag from the specified workspace. The flag must first have all its environment definitions removed before it can be deleted.
+      tags:
+      - Feature Flags
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      - $ref: '#/components/parameters/featureFlagNameParam'
+      responses:
+        '200':
+          description: Feature flag deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or feature flag not found
+        '409':
+          description: Feature flag still has active definitions in one or more environments
+components:
+  schemas:
+    FeatureFlagList:
+      type: object
+      description: Paginated list of feature flags
+      properties:
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeatureFlag'
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        totalCount:
+          type: integer
+          description: Total number of feature flags available
+    FeatureFlagCreate:
+      type: object
+      description: Request body for creating a new feature flag
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the feature flag. Must be unique within the workspace.
+          pattern: ^[a-zA-Z0-9_-]+$
+          maxLength: 256
+        description:
+          type: string
+          description: Description of the feature flag
+        tags:
+          type: array
+          description: Tags to associate with the feature flag
+          items:
+            $ref: '#/components/schemas/Tag'
+    FeatureFlag:
+      type: object
+      description: A feature flag (split) representing a toggle used to control feature rollouts and experimentation.
+      properties:
+        name:
+          type: string
+          description: Unique name of the feature flag
+        description:
+          type: string
+          description: Human-readable description of the feature flag
+        trafficType:
+          $ref: '#/components/schemas/TrafficType'
+        creationTime:
+          type: integer
+          format: int64
+          description: Unix timestamp of when the feature flag was created
+        tags:
+          type: array
+          description: Tags associated with the feature flag
+          items:
+            $ref: '#/components/schemas/Tag'
+    Tag:
+      type: object
+      description: A tag associated with a feature flag
+      properties:
+        name:
+          type: string
+          description: Name of the tag
+    FeatureFlagUpdate:
+      type: object
+      description: Request body for updating a feature flag
+      properties:
+        description:
+          type: string
+          description: Updated description of the feature flag
+        tags:
+          type: array
+          description: Updated tags for the feature flag
+          items:
+            $ref: '#/components/schemas/Tag'
+    TrafficType:
+      type: object
+      description: A traffic type defining the kind of entity targeted by feature flags.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the traffic type
+        name:
+          type: string
+          description: Name of the traffic type
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+    featureFlagNameParam:
+      name: featureFlagName
+      in: path
+      required: true
+      description: The name of the feature flag
+      schema:
+        type: string
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    workspaceIdParam:
+      name: workspaceId
+      in: path
+      required: true
+      description: The unique identifier of the workspace
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Admin API key passed as a Bearer token in the Authorization header.
+externalDocs:
+  description: Split Admin API Documentation
+  url: https://docs.split.io/reference/introduction

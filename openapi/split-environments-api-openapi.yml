@@ -1,0 +1,192 @@
+openapi: 3.1.0
+info:
+  title: Split Admin Environments API
+  description: The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.
+  version: '2.0'
+  contact:
+    name: Split Support
+    url: https://help.split.io
+  termsOfService: https://www.split.io/terms-of-service/
+servers:
+- url: https://api.split.io/internal/api/v2
+  description: Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Environments
+  description: Manage environments within workspaces for deploying and testing feature flags across stages such as staging and production.
+paths:
+  /environments/ws/{workspaceId}:
+    get:
+      operationId: listEnvironments
+      summary: List environments
+      description: Retrieves all environments within the specified workspace. Environments represent deployment stages such as staging and production where feature flag definitions can be configured independently.
+      tags:
+      - Environments
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      responses:
+        '200':
+          description: Successful response containing list of environments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Environment'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace not found
+    post:
+      operationId: createEnvironment
+      summary: Create environment
+      description: Creates a new environment within the specified workspace.
+      tags:
+      - Environments
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvironmentCreate'
+      responses:
+        '200':
+          description: Environment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace not found
+  /environments/ws/{workspaceId}/{environmentId}:
+    get:
+      operationId: getEnvironment
+      summary: Get environment
+      description: Retrieves a single environment by its identifier within the specified workspace.
+      tags:
+      - Environments
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      - $ref: '#/components/parameters/environmentIdParam'
+      responses:
+        '200':
+          description: Successful response containing the environment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Environment or workspace not found
+    patch:
+      operationId: updateEnvironment
+      summary: Update environment
+      description: Updates an existing environment within the specified workspace.
+      tags:
+      - Environments
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      - $ref: '#/components/parameters/environmentIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvironmentUpdate'
+      responses:
+        '200':
+          description: Environment updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Environment or workspace not found
+    delete:
+      operationId: deleteEnvironment
+      summary: Delete environment
+      description: Deletes an environment from the specified workspace.
+      tags:
+      - Environments
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      - $ref: '#/components/parameters/environmentIdParam'
+      responses:
+        '200':
+          description: Environment deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Environment or workspace not found
+components:
+  schemas:
+    EnvironmentCreate:
+      type: object
+      description: Request body for creating a new environment
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the new environment
+        production:
+          type: boolean
+          description: Whether this is a production environment
+    EnvironmentUpdate:
+      type: object
+      description: Request body for updating an environment
+      properties:
+        name:
+          type: string
+          description: Updated name for the environment
+        production:
+          type: boolean
+          description: Whether this is a production environment
+    Environment:
+      type: object
+      description: An environment representing a deployment stage where feature flags can be independently configured.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the environment
+        name:
+          type: string
+          description: Human-readable name of the environment
+        production:
+          type: boolean
+          description: Whether this is a production environment
+  parameters:
+    environmentIdParam:
+      name: environmentId
+      in: path
+      required: true
+      description: The unique identifier or name of the environment
+      schema:
+        type: string
+    workspaceIdParam:
+      name: workspaceId
+      in: path
+      required: true
+      description: The unique identifier of the workspace
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Admin API key passed as a Bearer token in the Authorization header.
+externalDocs:
+  description: Split Admin API Documentation
+  url: https://docs.split.io/reference/introduction

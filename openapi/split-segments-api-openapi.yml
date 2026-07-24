@@ -1,0 +1,210 @@
+openapi: 3.1.0
+info:
+  title: Split Admin Segments API
+  description: The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.
+  version: '2.0'
+  contact:
+    name: Split Support
+    url: https://help.split.io
+  termsOfService: https://www.split.io/terms-of-service/
+servers:
+- url: https://api.split.io/internal/api/v2
+  description: Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Segments
+  description: Manage segments which define reusable groups of identities for targeting.
+paths:
+  /segments/ws/{workspaceId}:
+    get:
+      operationId: listSegments
+      summary: List segments
+      description: Retrieves all segments defined within the specified workspace.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successful response containing list of segments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace not found
+  /segments/ws/{workspaceId}/environments/{environmentId}:
+    get:
+      operationId: listSegmentsInEnvironment
+      summary: List segments in environment
+      description: Retrieves all segments activated in the specified environment within the given workspace.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/workspaceIdParam'
+      - $ref: '#/components/parameters/environmentIdParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successful response containing list of segments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentList'
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Workspace or environment not found
+  /segments/{environmentId}/{segmentName}:
+    post:
+      operationId: enableSegmentInEnvironment
+      summary: Enable segment in environment
+      description: Activates a segment in the specified environment, making it available for use in feature flag targeting rules.
+      tags:
+      - Segments
+      parameters:
+      - name: environmentId
+        in: path
+        required: true
+        description: The unique identifier of the environment
+        schema:
+          type: string
+      - name: segmentName
+        in: path
+        required: true
+        description: The name of the segment
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Segment enabled successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Segment or environment not found
+    delete:
+      operationId: deactivateSegmentInEnvironment
+      summary: Deactivate segment in environment
+      description: Deactivates a segment in the specified environment.
+      tags:
+      - Segments
+      parameters:
+      - name: environmentId
+        in: path
+        required: true
+        description: The unique identifier of the environment
+        schema:
+          type: string
+      - name: segmentName
+        in: path
+        required: true
+        description: The name of the segment
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Segment deactivated successfully
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: Segment or environment not found
+components:
+  schemas:
+    SegmentList:
+      type: object
+      description: Paginated list of segments
+      properties:
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        totalCount:
+          type: integer
+          description: Total number of segments available
+    Segment:
+      type: object
+      description: A segment defining a reusable group of identities for targeting.
+      properties:
+        name:
+          type: string
+          description: Name of the segment
+        description:
+          type: string
+          description: Description of the segment
+        trafficType:
+          $ref: '#/components/schemas/TrafficType'
+        creationTime:
+          type: integer
+          format: int64
+          description: Timestamp of when the segment was created
+        tags:
+          type: array
+          description: Tags associated with the segment
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Tag name
+    TrafficType:
+      type: object
+      description: A traffic type defining the kind of entity that feature flags target.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the traffic type
+        name:
+          type: string
+          description: Name of the traffic type (e.g., user, account)
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+    environmentIdParam:
+      name: environmentId
+      in: path
+      required: true
+      description: The unique identifier or name of the environment
+      schema:
+        type: string
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    workspaceIdParam:
+      name: workspaceId
+      in: path
+      required: true
+      description: The unique identifier of the workspace
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Admin API key passed as a Bearer token in the Authorization header.
+externalDocs:
+  description: Split Admin API Documentation
+  url: https://docs.split.io/reference/introduction
