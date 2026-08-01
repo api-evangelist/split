@@ -1,0 +1,1540 @@
+{
+  "info": {
+    "_postman_id": "ee68e870-06c4-4c35-b35a-b1b189053b5f",
+    "name": "Split Admin Evaluation API",
+    "description": "The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.\n\nContact Support:\n Name: Split Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:59:55.000Z",
+    "updatedAt": "2026-07-28T02:59:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ee68e870-06c4-4c35-b35a-b1b189053b5f"
+  },
+  "item": [
+    {
+      "name": "client",
+      "item": [
+        {
+          "name": "get-treatment",
+          "item": [
+            {
+              "name": "Get treatment for a feature flag",
+              "id": "185f4501-089c-4505-a0ea-6d0ef4ffbc0f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/client/get-treatment?key=<string>&split-name=<string>&bucketing-key=<string>&attributes=<string>&impressions-disabled=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "client",
+                    "get-treatment"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The customer key to evaluate the feature flag against",
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The name of the feature flag to evaluate",
+                      "key": "split-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Optional bucketing key used for consistent percentage-based treatment assignments",
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "JSON string of attributes used in targeting rule evaluation",
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When set to true, disables impression logging for this evaluation",
+                      "key": "impressions-disabled",
+                      "value": "<boolean>"
+                    }
+                  ]
+                },
+                "description": "Evaluates a single feature flag for the given key and returns the treatment value. Optionally includes dynamic configuration associated with the treatment. This is the primary endpoint for feature flag evaluation."
+              },
+              "response": [
+                {
+                  "id": "0d9834f6-9835-48eb-8623-1d448476613b",
+                  "name": "Successful evaluation response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-treatment?key=<string>&split-name=<string>&bucketing-key=<string>&attributes=<string>&impressions-disabled=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-treatment"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key to evaluate the feature flag against",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The name of the feature flag to evaluate",
+                          "key": "split-name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional bucketing key used for consistent percentage-based treatment assignments",
+                          "key": "bucketing-key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "JSON string of attributes used in targeting rule evaluation",
+                          "key": "attributes",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, disables impression logging for this evaluation",
+                          "key": "impressions-disabled",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"splitName\": \"<string>\",\n  \"treatment\": \"<string>\",\n  \"config\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-0d9834f6-9835-48eb-8623-1d448476613b"
+                },
+                {
+                  "id": "dcb3e68b-9d9c-4dd0-86cb-9c8b9e02f1d2",
+                  "name": "Missing or invalid parameters",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-treatment?key=<string>&split-name=<string>&bucketing-key=<string>&attributes=<string>&impressions-disabled=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-treatment"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key to evaluate the feature flag against",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The name of the feature flag to evaluate",
+                          "key": "split-name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional bucketing key used for consistent percentage-based treatment assignments",
+                          "key": "bucketing-key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "JSON string of attributes used in targeting rule evaluation",
+                          "key": "attributes",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, disables impression logging for this evaluation",
+                          "key": "impressions-disabled",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-dcb3e68b-9d9c-4dd0-86cb-9c8b9e02f1d2"
+                },
+                {
+                  "id": "50730d44-ce51-459c-8d20-2854694ffcd6",
+                  "name": "Internal server error during evaluation",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-treatment?key=<string>&split-name=<string>&bucketing-key=<string>&attributes=<string>&impressions-disabled=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-treatment"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key to evaluate the feature flag against",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The name of the feature flag to evaluate",
+                          "key": "split-name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional bucketing key used for consistent percentage-based treatment assignments",
+                          "key": "bucketing-key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "JSON string of attributes used in targeting rule evaluation",
+                          "key": "attributes",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, disables impression logging for this evaluation",
+                          "key": "impressions-disabled",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-50730d44-ce51-459c-8d20-2854694ffcd6"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:55.000Z",
+              "updatedAt": "2026-07-28T02:59:55.000Z",
+              "uid": "35240-185f4501-089c-4505-a0ea-6d0ef4ffbc0f"
+            },
+            {
+              "name": "Get treatment with attributes",
+              "id": "c3444453-84d2-4f8b-a826-e9f30404b4e6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"nulla__\": \"irure tempor\",\n    \"veniam_51c\": 83933851,\n    \"sint542\": \"sed adipisicing\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/client/get-treatment?key=<string>&split-name=<string>&bucketing-key=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "client",
+                    "get-treatment"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The customer key to evaluate the feature flag against",
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The name of the feature flag to evaluate",
+                      "key": "split-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Optional bucketing key for consistent assignments",
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Evaluates a single feature flag for the given key with attributes passed in the request body. This is preferred over the GET method when attributes contain complex or large data structures."
+              },
+              "response": [
+                {
+                  "id": "eb38cc57-fbbf-4c13-8df3-f0fded26a345",
+                  "name": "Successful evaluation response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attributes\": {\n    \"nulla__\": \"irure tempor\",\n    \"veniam_51c\": 83933851,\n    \"sint542\": \"sed adipisicing\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-treatment?key=<string>&split-name=<string>&bucketing-key=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-treatment"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key to evaluate the feature flag against",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The name of the feature flag to evaluate",
+                          "key": "split-name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional bucketing key for consistent assignments",
+                          "key": "bucketing-key",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"splitName\": \"<string>\",\n  \"treatment\": \"<string>\",\n  \"config\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-eb38cc57-fbbf-4c13-8df3-f0fded26a345"
+                },
+                {
+                  "id": "4c22c31f-7765-45dd-afee-7703f5e9ffb8",
+                  "name": "Missing or invalid parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attributes\": {\n    \"nulla__\": \"irure tempor\",\n    \"veniam_51c\": 83933851,\n    \"sint542\": \"sed adipisicing\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-treatment?key=<string>&split-name=<string>&bucketing-key=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-treatment"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key to evaluate the feature flag against",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The name of the feature flag to evaluate",
+                          "key": "split-name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional bucketing key for consistent assignments",
+                          "key": "bucketing-key",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-4c22c31f-7765-45dd-afee-7703f5e9ffb8"
+                },
+                {
+                  "id": "a7bb3bbc-10fd-475b-b135-b8fcd96b274f",
+                  "name": "Internal server error during evaluation",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attributes\": {\n    \"nulla__\": \"irure tempor\",\n    \"veniam_51c\": 83933851,\n    \"sint542\": \"sed adipisicing\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-treatment?key=<string>&split-name=<string>&bucketing-key=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-treatment"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key to evaluate the feature flag against",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The name of the feature flag to evaluate",
+                          "key": "split-name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional bucketing key for consistent assignments",
+                          "key": "bucketing-key",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-a7bb3bbc-10fd-475b-b135-b8fcd96b274f"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:55.000Z",
+              "updatedAt": "2026-07-28T02:59:55.000Z",
+              "uid": "35240-c3444453-84d2-4f8b-a826-e9f30404b4e6"
+            }
+          ],
+          "id": "86973ba5-a977-4eea-9318-40f91d796acb",
+          "createdAt": "2026-07-28T02:59:55.000Z",
+          "updatedAt": "2026-07-28T02:59:55.000Z",
+          "uid": "35240-86973ba5-a977-4eea-9318-40f91d796acb"
+        },
+        {
+          "name": "get-treatments",
+          "item": [
+            {
+              "name": "Get treatments for multiple feature flags",
+              "id": "49dceb0f-6320-4833-92fd-3f001171fc06",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/client/get-treatments?key=<string>&split-names=<string>&bucketing-key=<string>&attributes=<string>&impressions-disabled=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "client",
+                    "get-treatments"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The customer key to evaluate feature flags against",
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of feature flag names to evaluate",
+                      "key": "split-names",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Optional bucketing key for consistent assignments",
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "JSON string of attributes for targeting rule evaluation",
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When set to true, disables impression logging for these evaluations",
+                      "key": "impressions-disabled",
+                      "value": "<boolean>"
+                    }
+                  ]
+                },
+                "description": "Evaluates multiple feature flags for the given key in a single request and returns the treatment values for each. More efficient than making individual get-treatment calls."
+              },
+              "response": [
+                {
+                  "id": "7be901be-990c-4ec4-b359-4ec8ff3da4d4",
+                  "name": "Successful evaluation response with multiple treatments",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-treatments?key=<string>&split-names=<string>&bucketing-key=<string>&attributes=<string>&impressions-disabled=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-treatments"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key to evaluate feature flags against",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of feature flag names to evaluate",
+                          "key": "split-names",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional bucketing key for consistent assignments",
+                          "key": "bucketing-key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "JSON string of attributes for targeting rule evaluation",
+                          "key": "attributes",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, disables impression logging for these evaluations",
+                          "key": "impressions-disabled",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"quif6d\": {\n    \"splitName\": \"<string>\",\n    \"treatment\": \"<string>\",\n    \"config\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-7be901be-990c-4ec4-b359-4ec8ff3da4d4"
+                },
+                {
+                  "id": "b129ddad-8820-49d2-9e7a-7390be1255ee",
+                  "name": "Missing or invalid parameters",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-treatments?key=<string>&split-names=<string>&bucketing-key=<string>&attributes=<string>&impressions-disabled=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-treatments"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key to evaluate feature flags against",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of feature flag names to evaluate",
+                          "key": "split-names",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional bucketing key for consistent assignments",
+                          "key": "bucketing-key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "JSON string of attributes for targeting rule evaluation",
+                          "key": "attributes",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, disables impression logging for these evaluations",
+                          "key": "impressions-disabled",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-b129ddad-8820-49d2-9e7a-7390be1255ee"
+                },
+                {
+                  "id": "ca1671eb-77c3-4b6b-ad13-9eb4d63fd2cc",
+                  "name": "Internal server error during evaluation",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-treatments?key=<string>&split-names=<string>&bucketing-key=<string>&attributes=<string>&impressions-disabled=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-treatments"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key to evaluate feature flags against",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of feature flag names to evaluate",
+                          "key": "split-names",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional bucketing key for consistent assignments",
+                          "key": "bucketing-key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "JSON string of attributes for targeting rule evaluation",
+                          "key": "attributes",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, disables impression logging for these evaluations",
+                          "key": "impressions-disabled",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-ca1671eb-77c3-4b6b-ad13-9eb4d63fd2cc"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:55.000Z",
+              "updatedAt": "2026-07-28T02:59:55.000Z",
+              "uid": "35240-49dceb0f-6320-4833-92fd-3f001171fc06"
+            },
+            {
+              "name": "Get treatments with attributes",
+              "id": "2842de4e-bc16-480b-a33c-d206bceca05d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"nulla__\": \"irure tempor\",\n    \"veniam_51c\": 83933851,\n    \"sint542\": \"sed adipisicing\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/client/get-treatments?key=<string>&split-names=<string>&bucketing-key=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "client",
+                    "get-treatments"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The customer key to evaluate feature flags against",
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of feature flag names to evaluate",
+                      "key": "split-names",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Optional bucketing key for consistent assignments",
+                      "key": "bucketing-key",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Evaluates multiple feature flags for the given key with attributes passed in the request body."
+              },
+              "response": [
+                {
+                  "id": "ba980da5-5cdb-4388-afcd-28aa58cbafc1",
+                  "name": "Successful evaluation response with multiple treatments",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attributes\": {\n    \"nulla__\": \"irure tempor\",\n    \"veniam_51c\": 83933851,\n    \"sint542\": \"sed adipisicing\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-treatments?key=<string>&split-names=<string>&bucketing-key=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-treatments"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key to evaluate feature flags against",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of feature flag names to evaluate",
+                          "key": "split-names",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional bucketing key for consistent assignments",
+                          "key": "bucketing-key",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"quif6d\": {\n    \"splitName\": \"<string>\",\n    \"treatment\": \"<string>\",\n    \"config\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-ba980da5-5cdb-4388-afcd-28aa58cbafc1"
+                },
+                {
+                  "id": "a45a988a-8d94-4be0-9d0d-ecd9fefba9b0",
+                  "name": "Missing or invalid parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attributes\": {\n    \"nulla__\": \"irure tempor\",\n    \"veniam_51c\": 83933851,\n    \"sint542\": \"sed adipisicing\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-treatments?key=<string>&split-names=<string>&bucketing-key=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-treatments"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key to evaluate feature flags against",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of feature flag names to evaluate",
+                          "key": "split-names",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional bucketing key for consistent assignments",
+                          "key": "bucketing-key",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-a45a988a-8d94-4be0-9d0d-ecd9fefba9b0"
+                },
+                {
+                  "id": "23f04c9a-50c7-472d-bb7c-55a4f8702b9b",
+                  "name": "Internal server error during evaluation",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attributes\": {\n    \"nulla__\": \"irure tempor\",\n    \"veniam_51c\": 83933851,\n    \"sint542\": \"sed adipisicing\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-treatments?key=<string>&split-names=<string>&bucketing-key=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-treatments"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key to evaluate feature flags against",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of feature flag names to evaluate",
+                          "key": "split-names",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional bucketing key for consistent assignments",
+                          "key": "bucketing-key",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-23f04c9a-50c7-472d-bb7c-55a4f8702b9b"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:55.000Z",
+              "updatedAt": "2026-07-28T02:59:55.000Z",
+              "uid": "35240-2842de4e-bc16-480b-a33c-d206bceca05d"
+            }
+          ],
+          "id": "0f449f54-fc66-486f-adb9-a97d0a1acdf7",
+          "createdAt": "2026-07-28T02:59:55.000Z",
+          "updatedAt": "2026-07-28T02:59:55.000Z",
+          "uid": "35240-0f449f54-fc66-486f-adb9-a97d0a1acdf7"
+        },
+        {
+          "name": "get-all-treatments",
+          "item": [
+            {
+              "name": "Get all treatments for a key",
+              "id": "f942c1bd-2757-4408-8cef-6c027259f063",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/client/get-all-treatments?keys=<string>&attributes=<string>&impressions-disabled=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "client",
+                    "get-all-treatments"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) JSON string containing an array of key objects with matchingKey and trafficType properties, and optionally a bucketingKey",
+                      "key": "keys",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "JSON string of attributes for targeting rule evaluation",
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When set to true, disables impression logging for these evaluations",
+                      "key": "impressions-disabled",
+                      "value": "<boolean>"
+                    }
+                  ]
+                },
+                "description": "Evaluates all available feature flags for the given keys and traffic types and returns the treatment values. Useful for retrieving a complete set of flag evaluations for a user session."
+              },
+              "response": [
+                {
+                  "id": "820c5789-a07a-407e-8e77-00185b3105ae",
+                  "name": "Successful response with treatments for all feature flags",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-all-treatments?keys=<string>&attributes=<string>&impressions-disabled=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-all-treatments"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) JSON string containing an array of key objects with matchingKey and trafficType properties, and optionally a bucketingKey",
+                          "key": "keys",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "JSON string of attributes for targeting rule evaluation",
+                          "key": "attributes",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, disables impression logging for these evaluations",
+                          "key": "impressions-disabled",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"aliqua_f80\": {\n    \"splitName\": \"<string>\",\n    \"treatment\": \"<string>\",\n    \"config\": \"<string>\"\n  },\n  \"nostrud_d0e\": {\n    \"splitName\": \"<string>\",\n    \"treatment\": \"<string>\",\n    \"config\": \"<string>\"\n  },\n  \"cupidatat_6\": {\n    \"splitName\": \"<string>\",\n    \"treatment\": \"<string>\",\n    \"config\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-820c5789-a07a-407e-8e77-00185b3105ae"
+                },
+                {
+                  "id": "8b6d30eb-efce-4569-8bf5-51304f32c4bc",
+                  "name": "Missing or invalid parameters",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-all-treatments?keys=<string>&attributes=<string>&impressions-disabled=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-all-treatments"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) JSON string containing an array of key objects with matchingKey and trafficType properties, and optionally a bucketingKey",
+                          "key": "keys",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "JSON string of attributes for targeting rule evaluation",
+                          "key": "attributes",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, disables impression logging for these evaluations",
+                          "key": "impressions-disabled",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-8b6d30eb-efce-4569-8bf5-51304f32c4bc"
+                },
+                {
+                  "id": "8dd1b3ea-e376-4922-bfcf-06bff92da913",
+                  "name": "Internal server error during evaluation",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-all-treatments?keys=<string>&attributes=<string>&impressions-disabled=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-all-treatments"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) JSON string containing an array of key objects with matchingKey and trafficType properties, and optionally a bucketingKey",
+                          "key": "keys",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "JSON string of attributes for targeting rule evaluation",
+                          "key": "attributes",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, disables impression logging for these evaluations",
+                          "key": "impressions-disabled",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-8dd1b3ea-e376-4922-bfcf-06bff92da913"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:55.000Z",
+              "updatedAt": "2026-07-28T02:59:55.000Z",
+              "uid": "35240-f942c1bd-2757-4408-8cef-6c027259f063"
+            },
+            {
+              "name": "Get all treatments with attributes",
+              "id": "0de43b7b-7750-4a7e-b65c-98dfd3b32624",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"nulla__\": \"irure tempor\",\n    \"veniam_51c\": 83933851,\n    \"sint542\": \"sed adipisicing\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/client/get-all-treatments?keys=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "client",
+                    "get-all-treatments"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) JSON string containing an array of key objects",
+                      "key": "keys",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Evaluates all available feature flags for the given keys with attributes passed in the request body."
+              },
+              "response": [
+                {
+                  "id": "c9ef0d77-5bb0-4ce6-adef-ff5966bcf976",
+                  "name": "Successful response with treatments for all feature flags",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attributes\": {\n    \"nulla__\": \"irure tempor\",\n    \"veniam_51c\": 83933851,\n    \"sint542\": \"sed adipisicing\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-all-treatments?keys=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-all-treatments"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) JSON string containing an array of key objects",
+                          "key": "keys",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"aliqua_f80\": {\n    \"splitName\": \"<string>\",\n    \"treatment\": \"<string>\",\n    \"config\": \"<string>\"\n  },\n  \"nostrud_d0e\": {\n    \"splitName\": \"<string>\",\n    \"treatment\": \"<string>\",\n    \"config\": \"<string>\"\n  },\n  \"cupidatat_6\": {\n    \"splitName\": \"<string>\",\n    \"treatment\": \"<string>\",\n    \"config\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-c9ef0d77-5bb0-4ce6-adef-ff5966bcf976"
+                },
+                {
+                  "id": "0b161e74-a31b-4bb2-9f21-5daffb684814",
+                  "name": "Missing or invalid parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attributes\": {\n    \"nulla__\": \"irure tempor\",\n    \"veniam_51c\": 83933851,\n    \"sint542\": \"sed adipisicing\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-all-treatments?keys=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-all-treatments"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) JSON string containing an array of key objects",
+                          "key": "keys",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-0b161e74-a31b-4bb2-9f21-5daffb684814"
+                },
+                {
+                  "id": "3cc782d1-9db3-4f0b-b1fa-c136e0a388e7",
+                  "name": "Internal server error during evaluation",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attributes\": {\n    \"nulla__\": \"irure tempor\",\n    \"veniam_51c\": 83933851,\n    \"sint542\": \"sed adipisicing\"\n  },\n  \"impressionsDisabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/client/get-all-treatments?keys=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "get-all-treatments"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) JSON string containing an array of key objects",
+                          "key": "keys",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:55.000Z",
+                  "updatedAt": "2026-07-28T02:59:55.000Z",
+                  "uid": "35240-3cc782d1-9db3-4f0b-b1fa-c136e0a388e7"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:55.000Z",
+              "updatedAt": "2026-07-28T02:59:55.000Z",
+              "uid": "35240-0de43b7b-7750-4a7e-b65c-98dfd3b32624"
+            }
+          ],
+          "id": "6fef97ee-1e4b-48a0-98e1-ae23448ba098",
+          "createdAt": "2026-07-28T02:59:55.000Z",
+          "updatedAt": "2026-07-28T02:59:55.000Z",
+          "uid": "35240-6fef97ee-1e4b-48a0-98e1-ae23448ba098"
+        }
+      ],
+      "id": "8d4a56eb-5a5b-47d8-b2b1-14ee3b6cca25",
+      "createdAt": "2026-07-28T02:59:55.000Z",
+      "updatedAt": "2026-07-28T02:59:55.000Z",
+      "uid": "35240-8d4a56eb-5a5b-47d8-b2b1-14ee3b6cca25"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.split.io/internal/api/v2"
+    }
+  ]
+}

@@ -1,0 +1,1341 @@
+{
+  "info": {
+    "_postman_id": "b81f839f-4333-4560-9a5e-f9191014d701",
+    "name": "Split Admin Feature Flags API",
+    "description": "The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.\n\nContact Support:\n Name: Split Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:59:58.000Z",
+    "updatedAt": "2026-07-28T02:59:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b81f839f-4333-4560-9a5e-f9191014d701"
+  },
+  "item": [
+    {
+      "name": "splits",
+      "item": [
+        {
+          "name": "ws",
+          "item": [
+            {
+              "name": "{workspaceId}",
+              "item": [
+                {
+                  "name": "trafficTypes",
+                  "item": [
+                    {
+                      "name": "{trafficTypeId}",
+                      "item": [
+                        {
+                          "name": "Create feature flag",
+                          "id": "3e418be7-f659-4481-89fa-cadde77baac5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"PNGS\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/trafficTypes/:trafficTypeId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                "trafficTypes",
+                                ":trafficTypeId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b631a7ef-7caa-4f67-993f-e2eeba14cbfb",
+                                  "key": "workspaceId",
+                                  "value": "<string>",
+                                  "description": "(Required) The unique identifier of the workspace"
+                                },
+                                {
+                                  "id": "aa0492bd-de94-4eb8-a805-8586c53bc12b",
+                                  "key": "trafficTypeId",
+                                  "value": "<string>",
+                                  "description": "(Required) The identifier or name of the traffic type for the feature flag"
+                                }
+                              ]
+                            },
+                            "description": "Creates a new feature flag within the specified workspace and traffic type. The flag is created with default treatments of on and off. After creation, a definition must be created in each environment where the flag should be active."
+                          },
+                          "response": [
+                            {
+                              "id": "abfe8847-1add-4e69-a3e8-ce91997add3e",
+                              "name": "Feature flag created successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"PNGS\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/splits/ws/:workspaceId/trafficTypes/:trafficTypeId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "splits",
+                                    "ws",
+                                    ":workspaceId",
+                                    "trafficTypes",
+                                    ":trafficTypeId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspaceId"
+                                    },
+                                    {
+                                      "key": "trafficTypeId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"trafficType\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"creationTime\": \"<long>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:59:58.000Z",
+                              "updatedAt": "2026-07-28T02:59:58.000Z",
+                              "uid": "35240-abfe8847-1add-4e69-a3e8-ce91997add3e"
+                            },
+                            {
+                              "id": "4973cf25-ee2b-42e9-b0f4-f1469f6163cd",
+                              "name": "Invalid request body or feature flag name already exists",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"PNGS\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/splits/ws/:workspaceId/trafficTypes/:trafficTypeId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "splits",
+                                    "ws",
+                                    ":workspaceId",
+                                    "trafficTypes",
+                                    ":trafficTypeId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspaceId"
+                                    },
+                                    {
+                                      "key": "trafficTypeId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:59:58.000Z",
+                              "updatedAt": "2026-07-28T02:59:58.000Z",
+                              "uid": "35240-4973cf25-ee2b-42e9-b0f4-f1469f6163cd"
+                            },
+                            {
+                              "id": "92b02ad1-eefb-4b35-9e94-cd9a42d58703",
+                              "name": "Unauthorized - invalid or missing API key",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"PNGS\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/splits/ws/:workspaceId/trafficTypes/:trafficTypeId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "splits",
+                                    "ws",
+                                    ":workspaceId",
+                                    "trafficTypes",
+                                    ":trafficTypeId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspaceId"
+                                    },
+                                    {
+                                      "key": "trafficTypeId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:59:58.000Z",
+                              "updatedAt": "2026-07-28T02:59:58.000Z",
+                              "uid": "35240-92b02ad1-eefb-4b35-9e94-cd9a42d58703"
+                            },
+                            {
+                              "id": "96b1cb1e-244b-4762-b307-f41996fb7916",
+                              "name": "Workspace or traffic type not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"PNGS\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/splits/ws/:workspaceId/trafficTypes/:trafficTypeId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "splits",
+                                    "ws",
+                                    ":workspaceId",
+                                    "trafficTypes",
+                                    ":trafficTypeId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspaceId"
+                                    },
+                                    {
+                                      "key": "trafficTypeId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:59:58.000Z",
+                              "updatedAt": "2026-07-28T02:59:58.000Z",
+                              "uid": "35240-96b1cb1e-244b-4762-b307-f41996fb7916"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:59:58.000Z",
+                          "updatedAt": "2026-07-28T02:59:58.000Z",
+                          "uid": "35240-3e418be7-f659-4481-89fa-cadde77baac5"
+                        }
+                      ],
+                      "id": "3cfbbf9b-ffef-4ea9-a937-cc7f112d0281",
+                      "createdAt": "2026-07-28T02:59:58.000Z",
+                      "updatedAt": "2026-07-28T02:59:58.000Z",
+                      "uid": "35240-3cfbbf9b-ffef-4ea9-a937-cc7f112d0281"
+                    }
+                  ],
+                  "id": "a61e8ba7-d485-43ea-850f-8b1d78ff2af6",
+                  "createdAt": "2026-07-28T02:59:58.000Z",
+                  "updatedAt": "2026-07-28T02:59:58.000Z",
+                  "uid": "35240-a61e8ba7-d485-43ea-850f-8b1d78ff2af6"
+                },
+                {
+                  "name": "{featureFlagName}",
+                  "item": [
+                    {
+                      "name": "Get feature flag",
+                      "id": "f33d117a-b2b7-4ee3-84dc-c83e7f518aa6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "splits",
+                            "ws",
+                            ":workspaceId",
+                            ":featureFlagName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5c8d14ff-8c11-44aa-91a0-0540611587b4",
+                              "key": "workspaceId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the workspace"
+                            },
+                            {
+                              "id": "32295df9-3ef6-44e1-a4a7-28af73d31a28",
+                              "key": "featureFlagName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the feature flag"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a single feature flag by its name within the specified workspace. Returns the flag metadata including name, description, traffic type, creation time, and tags."
+                      },
+                      "response": [
+                        {
+                          "id": "6b42f333-d5e2-4057-9a1e-945911c711cb",
+                          "name": "Successful response containing the feature flag",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                ":featureFlagName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "featureFlagName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"trafficType\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"creationTime\": \"<long>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:59:58.000Z",
+                          "updatedAt": "2026-07-28T02:59:58.000Z",
+                          "uid": "35240-6b42f333-d5e2-4057-9a1e-945911c711cb"
+                        },
+                        {
+                          "id": "ff16f611-843c-4b59-a351-b8f8fb99f766",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                ":featureFlagName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "featureFlagName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:58.000Z",
+                          "updatedAt": "2026-07-28T02:59:58.000Z",
+                          "uid": "35240-ff16f611-843c-4b59-a351-b8f8fb99f766"
+                        },
+                        {
+                          "id": "3c29c60e-8d71-4c4d-b751-2397fe24329b",
+                          "name": "Workspace or feature flag not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                ":featureFlagName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "featureFlagName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:58.000Z",
+                          "updatedAt": "2026-07-28T02:59:58.000Z",
+                          "uid": "35240-3c29c60e-8d71-4c4d-b751-2397fe24329b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:59:58.000Z",
+                      "updatedAt": "2026-07-28T02:59:58.000Z",
+                      "uid": "35240-f33d117a-b2b7-4ee3-84dc-c83e7f518aa6"
+                    },
+                    {
+                      "name": "Update feature flag",
+                      "id": "29790812-7c7a-4ea6-bb39-3160ad900968",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"description\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "splits",
+                            "ws",
+                            ":workspaceId",
+                            ":featureFlagName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8e24297f-cca7-4bee-a489-cd7652c7c285",
+                              "key": "workspaceId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the workspace"
+                            },
+                            {
+                              "id": "88669fc0-25ba-41b2-9f5d-2bdcb69c0b88",
+                              "key": "featureFlagName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the feature flag"
+                            }
+                          ]
+                        },
+                        "description": "Updates the metadata of an existing feature flag, such as its description or tags."
+                      },
+                      "response": [
+                        {
+                          "id": "ee91b7cd-461e-4278-87a5-f71defd4828b",
+                          "name": "Feature flag updated successfully",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"description\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                ":featureFlagName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "featureFlagName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"trafficType\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"creationTime\": \"<long>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:59:58.000Z",
+                          "updatedAt": "2026-07-28T02:59:58.000Z",
+                          "uid": "35240-ee91b7cd-461e-4278-87a5-f71defd4828b"
+                        },
+                        {
+                          "id": "18d868e2-5721-4bf3-991d-727c27fa5141",
+                          "name": "Invalid request body",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"description\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                ":featureFlagName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "featureFlagName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:58.000Z",
+                          "updatedAt": "2026-07-28T02:59:58.000Z",
+                          "uid": "35240-18d868e2-5721-4bf3-991d-727c27fa5141"
+                        },
+                        {
+                          "id": "cf7c4be8-52a3-4fae-8698-4bbda7578230",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"description\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                ":featureFlagName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "featureFlagName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:58.000Z",
+                          "updatedAt": "2026-07-28T02:59:58.000Z",
+                          "uid": "35240-cf7c4be8-52a3-4fae-8698-4bbda7578230"
+                        },
+                        {
+                          "id": "ba37db5b-6332-4123-b5db-3a76c6e2852c",
+                          "name": "Workspace or feature flag not found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"description\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                ":featureFlagName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "featureFlagName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:58.000Z",
+                          "updatedAt": "2026-07-28T02:59:58.000Z",
+                          "uid": "35240-ba37db5b-6332-4123-b5db-3a76c6e2852c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:59:58.000Z",
+                      "updatedAt": "2026-07-28T02:59:58.000Z",
+                      "uid": "35240-29790812-7c7a-4ea6-bb39-3160ad900968"
+                    },
+                    {
+                      "name": "Delete feature flag",
+                      "id": "609187e6-59e5-4f67-864a-38bcec85c2d7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "splits",
+                            "ws",
+                            ":workspaceId",
+                            ":featureFlagName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "511a2935-c94e-4cb4-9f69-e5a1092478a9",
+                              "key": "workspaceId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the workspace"
+                            },
+                            {
+                              "id": "5c8bb4d9-1193-478a-bbdf-f6102b4a0932",
+                              "key": "featureFlagName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the feature flag"
+                            }
+                          ]
+                        },
+                        "description": "Deletes a feature flag from the specified workspace. The flag must first have all its environment definitions removed before it can be deleted."
+                      },
+                      "response": [
+                        {
+                          "id": "d43f3840-c0aa-4298-a373-2f45c37d9146",
+                          "name": "Feature flag deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                ":featureFlagName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "featureFlagName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:58.000Z",
+                          "updatedAt": "2026-07-28T02:59:58.000Z",
+                          "uid": "35240-d43f3840-c0aa-4298-a373-2f45c37d9146"
+                        },
+                        {
+                          "id": "777e61c3-4b56-47a9-95b4-53a5505db4ec",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                ":featureFlagName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "featureFlagName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:58.000Z",
+                          "updatedAt": "2026-07-28T02:59:58.000Z",
+                          "uid": "35240-777e61c3-4b56-47a9-95b4-53a5505db4ec"
+                        },
+                        {
+                          "id": "a83ad7b9-91ab-4309-93c0-aba128168812",
+                          "name": "Workspace or feature flag not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                ":featureFlagName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "featureFlagName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:58.000Z",
+                          "updatedAt": "2026-07-28T02:59:58.000Z",
+                          "uid": "35240-a83ad7b9-91ab-4309-93c0-aba128168812"
+                        },
+                        {
+                          "id": "d40acd4b-88e9-424a-88ed-ba484a777222",
+                          "name": "Feature flag still has active definitions in one or more environments",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                ":featureFlagName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "featureFlagName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:58.000Z",
+                          "updatedAt": "2026-07-28T02:59:58.000Z",
+                          "uid": "35240-d40acd4b-88e9-424a-88ed-ba484a777222"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:59:58.000Z",
+                      "updatedAt": "2026-07-28T02:59:58.000Z",
+                      "uid": "35240-609187e6-59e5-4f67-864a-38bcec85c2d7"
+                    }
+                  ],
+                  "id": "f5d4d4e6-12fe-40d1-be67-2feb590ac919",
+                  "createdAt": "2026-07-28T02:59:58.000Z",
+                  "updatedAt": "2026-07-28T02:59:58.000Z",
+                  "uid": "35240-f5d4d4e6-12fe-40d1-be67-2feb590ac919"
+                },
+                {
+                  "name": "List feature flags",
+                  "id": "94307bed-6081-40b4-bf1a-267832005757",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/splits/ws/:workspaceId?limit=20&offset=0&tags=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "splits",
+                        "ws",
+                        ":workspaceId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return per page",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Number of results to skip for pagination",
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Filter feature flags by tag names (comma-separated)",
+                          "key": "tags",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "248b6d4a-3e01-4cfb-9e05-0451dc70fde6",
+                          "key": "workspaceId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the workspace"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves all feature flags within the specified workspace. Returns paginated results including flag name, description, traffic type, creation time, and tags."
+                  },
+                  "response": [
+                    {
+                      "id": "08b3d2b6-03a2-4ced-8407-84e989f54444",
+                      "name": "Successful response containing list of feature flags",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/splits/ws/:workspaceId?limit=20&offset=0&tags=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "splits",
+                            "ws",
+                            ":workspaceId"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return per page",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Filter feature flags by tag names (comma-separated)",
+                              "key": "tags",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "workspaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"objects\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"trafficType\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"creationTime\": \"<long>\",\n      \"tags\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"trafficType\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"creationTime\": \"<long>\",\n      \"tags\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"totalCount\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:59:58.000Z",
+                      "updatedAt": "2026-07-28T02:59:58.000Z",
+                      "uid": "35240-08b3d2b6-03a2-4ced-8407-84e989f54444"
+                    },
+                    {
+                      "id": "9e04d293-75d2-4a99-b496-ec7867811b94",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/splits/ws/:workspaceId?limit=20&offset=0&tags=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "splits",
+                            "ws",
+                            ":workspaceId"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return per page",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Filter feature flags by tag names (comma-separated)",
+                              "key": "tags",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "workspaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:59:58.000Z",
+                      "updatedAt": "2026-07-28T02:59:58.000Z",
+                      "uid": "35240-9e04d293-75d2-4a99-b496-ec7867811b94"
+                    },
+                    {
+                      "id": "64217a93-d127-40ef-a332-88798e7c80ac",
+                      "name": "Workspace not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/splits/ws/:workspaceId?limit=20&offset=0&tags=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "splits",
+                            "ws",
+                            ":workspaceId"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return per page",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Filter feature flags by tag names (comma-separated)",
+                              "key": "tags",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "workspaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:59:58.000Z",
+                      "updatedAt": "2026-07-28T02:59:58.000Z",
+                      "uid": "35240-64217a93-d127-40ef-a332-88798e7c80ac"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:59:58.000Z",
+                  "updatedAt": "2026-07-28T02:59:58.000Z",
+                  "uid": "35240-94307bed-6081-40b4-bf1a-267832005757"
+                }
+              ],
+              "id": "efe20697-81ca-4bf0-91f8-026de0fa8476",
+              "createdAt": "2026-07-28T02:59:58.000Z",
+              "updatedAt": "2026-07-28T02:59:58.000Z",
+              "uid": "35240-efe20697-81ca-4bf0-91f8-026de0fa8476"
+            }
+          ],
+          "id": "10e01799-e51a-4888-a10c-5151e20f2ae9",
+          "createdAt": "2026-07-28T02:59:58.000Z",
+          "updatedAt": "2026-07-28T02:59:58.000Z",
+          "uid": "35240-10e01799-e51a-4888-a10c-5151e20f2ae9"
+        }
+      ],
+      "id": "f7294a08-3f67-456e-8654-d622063a1f37",
+      "createdAt": "2026-07-28T02:59:58.000Z",
+      "updatedAt": "2026-07-28T02:59:58.000Z",
+      "uid": "35240-f7294a08-3f67-456e-8654-d622063a1f37"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.split.io/internal/api/v2"
+    }
+  ]
+}

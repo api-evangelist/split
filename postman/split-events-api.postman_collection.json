@@ -1,0 +1,559 @@
+{
+  "info": {
+    "_postman_id": "2866d1e0-af4f-43fd-a26d-310dd72ed520",
+    "name": "Split Admin Events API",
+    "description": "The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.\n\nContact Support:\n Name: Split Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:59:56.000Z",
+    "updatedAt": "2026-07-28T02:59:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2866d1e0-af4f-43fd-a26d-310dd72ed520"
+  },
+  "item": [
+    {
+      "name": "client",
+      "item": [
+        {
+          "name": "track",
+          "item": [
+            {
+              "name": "Track an event",
+              "id": "cefe05d4-f989-404e-b6f6-a247483e9107",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/client/track?key=<string>&traffic-type=<string>&event-type=<string>&value=<number>&properties=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "client",
+                    "track"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The customer key associated with the event",
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The traffic type for the event",
+                      "key": "traffic-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The type of event being tracked (e.g., purchase, click, signup)",
+                      "key": "event-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Optional numeric value associated with the event",
+                      "key": "value",
+                      "value": "<number>"
+                    },
+                    {
+                      "description": "JSON string with up to 15 key-value pairs of event properties. Values must be boolean, string, number, or null.",
+                      "key": "properties",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Records a custom event for the given key and event type. Events are used to measure the impact of feature flags on user actions and experimentation metrics."
+              },
+              "response": [
+                {
+                  "id": "660c06d9-4cf1-46a4-827f-467e323fb13a",
+                  "name": "Event tracked successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/client/track?key=<string>&traffic-type=<string>&event-type=<string>&value=<number>&properties=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "track"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key associated with the event",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The traffic type for the event",
+                          "key": "traffic-type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The type of event being tracked (e.g., purchase, click, signup)",
+                          "key": "event-type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional numeric value associated with the event",
+                          "key": "value",
+                          "value": "<number>"
+                        },
+                        {
+                          "description": "JSON string with up to 15 key-value pairs of event properties. Values must be boolean, string, number, or null.",
+                          "key": "properties",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:56.000Z",
+                  "updatedAt": "2026-07-28T02:59:56.000Z",
+                  "uid": "35240-660c06d9-4cf1-46a4-827f-467e323fb13a"
+                },
+                {
+                  "id": "54ab542c-005f-4da1-bfaf-cf5d11434ae1",
+                  "name": "Missing or invalid parameters",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/client/track?key=<string>&traffic-type=<string>&event-type=<string>&value=<number>&properties=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "track"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key associated with the event",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The traffic type for the event",
+                          "key": "traffic-type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The type of event being tracked (e.g., purchase, click, signup)",
+                          "key": "event-type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional numeric value associated with the event",
+                          "key": "value",
+                          "value": "<number>"
+                        },
+                        {
+                          "description": "JSON string with up to 15 key-value pairs of event properties. Values must be boolean, string, number, or null.",
+                          "key": "properties",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:56.000Z",
+                  "updatedAt": "2026-07-28T02:59:56.000Z",
+                  "uid": "35240-54ab542c-005f-4da1-bfaf-cf5d11434ae1"
+                },
+                {
+                  "id": "ee0bc022-f446-4c4a-a648-387bf2258244",
+                  "name": "Internal server error during tracking",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/client/track?key=<string>&traffic-type=<string>&event-type=<string>&value=<number>&properties=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "track"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key associated with the event",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The traffic type for the event",
+                          "key": "traffic-type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The type of event being tracked (e.g., purchase, click, signup)",
+                          "key": "event-type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional numeric value associated with the event",
+                          "key": "value",
+                          "value": "<number>"
+                        },
+                        {
+                          "description": "JSON string with up to 15 key-value pairs of event properties. Values must be boolean, string, number, or null.",
+                          "key": "properties",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:56.000Z",
+                  "updatedAt": "2026-07-28T02:59:56.000Z",
+                  "uid": "35240-ee0bc022-f446-4c4a-a648-387bf2258244"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:56.000Z",
+              "updatedAt": "2026-07-28T02:59:56.000Z",
+              "uid": "35240-cefe05d4-f989-404e-b6f6-a247483e9107"
+            },
+            {
+              "name": "Track an event with properties",
+              "id": "37bd1412-1c18-49fd-b888-54b074337700",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"velit_882\": -6628897,\n    \"proident_b\": \"aliqua velit\",\n    \"tempor_7\": true,\n    \"occaecat_e_1\": false,\n    \"anim9f\": -21481673,\n    \"est78\": -80298702,\n    \"fugiat2ee\": -28142634,\n    \"dolore64\": -76273876,\n    \"Lorem_f9c\": -32001639,\n    \"nisi_f\": -43475096,\n    \"laboris6\": -39827775\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/client/track?key=<string>&traffic-type=<string>&event-type=<string>&value=<number>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "client",
+                    "track"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The customer key associated with the event",
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The traffic type for the event",
+                      "key": "traffic-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The type of event being tracked",
+                      "key": "event-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Optional numeric value associated with the event",
+                      "key": "value",
+                      "value": "<number>"
+                    }
+                  ]
+                },
+                "description": "Records a custom event with properties passed in the request body. Preferred for events with complex property structures."
+              },
+              "response": [
+                {
+                  "id": "bf87f99a-36ef-41d3-82ba-ca9a6e5fd1e5",
+                  "name": "Event tracked successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"properties\": {\n    \"velit_882\": -6628897,\n    \"proident_b\": \"aliqua velit\",\n    \"tempor_7\": true,\n    \"occaecat_e_1\": false,\n    \"anim9f\": -21481673,\n    \"est78\": -80298702,\n    \"fugiat2ee\": -28142634,\n    \"dolore64\": -76273876,\n    \"Lorem_f9c\": -32001639,\n    \"nisi_f\": -43475096,\n    \"laboris6\": -39827775\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/client/track?key=<string>&traffic-type=<string>&event-type=<string>&value=<number>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "track"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key associated with the event",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The traffic type for the event",
+                          "key": "traffic-type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The type of event being tracked",
+                          "key": "event-type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional numeric value associated with the event",
+                          "key": "value",
+                          "value": "<number>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:56.000Z",
+                  "updatedAt": "2026-07-28T02:59:56.000Z",
+                  "uid": "35240-bf87f99a-36ef-41d3-82ba-ca9a6e5fd1e5"
+                },
+                {
+                  "id": "4d081efc-954d-474a-bb08-1035dda79c2e",
+                  "name": "Missing or invalid parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"properties\": {\n    \"velit_882\": -6628897,\n    \"proident_b\": \"aliqua velit\",\n    \"tempor_7\": true,\n    \"occaecat_e_1\": false,\n    \"anim9f\": -21481673,\n    \"est78\": -80298702,\n    \"fugiat2ee\": -28142634,\n    \"dolore64\": -76273876,\n    \"Lorem_f9c\": -32001639,\n    \"nisi_f\": -43475096,\n    \"laboris6\": -39827775\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/client/track?key=<string>&traffic-type=<string>&event-type=<string>&value=<number>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "track"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key associated with the event",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The traffic type for the event",
+                          "key": "traffic-type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The type of event being tracked",
+                          "key": "event-type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional numeric value associated with the event",
+                          "key": "value",
+                          "value": "<number>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:56.000Z",
+                  "updatedAt": "2026-07-28T02:59:56.000Z",
+                  "uid": "35240-4d081efc-954d-474a-bb08-1035dda79c2e"
+                },
+                {
+                  "id": "10ecfe3d-a287-4be9-b460-142d8924177a",
+                  "name": "Internal server error during tracking",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"properties\": {\n    \"velit_882\": -6628897,\n    \"proident_b\": \"aliqua velit\",\n    \"tempor_7\": true,\n    \"occaecat_e_1\": false,\n    \"anim9f\": -21481673,\n    \"est78\": -80298702,\n    \"fugiat2ee\": -28142634,\n    \"dolore64\": -76273876,\n    \"Lorem_f9c\": -32001639,\n    \"nisi_f\": -43475096,\n    \"laboris6\": -39827775\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/client/track?key=<string>&traffic-type=<string>&event-type=<string>&value=<number>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "client",
+                        "track"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The customer key associated with the event",
+                          "key": "key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The traffic type for the event",
+                          "key": "traffic-type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The type of event being tracked",
+                          "key": "event-type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional numeric value associated with the event",
+                          "key": "value",
+                          "value": "<number>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:56.000Z",
+                  "updatedAt": "2026-07-28T02:59:56.000Z",
+                  "uid": "35240-10ecfe3d-a287-4be9-b460-142d8924177a"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:56.000Z",
+              "updatedAt": "2026-07-28T02:59:56.000Z",
+              "uid": "35240-37bd1412-1c18-49fd-b888-54b074337700"
+            }
+          ],
+          "id": "073e1f20-55ea-4902-977b-d9cb927d692b",
+          "createdAt": "2026-07-28T02:59:56.000Z",
+          "updatedAt": "2026-07-28T02:59:56.000Z",
+          "uid": "35240-073e1f20-55ea-4902-977b-d9cb927d692b"
+        }
+      ],
+      "id": "7def4fb5-a3f7-4bf4-927d-56c310de71cd",
+      "createdAt": "2026-07-28T02:59:56.000Z",
+      "updatedAt": "2026-07-28T02:59:56.000Z",
+      "uid": "35240-7def4fb5-a3f7-4bf4-927d-56c310de71cd"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.split.io/internal/api/v2"
+    }
+  ]
+}

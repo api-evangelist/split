@@ -1,0 +1,395 @@
+{
+  "info": {
+    "_postman_id": "248f3ee8-ee9f-4816-be98-6124961da256",
+    "name": "Split Admin API Keys API",
+    "description": "The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.\n\nContact Support:\n Name: Split Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:59:51.000Z",
+    "updatedAt": "2026-07-28T02:59:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-248f3ee8-ee9f-4816-be98-6124961da256"
+  },
+  "item": [
+    {
+      "name": "apiKeys",
+      "item": [
+        {
+          "name": "{apiKeyId}",
+          "item": [
+            {
+              "name": "Delete API key",
+              "id": "2f1abe17-e87c-4617-bc48-cca08787c52a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/apiKeys/:apiKeyId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "apiKeys",
+                    ":apiKeyId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "641241dc-c8c7-431c-9f42-3c073a2b037f",
+                      "key": "apiKeyId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the API key"
+                    }
+                  ]
+                },
+                "description": "Deletes an existing API key by its unique identifier."
+              },
+              "response": [
+                {
+                  "id": "65cde1e2-2dcf-42ff-81cd-48909ee40ec5",
+                  "name": "API key deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/apiKeys/:apiKeyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "apiKeys",
+                        ":apiKeyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "apiKeyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:51.000Z",
+                  "updatedAt": "2026-07-28T02:59:51.000Z",
+                  "uid": "35240-65cde1e2-2dcf-42ff-81cd-48909ee40ec5"
+                },
+                {
+                  "id": "3f96caa3-0300-4c86-8f9c-7c6b355fb176",
+                  "name": "Unauthorized - invalid or missing API key",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/apiKeys/:apiKeyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "apiKeys",
+                        ":apiKeyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "apiKeyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:51.000Z",
+                  "updatedAt": "2026-07-28T02:59:51.000Z",
+                  "uid": "35240-3f96caa3-0300-4c86-8f9c-7c6b355fb176"
+                },
+                {
+                  "id": "80862a7d-0e59-41a3-a8cc-352e8a35fcfb",
+                  "name": "API key not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/apiKeys/:apiKeyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "apiKeys",
+                        ":apiKeyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "apiKeyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:59:51.000Z",
+                  "updatedAt": "2026-07-28T02:59:51.000Z",
+                  "uid": "35240-80862a7d-0e59-41a3-a8cc-352e8a35fcfb"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:51.000Z",
+              "updatedAt": "2026-07-28T02:59:51.000Z",
+              "uid": "35240-2f1abe17-e87c-4617-bc48-cca08787c52a"
+            }
+          ],
+          "id": "7bc9dc06-1430-4333-9894-795fd35a8eb5",
+          "createdAt": "2026-07-28T02:59:51.000Z",
+          "updatedAt": "2026-07-28T02:59:51.000Z",
+          "uid": "35240-7bc9dc06-1430-4333-9894-795fd35a8eb5"
+        },
+        {
+          "name": "Create API key",
+          "id": "648b3d6c-bb3c-40c8-b473-983babdf636f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"apiKeyType\": \"server-side\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"workspaceId\": \"<string>\",\n  \"environmentIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/apiKeys",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "apiKeys"
+              ]
+            },
+            "description": "Creates a new API key with specified roles and scope. API keys can be scoped to specific environments, a workspace, or the entire account."
+          },
+          "response": [
+            {
+              "id": "8891e47b-518c-4814-a23b-a880b8285703",
+              "name": "API key created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"apiKeyType\": \"server-side\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"workspaceId\": \"<string>\",\n  \"environmentIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/apiKeys",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "apiKeys"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"apiKeyType\": \"admin\",\n  \"key\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<long>\"\n}",
+              "createdAt": "2026-07-28T02:59:51.000Z",
+              "updatedAt": "2026-07-28T02:59:51.000Z",
+              "uid": "35240-8891e47b-518c-4814-a23b-a880b8285703"
+            },
+            {
+              "id": "72126d43-37e1-4bce-9203-41047d77f775",
+              "name": "Invalid request body",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"apiKeyType\": \"server-side\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"workspaceId\": \"<string>\",\n  \"environmentIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/apiKeys",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "apiKeys"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:59:51.000Z",
+              "updatedAt": "2026-07-28T02:59:51.000Z",
+              "uid": "35240-72126d43-37e1-4bce-9203-41047d77f775"
+            },
+            {
+              "id": "ec0ea449-aaa4-472a-9d0a-0c54d21929de",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"apiKeyType\": \"server-side\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"workspaceId\": \"<string>\",\n  \"environmentIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/apiKeys",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "apiKeys"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:59:51.000Z",
+              "updatedAt": "2026-07-28T02:59:51.000Z",
+              "uid": "35240-ec0ea449-aaa4-472a-9d0a-0c54d21929de"
+            }
+          ],
+          "createdAt": "2026-07-28T02:59:51.000Z",
+          "updatedAt": "2026-07-28T02:59:51.000Z",
+          "uid": "35240-648b3d6c-bb3c-40c8-b473-983babdf636f"
+        }
+      ],
+      "id": "30dcbbd0-efde-44c4-9673-ff477a8f8166",
+      "createdAt": "2026-07-28T02:59:51.000Z",
+      "updatedAt": "2026-07-28T02:59:51.000Z",
+      "uid": "35240-30dcbbd0-efde-44c4-9673-ff477a8f8166"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.split.io/internal/api/v2"
+    }
+  ]
+}

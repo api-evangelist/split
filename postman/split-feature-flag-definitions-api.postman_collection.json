@@ -1,0 +1,1837 @@
+{
+  "info": {
+    "_postman_id": "300d4871-87e9-4a36-98d5-b559475c0ba0",
+    "name": "Split Admin Feature Flag Definitions API",
+    "description": "The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.\n\nContact Support:\n Name: Split Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:59:57.000Z",
+    "updatedAt": "2026-07-28T02:59:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-300d4871-87e9-4a36-98d5-b559475c0ba0"
+  },
+  "item": [
+    {
+      "name": "splits",
+      "item": [
+        {
+          "name": "ws",
+          "item": [
+            {
+              "name": "{workspaceId}",
+              "item": [
+                {
+                  "name": "{featureFlagName}",
+                  "item": [
+                    {
+                      "name": "environments",
+                      "item": [
+                        {
+                          "name": "{environmentId}",
+                          "item": [
+                            {
+                              "name": "kill",
+                              "item": [
+                                {
+                                  "name": "Kill feature flag in environment",
+                                  "id": "75d25937-0664-4ca3-b58c-6563e8920354",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "PUT",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId/kill",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId",
+                                        "kill"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "d0eadac4-536d-45f7-a325-72e2ae3eaa81",
+                                          "key": "workspaceId",
+                                          "value": "<string>",
+                                          "description": "(Required) The unique identifier of the workspace"
+                                        },
+                                        {
+                                          "id": "a0d7ee90-6457-443c-89fb-030ed5a5de26",
+                                          "key": "featureFlagName",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the feature flag"
+                                        },
+                                        {
+                                          "id": "21b791dc-504c-4137-9008-bbb387742932",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) The unique identifier or name of the environment"
+                                        }
+                                      ]
+                                    },
+                                    "description": "Kills a feature flag in the specified environment, forcing all evaluations to return the default treatment. This is used as an emergency shut-off mechanism."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "a5339763-1893-43da-a803-51109cf48c8f",
+                                      "name": "Feature flag killed successfully",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId/kill",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "splits",
+                                            "ws",
+                                            ":workspaceId",
+                                            ":featureFlagName",
+                                            "environments",
+                                            ":environmentId",
+                                            "kill"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workspaceId"
+                                            },
+                                            {
+                                              "key": "featureFlagName"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:59:57.000Z",
+                                      "updatedAt": "2026-07-28T02:59:57.000Z",
+                                      "uid": "35240-a5339763-1893-43da-a803-51109cf48c8f"
+                                    },
+                                    {
+                                      "id": "ad199568-9638-4767-a145-09fef8c28efb",
+                                      "name": "Unauthorized - invalid or missing API key",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId/kill",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "splits",
+                                            "ws",
+                                            ":workspaceId",
+                                            ":featureFlagName",
+                                            "environments",
+                                            ":environmentId",
+                                            "kill"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workspaceId"
+                                            },
+                                            {
+                                              "key": "featureFlagName"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:59:57.000Z",
+                                      "updatedAt": "2026-07-28T02:59:57.000Z",
+                                      "uid": "35240-ad199568-9638-4767-a145-09fef8c28efb"
+                                    },
+                                    {
+                                      "id": "e2f790d4-06c5-4f0c-b718-9261c4be5801",
+                                      "name": "Workspace, feature flag, or environment not found",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId/kill",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "splits",
+                                            "ws",
+                                            ":workspaceId",
+                                            ":featureFlagName",
+                                            "environments",
+                                            ":environmentId",
+                                            "kill"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workspaceId"
+                                            },
+                                            {
+                                              "key": "featureFlagName"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:59:57.000Z",
+                                      "updatedAt": "2026-07-28T02:59:57.000Z",
+                                      "uid": "35240-e2f790d4-06c5-4f0c-b718-9261c4be5801"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-75d25937-0664-4ca3-b58c-6563e8920354"
+                                }
+                              ],
+                              "id": "c8613096-9cbf-42c6-822c-3c1d1f0a92ce",
+                              "createdAt": "2026-07-28T02:59:57.000Z",
+                              "updatedAt": "2026-07-28T02:59:57.000Z",
+                              "uid": "35240-c8613096-9cbf-42c6-822c-3c1d1f0a92ce"
+                            },
+                            {
+                              "name": "restore",
+                              "item": [
+                                {
+                                  "name": "Restore feature flag in environment",
+                                  "id": "4361ca32-165c-4e42-9ef2-5b8747e7de4a",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "PUT",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId/restore",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId",
+                                        "restore"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "9a0213e5-a563-4441-ae79-13d45594d609",
+                                          "key": "workspaceId",
+                                          "value": "<string>",
+                                          "description": "(Required) The unique identifier of the workspace"
+                                        },
+                                        {
+                                          "id": "eb1eeaea-85e9-420a-8af5-0691a0f5214a",
+                                          "key": "featureFlagName",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the feature flag"
+                                        },
+                                        {
+                                          "id": "a8b485cc-1c31-48de-8f2e-9f064bb0119f",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) The unique identifier or name of the environment"
+                                        }
+                                      ]
+                                    },
+                                    "description": "Restores a previously killed feature flag in the specified environment, resuming normal treatment evaluation based on targeting rules."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "7686f211-637b-403a-b4ec-1a286e8b0011",
+                                      "name": "Feature flag restored successfully",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId/restore",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "splits",
+                                            "ws",
+                                            ":workspaceId",
+                                            ":featureFlagName",
+                                            "environments",
+                                            ":environmentId",
+                                            "restore"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workspaceId"
+                                            },
+                                            {
+                                              "key": "featureFlagName"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:59:57.000Z",
+                                      "updatedAt": "2026-07-28T02:59:57.000Z",
+                                      "uid": "35240-7686f211-637b-403a-b4ec-1a286e8b0011"
+                                    },
+                                    {
+                                      "id": "21daf6b0-9762-47d3-8e79-24f7cb35f863",
+                                      "name": "Unauthorized - invalid or missing API key",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId/restore",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "splits",
+                                            "ws",
+                                            ":workspaceId",
+                                            ":featureFlagName",
+                                            "environments",
+                                            ":environmentId",
+                                            "restore"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workspaceId"
+                                            },
+                                            {
+                                              "key": "featureFlagName"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:59:57.000Z",
+                                      "updatedAt": "2026-07-28T02:59:57.000Z",
+                                      "uid": "35240-21daf6b0-9762-47d3-8e79-24f7cb35f863"
+                                    },
+                                    {
+                                      "id": "b45d3738-006e-41b6-8aa0-021080fb7b6a",
+                                      "name": "Workspace, feature flag, or environment not found",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId/restore",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "splits",
+                                            "ws",
+                                            ":workspaceId",
+                                            ":featureFlagName",
+                                            "environments",
+                                            ":environmentId",
+                                            "restore"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workspaceId"
+                                            },
+                                            {
+                                              "key": "featureFlagName"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:59:57.000Z",
+                                      "updatedAt": "2026-07-28T02:59:57.000Z",
+                                      "uid": "35240-b45d3738-006e-41b6-8aa0-021080fb7b6a"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-4361ca32-165c-4e42-9ef2-5b8747e7de4a"
+                                }
+                              ],
+                              "id": "03ded195-b9eb-48b4-9570-9cd3f573d34b",
+                              "createdAt": "2026-07-28T02:59:57.000Z",
+                              "updatedAt": "2026-07-28T02:59:57.000Z",
+                              "uid": "35240-03ded195-b9eb-48b4-9570-9cd3f573d34b"
+                            },
+                            {
+                              "name": "Get feature flag definition in environment",
+                              "id": "91f8b39d-5dd6-4e66-9c8e-c5a3af0c84d0",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "splits",
+                                    "ws",
+                                    ":workspaceId",
+                                    ":featureFlagName",
+                                    "environments",
+                                    ":environmentId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "004e4037-0218-4321-b30b-0e0607739180",
+                                      "key": "workspaceId",
+                                      "value": "<string>",
+                                      "description": "(Required) The unique identifier of the workspace"
+                                    },
+                                    {
+                                      "id": "56d09922-4547-4e92-b18f-10e2a2bd99df",
+                                      "key": "featureFlagName",
+                                      "value": "<string>",
+                                      "description": "(Required) The name of the feature flag"
+                                    },
+                                    {
+                                      "id": "d834360e-9ce5-4bfd-8a48-3716745f374c",
+                                      "key": "environmentId",
+                                      "value": "<string>",
+                                      "description": "(Required) The unique identifier or name of the environment"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves the full definition of a feature flag in a specific environment, including treatments, targeting rules, default treatment, percentage rollout configuration, and kill status."
+                              },
+                              "response": [
+                                {
+                                  "id": "70281d14-9255-49ea-8dda-0c32f015c4cf",
+                                  "name": "Successful response containing the feature flag definition",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"name\": \"<string>\",\n  \"environment\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"trafficType\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"killed\": \"<boolean>\",\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"DEPENDS_ON\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"BETWEEN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"EQUAL_TO_BOOLEAN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_LIST_STRING\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\",\n  \"lastModified\": \"<long>\",\n  \"creationTime\": \"<long>\"\n}",
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-70281d14-9255-49ea-8dda-0c32f015c4cf"
+                                },
+                                {
+                                  "id": "cb3be084-f467-4edd-8556-891f10285a74",
+                                  "name": "Unauthorized - invalid or missing API key",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-cb3be084-f467-4edd-8556-891f10285a74"
+                                },
+                                {
+                                  "id": "0298b36e-c589-4fde-80f2-a33e2a7c27af",
+                                  "name": "Workspace, feature flag, or environment not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-0298b36e-c589-4fde-80f2-a33e2a7c27af"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:59:57.000Z",
+                              "updatedAt": "2026-07-28T02:59:57.000Z",
+                              "uid": "35240-91f8b39d-5dd6-4e66-9c8e-c5a3af0c84d0"
+                            },
+                            {
+                              "name": "Create feature flag definition in environment",
+                              "id": "c4e6c137-41b6-437d-92b5-7dec0ac09ce9",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"CONTAINS_ANY_OF_SET\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"BETWEEN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"GREATER_THAN_OR_EQUAL_TO\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"EQUAL_TO_BOOLEAN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "splits",
+                                    "ws",
+                                    ":workspaceId",
+                                    ":featureFlagName",
+                                    "environments",
+                                    ":environmentId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "ba474b6b-845c-4db3-81b4-85e2d3250fa6",
+                                      "key": "workspaceId",
+                                      "value": "<string>",
+                                      "description": "(Required) The unique identifier of the workspace"
+                                    },
+                                    {
+                                      "id": "45dcb835-d18d-427d-86e8-ceb4f9a8b33e",
+                                      "key": "featureFlagName",
+                                      "value": "<string>",
+                                      "description": "(Required) The name of the feature flag"
+                                    },
+                                    {
+                                      "id": "b32c6597-017b-470c-81e6-f6f9a6ec140e",
+                                      "key": "environmentId",
+                                      "value": "<string>",
+                                      "description": "(Required) The unique identifier or name of the environment"
+                                    }
+                                  ]
+                                },
+                                "description": "Creates a new definition for an existing feature flag in the specified environment. This activates the flag in that environment with the provided targeting rules and treatments."
+                              },
+                              "response": [
+                                {
+                                  "id": "e5dfc879-a9af-45ed-952f-0a7554b3a7f9",
+                                  "name": "Feature flag definition created successfully",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"CONTAINS_ANY_OF_SET\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"BETWEEN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"GREATER_THAN_OR_EQUAL_TO\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"EQUAL_TO_BOOLEAN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"name\": \"<string>\",\n  \"environment\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"trafficType\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"killed\": \"<boolean>\",\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"DEPENDS_ON\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"BETWEEN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"EQUAL_TO_BOOLEAN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_LIST_STRING\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\",\n  \"lastModified\": \"<long>\",\n  \"creationTime\": \"<long>\"\n}",
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-e5dfc879-a9af-45ed-952f-0a7554b3a7f9"
+                                },
+                                {
+                                  "id": "8574dc36-be74-43cc-bb69-f07b8b185444",
+                                  "name": "Invalid request body",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"CONTAINS_ANY_OF_SET\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"BETWEEN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"GREATER_THAN_OR_EQUAL_TO\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"EQUAL_TO_BOOLEAN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-8574dc36-be74-43cc-bb69-f07b8b185444"
+                                },
+                                {
+                                  "id": "76977867-b544-4911-a5e2-3b6df9781d3f",
+                                  "name": "Unauthorized - invalid or missing API key",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"CONTAINS_ANY_OF_SET\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"BETWEEN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"GREATER_THAN_OR_EQUAL_TO\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"EQUAL_TO_BOOLEAN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-76977867-b544-4911-a5e2-3b6df9781d3f"
+                                },
+                                {
+                                  "id": "fdbc3ce4-0374-49b4-b4b8-331134eaf1d7",
+                                  "name": "Workspace, feature flag, or environment not found",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"CONTAINS_ANY_OF_SET\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"BETWEEN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"GREATER_THAN_OR_EQUAL_TO\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"EQUAL_TO_BOOLEAN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-fdbc3ce4-0374-49b4-b4b8-331134eaf1d7"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:59:57.000Z",
+                              "updatedAt": "2026-07-28T02:59:57.000Z",
+                              "uid": "35240-c4e6c137-41b6-437d-92b5-7dec0ac09ce9"
+                            },
+                            {
+                              "name": "Update feature flag definition in environment",
+                              "id": "461fc79d-2265-4d1c-a435-88329f9a978b",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"EQUAL_TO\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_SEGMENT\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"CONTAINS_STRING\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_SEGMENT\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\",\n  \"comment\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "splits",
+                                    "ws",
+                                    ":workspaceId",
+                                    ":featureFlagName",
+                                    "environments",
+                                    ":environmentId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "9d0967fa-2163-4dc4-b604-6c4a1da4cd46",
+                                      "key": "workspaceId",
+                                      "value": "<string>",
+                                      "description": "(Required) The unique identifier of the workspace"
+                                    },
+                                    {
+                                      "id": "216004e4-8528-43de-b73a-b5337dc9415f",
+                                      "key": "featureFlagName",
+                                      "value": "<string>",
+                                      "description": "(Required) The name of the feature flag"
+                                    },
+                                    {
+                                      "id": "2518bf6d-0729-4258-bddf-b60d2054a1a1",
+                                      "key": "environmentId",
+                                      "value": "<string>",
+                                      "description": "(Required) The unique identifier or name of the environment"
+                                    }
+                                  ]
+                                },
+                                "description": "Partially updates the definition of a feature flag in a specific environment. Supports modifying targeting rules, percentage rollouts, default treatment, and kill status."
+                              },
+                              "response": [
+                                {
+                                  "id": "acfb74b6-0f0b-4e82-99bc-0fa74bffce79",
+                                  "name": "Feature flag definition updated successfully",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"EQUAL_TO\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_SEGMENT\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"CONTAINS_STRING\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_SEGMENT\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\",\n  \"comment\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"name\": \"<string>\",\n  \"environment\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"trafficType\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"killed\": \"<boolean>\",\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"DEPENDS_ON\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"BETWEEN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"EQUAL_TO_BOOLEAN\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_LIST_STRING\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\",\n  \"lastModified\": \"<long>\",\n  \"creationTime\": \"<long>\"\n}",
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-acfb74b6-0f0b-4e82-99bc-0fa74bffce79"
+                                },
+                                {
+                                  "id": "6a69175c-bf34-4829-a693-3c7864fb693c",
+                                  "name": "Invalid request body",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"EQUAL_TO\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_SEGMENT\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"CONTAINS_STRING\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_SEGMENT\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\",\n  \"comment\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-6a69175c-bf34-4829-a693-3c7864fb693c"
+                                },
+                                {
+                                  "id": "c2b7db0b-614f-41bf-9b28-3db0612918be",
+                                  "name": "Unauthorized - invalid or missing API key",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"EQUAL_TO\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_SEGMENT\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"CONTAINS_STRING\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_SEGMENT\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\",\n  \"comment\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-c2b7db0b-614f-41bf-9b28-3db0612918be"
+                                },
+                                {
+                                  "id": "fd716d52-50c5-42d4-bb86-1b5bae1af740",
+                                  "name": "Workspace, feature flag, or environment not found",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"treatments\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"configurations\": \"<string>\"\n    }\n  ],\n  \"defaultTreatment\": \"<string>\",\n  \"baselineTreatment\": \"<string>\",\n  \"rules\": [\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"EQUAL_TO\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_SEGMENT\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"condition\": {\n        \"combiner\": \"AND\",\n        \"matchers\": [\n          {\n            \"type\": \"CONTAINS_STRING\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          },\n          {\n            \"type\": \"IN_SEGMENT\",\n            \"negate\": \"<boolean>\",\n            \"attribute\": \"<string>\",\n            \"strings\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"number\": \"<integer>\",\n            \"date\": \"<long>\",\n            \"between\": {\n              \"from\": \"<integer>\",\n              \"to\": \"<integer>\"\n            },\n            \"depends\": {\n              \"splitName\": \"<string>\",\n              \"treatments\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        ]\n      },\n      \"buckets\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"defaultRule\": [\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"treatment\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"trafficAllocation\": \"<integer>\",\n  \"comment\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-fd716d52-50c5-42d4-bb86-1b5bae1af740"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:59:57.000Z",
+                              "updatedAt": "2026-07-28T02:59:57.000Z",
+                              "uid": "35240-461fc79d-2265-4d1c-a435-88329f9a978b"
+                            },
+                            {
+                              "name": "Delete feature flag definition in environment",
+                              "id": "8f448b49-16c9-41e3-8e57-dbd7b92c0bca",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "splits",
+                                    "ws",
+                                    ":workspaceId",
+                                    ":featureFlagName",
+                                    "environments",
+                                    ":environmentId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "c718f4f3-46f1-496e-a134-8505b8e84fb5",
+                                      "key": "workspaceId",
+                                      "value": "<string>",
+                                      "description": "(Required) The unique identifier of the workspace"
+                                    },
+                                    {
+                                      "id": "61b46a09-5a6b-46bb-8588-4a46394a252c",
+                                      "key": "featureFlagName",
+                                      "value": "<string>",
+                                      "description": "(Required) The name of the feature flag"
+                                    },
+                                    {
+                                      "id": "bf843017-0db7-4363-8ce1-bab5e2a3f15f",
+                                      "key": "environmentId",
+                                      "value": "<string>",
+                                      "description": "(Required) The unique identifier or name of the environment"
+                                    }
+                                  ]
+                                },
+                                "description": "Removes the definition of a feature flag from the specified environment, effectively deactivating the flag in that environment."
+                              },
+                              "response": [
+                                {
+                                  "id": "a8cd7943-42cb-471a-b750-393d3bd3cd00",
+                                  "name": "Feature flag definition deleted successfully",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-a8cd7943-42cb-471a-b750-393d3bd3cd00"
+                                },
+                                {
+                                  "id": "70dd4bbe-4283-4b4f-a3b7-19618912907d",
+                                  "name": "Unauthorized - invalid or missing API key",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-70dd4bbe-4283-4b4f-a3b7-19618912907d"
+                                },
+                                {
+                                  "id": "f2d9dcf3-1604-4aa2-bf19-68cfcd2c5cc2",
+                                  "name": "Workspace, feature flag, or environment not found",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/splits/ws/:workspaceId/:featureFlagName/environments/:environmentId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "splits",
+                                        "ws",
+                                        ":workspaceId",
+                                        ":featureFlagName",
+                                        "environments",
+                                        ":environmentId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspaceId"
+                                        },
+                                        {
+                                          "key": "featureFlagName"
+                                        },
+                                        {
+                                          "key": "environmentId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:59:57.000Z",
+                                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                                  "uid": "35240-f2d9dcf3-1604-4aa2-bf19-68cfcd2c5cc2"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:59:57.000Z",
+                              "updatedAt": "2026-07-28T02:59:57.000Z",
+                              "uid": "35240-8f448b49-16c9-41e3-8e57-dbd7b92c0bca"
+                            }
+                          ],
+                          "id": "11a36303-8ba9-4ec0-9216-b11bf6da7547",
+                          "createdAt": "2026-07-28T02:59:57.000Z",
+                          "updatedAt": "2026-07-28T02:59:57.000Z",
+                          "uid": "35240-11a36303-8ba9-4ec0-9216-b11bf6da7547"
+                        }
+                      ],
+                      "id": "80dddd8e-970b-4aaf-b5b6-4e0ddb67f695",
+                      "createdAt": "2026-07-28T02:59:57.000Z",
+                      "updatedAt": "2026-07-28T02:59:57.000Z",
+                      "uid": "35240-80dddd8e-970b-4aaf-b5b6-4e0ddb67f695"
+                    }
+                  ],
+                  "id": "c9bb0e39-2f19-4863-83b2-66d559ceb6c3",
+                  "createdAt": "2026-07-28T02:59:57.000Z",
+                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                  "uid": "35240-c9bb0e39-2f19-4863-83b2-66d559ceb6c3"
+                },
+                {
+                  "name": "environments",
+                  "item": [
+                    {
+                      "name": "{environmentId}",
+                      "item": [
+                        {
+                          "name": "List feature flag definitions in environment",
+                          "id": "241f865c-c436-4c65-b38a-4ef428a2138c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/splits/ws/:workspaceId/environments/:environmentId?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "splits",
+                                "ws",
+                                ":workspaceId",
+                                "environments",
+                                ":environmentId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results to return per page",
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "description": "Number of results to skip for pagination",
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4da01ed0-9b11-4baa-a972-254e4e96a0ae",
+                                  "key": "workspaceId",
+                                  "value": "<string>",
+                                  "description": "(Required) The unique identifier of the workspace"
+                                },
+                                {
+                                  "id": "d261746a-a437-489f-b46e-f58ad160b83c",
+                                  "key": "environmentId",
+                                  "value": "<string>",
+                                  "description": "(Required) The unique identifier or name of the environment"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves all feature flag definitions within the specified environment and workspace. Returns the targeting configuration, treatments, and status of each flag."
+                          },
+                          "response": [
+                            {
+                              "id": "873283a7-52be-4769-880b-32d36119a058",
+                              "name": "Successful response containing list of feature flag definitions",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/splits/ws/:workspaceId/environments/:environmentId?limit=20&offset=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "splits",
+                                    "ws",
+                                    ":workspaceId",
+                                    "environments",
+                                    ":environmentId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of results to return per page",
+                                      "key": "limit",
+                                      "value": "20"
+                                    },
+                                    {
+                                      "description": "Number of results to skip for pagination",
+                                      "key": "offset",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspaceId"
+                                    },
+                                    {
+                                      "key": "environmentId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"objects\": [\n    {\n      \"name\": \"<string>\",\n      \"environment\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"trafficType\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"killed\": \"<boolean>\",\n      \"treatments\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"configurations\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"configurations\": \"<string>\"\n        }\n      ],\n      \"defaultTreatment\": \"<string>\",\n      \"baselineTreatment\": \"<string>\",\n      \"rules\": [\n        {\n          \"condition\": {\n            \"combiner\": \"AND\",\n            \"matchers\": [\n              {\n                \"type\": \"IN_LIST_STRING\",\n                \"negate\": \"<boolean>\",\n                \"attribute\": \"<string>\",\n                \"strings\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"number\": \"<integer>\",\n                \"date\": \"<long>\",\n                \"between\": {\n                  \"from\": \"<integer>\",\n                  \"to\": \"<integer>\"\n                },\n                \"depends\": {\n                  \"splitName\": \"<string>\",\n                  \"treatments\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ]\n                }\n              },\n              {\n                \"type\": \"GREATER_THAN_OR_EQUAL_TO\",\n                \"negate\": \"<boolean>\",\n                \"attribute\": \"<string>\",\n                \"strings\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"number\": \"<integer>\",\n                \"date\": \"<long>\",\n                \"between\": {\n                  \"from\": \"<integer>\",\n                  \"to\": \"<integer>\"\n                },\n                \"depends\": {\n                  \"splitName\": \"<string>\",\n                  \"treatments\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ]\n                }\n              }\n            ]\n          },\n          \"buckets\": [\n            {\n              \"treatment\": \"<string>\",\n              \"size\": \"<integer>\"\n            },\n            {\n              \"treatment\": \"<string>\",\n              \"size\": \"<integer>\"\n            }\n          ]\n        },\n        {\n          \"condition\": {\n            \"combiner\": \"AND\",\n            \"matchers\": [\n              {\n                \"type\": \"IN_SEGMENT\",\n                \"negate\": \"<boolean>\",\n                \"attribute\": \"<string>\",\n                \"strings\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"number\": \"<integer>\",\n                \"date\": \"<long>\",\n                \"between\": {\n                  \"from\": \"<integer>\",\n                  \"to\": \"<integer>\"\n                },\n                \"depends\": {\n                  \"splitName\": \"<string>\",\n                  \"treatments\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ]\n                }\n              },\n              {\n                \"type\": \"LESS_THAN_OR_EQUAL_TO\",\n                \"negate\": \"<boolean>\",\n                \"attribute\": \"<string>\",\n                \"strings\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"number\": \"<integer>\",\n                \"date\": \"<long>\",\n                \"between\": {\n                  \"from\": \"<integer>\",\n                  \"to\": \"<integer>\"\n                },\n                \"depends\": {\n                  \"splitName\": \"<string>\",\n                  \"treatments\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ]\n                }\n              }\n            ]\n          },\n          \"buckets\": [\n            {\n              \"treatment\": \"<string>\",\n              \"size\": \"<integer>\"\n            },\n            {\n              \"treatment\": \"<string>\",\n              \"size\": \"<integer>\"\n            }\n          ]\n        }\n      ],\n      \"defaultRule\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ],\n      \"trafficAllocation\": \"<integer>\",\n      \"lastModified\": \"<long>\",\n      \"creationTime\": \"<long>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"environment\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"trafficType\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"killed\": \"<boolean>\",\n      \"treatments\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"configurations\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"configurations\": \"<string>\"\n        }\n      ],\n      \"defaultTreatment\": \"<string>\",\n      \"baselineTreatment\": \"<string>\",\n      \"rules\": [\n        {\n          \"condition\": {\n            \"combiner\": \"AND\",\n            \"matchers\": [\n              {\n                \"type\": \"WHITELIST\",\n                \"negate\": \"<boolean>\",\n                \"attribute\": \"<string>\",\n                \"strings\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"number\": \"<integer>\",\n                \"date\": \"<long>\",\n                \"between\": {\n                  \"from\": \"<integer>\",\n                  \"to\": \"<integer>\"\n                },\n                \"depends\": {\n                  \"splitName\": \"<string>\",\n                  \"treatments\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ]\n                }\n              },\n              {\n                \"type\": \"BETWEEN\",\n                \"negate\": \"<boolean>\",\n                \"attribute\": \"<string>\",\n                \"strings\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"number\": \"<integer>\",\n                \"date\": \"<long>\",\n                \"between\": {\n                  \"from\": \"<integer>\",\n                  \"to\": \"<integer>\"\n                },\n                \"depends\": {\n                  \"splitName\": \"<string>\",\n                  \"treatments\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ]\n                }\n              }\n            ]\n          },\n          \"buckets\": [\n            {\n              \"treatment\": \"<string>\",\n              \"size\": \"<integer>\"\n            },\n            {\n              \"treatment\": \"<string>\",\n              \"size\": \"<integer>\"\n            }\n          ]\n        },\n        {\n          \"condition\": {\n            \"combiner\": \"AND\",\n            \"matchers\": [\n              {\n                \"type\": \"MATCHES_STRING\",\n                \"negate\": \"<boolean>\",\n                \"attribute\": \"<string>\",\n                \"strings\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"number\": \"<integer>\",\n                \"date\": \"<long>\",\n                \"between\": {\n                  \"from\": \"<integer>\",\n                  \"to\": \"<integer>\"\n                },\n                \"depends\": {\n                  \"splitName\": \"<string>\",\n                  \"treatments\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ]\n                }\n              },\n              {\n                \"type\": \"ALL_KEYS\",\n                \"negate\": \"<boolean>\",\n                \"attribute\": \"<string>\",\n                \"strings\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"number\": \"<integer>\",\n                \"date\": \"<long>\",\n                \"between\": {\n                  \"from\": \"<integer>\",\n                  \"to\": \"<integer>\"\n                },\n                \"depends\": {\n                  \"splitName\": \"<string>\",\n                  \"treatments\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ]\n                }\n              }\n            ]\n          },\n          \"buckets\": [\n            {\n              \"treatment\": \"<string>\",\n              \"size\": \"<integer>\"\n            },\n            {\n              \"treatment\": \"<string>\",\n              \"size\": \"<integer>\"\n            }\n          ]\n        }\n      ],\n      \"defaultRule\": [\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        },\n        {\n          \"treatment\": \"<string>\",\n          \"size\": \"<integer>\"\n        }\n      ],\n      \"trafficAllocation\": \"<integer>\",\n      \"lastModified\": \"<long>\",\n      \"creationTime\": \"<long>\"\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"totalCount\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T02:59:57.000Z",
+                              "updatedAt": "2026-07-28T02:59:57.000Z",
+                              "uid": "35240-873283a7-52be-4769-880b-32d36119a058"
+                            },
+                            {
+                              "id": "4c45c276-d9e5-4fd2-ac55-2970f1b6ad81",
+                              "name": "Unauthorized - invalid or missing API key",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/splits/ws/:workspaceId/environments/:environmentId?limit=20&offset=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "splits",
+                                    "ws",
+                                    ":workspaceId",
+                                    "environments",
+                                    ":environmentId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of results to return per page",
+                                      "key": "limit",
+                                      "value": "20"
+                                    },
+                                    {
+                                      "description": "Number of results to skip for pagination",
+                                      "key": "offset",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspaceId"
+                                    },
+                                    {
+                                      "key": "environmentId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:59:57.000Z",
+                              "updatedAt": "2026-07-28T02:59:57.000Z",
+                              "uid": "35240-4c45c276-d9e5-4fd2-ac55-2970f1b6ad81"
+                            },
+                            {
+                              "id": "3c021a18-8ab7-4a34-bba9-360a71a5dffa",
+                              "name": "Workspace or environment not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/splits/ws/:workspaceId/environments/:environmentId?limit=20&offset=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "splits",
+                                    "ws",
+                                    ":workspaceId",
+                                    "environments",
+                                    ":environmentId"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of results to return per page",
+                                      "key": "limit",
+                                      "value": "20"
+                                    },
+                                    {
+                                      "description": "Number of results to skip for pagination",
+                                      "key": "offset",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspaceId"
+                                    },
+                                    {
+                                      "key": "environmentId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:59:57.000Z",
+                              "updatedAt": "2026-07-28T02:59:57.000Z",
+                              "uid": "35240-3c021a18-8ab7-4a34-bba9-360a71a5dffa"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:59:57.000Z",
+                          "updatedAt": "2026-07-28T02:59:57.000Z",
+                          "uid": "35240-241f865c-c436-4c65-b38a-4ef428a2138c"
+                        }
+                      ],
+                      "id": "91b26112-dd3e-48a4-8328-024668c5b499",
+                      "createdAt": "2026-07-28T02:59:57.000Z",
+                      "updatedAt": "2026-07-28T02:59:57.000Z",
+                      "uid": "35240-91b26112-dd3e-48a4-8328-024668c5b499"
+                    }
+                  ],
+                  "id": "274e00ce-fb87-4783-a3da-595be2380246",
+                  "createdAt": "2026-07-28T02:59:57.000Z",
+                  "updatedAt": "2026-07-28T02:59:57.000Z",
+                  "uid": "35240-274e00ce-fb87-4783-a3da-595be2380246"
+                }
+              ],
+              "id": "73f201f9-4ccc-4307-a38b-7884c7816712",
+              "createdAt": "2026-07-28T02:59:57.000Z",
+              "updatedAt": "2026-07-28T02:59:57.000Z",
+              "uid": "35240-73f201f9-4ccc-4307-a38b-7884c7816712"
+            }
+          ],
+          "id": "d5e776aa-65d7-4059-88a6-29aa00b13e45",
+          "createdAt": "2026-07-28T02:59:57.000Z",
+          "updatedAt": "2026-07-28T02:59:57.000Z",
+          "uid": "35240-d5e776aa-65d7-4059-88a6-29aa00b13e45"
+        }
+      ],
+      "id": "c67c0b8e-6c3b-47e3-ac91-add3d9b81f41",
+      "createdAt": "2026-07-28T02:59:57.000Z",
+      "updatedAt": "2026-07-28T02:59:57.000Z",
+      "uid": "35240-c67c0b8e-6c3b-47e3-ac91-add3d9b81f41"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.split.io/internal/api/v2"
+    }
+  ]
+}

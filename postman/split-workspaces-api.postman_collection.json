@@ -1,0 +1,226 @@
+{
+  "info": {
+    "_postman_id": "66e887f9-6bfc-4e69-9bef-f656acc25ef9",
+    "name": "Split Admin Workspaces API",
+    "description": "The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.\n\nContact Support:\n Name: Split Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:00:38.000Z",
+    "updatedAt": "2026-07-28T03:00:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-66e887f9-6bfc-4e69-9bef-f656acc25ef9"
+  },
+  "item": [
+    {
+      "name": "workspaces",
+      "item": [
+        {
+          "name": "List workspaces",
+          "id": "b504a0bf-8bb0-4933-a911-b1b4b046ce8f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/workspaces?limit=20&offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "workspaces"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return per page",
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "description": "Number of results to skip for pagination",
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Retrieves all workspaces (projects) accessible to the authenticated Admin API key. Workspaces allow you to separately manage feature flags and experiments across different business units or applications."
+          },
+          "response": [
+            {
+              "id": "ebbaa876-b72a-4148-980c-0239282d296c",
+              "name": "Successful response containing list of workspaces",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/workspaces?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "workspaces"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return per page",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"requiresTitleAndComments\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"requiresTitleAndComments\": \"<boolean>\"\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"totalCount\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T03:00:39.000Z",
+              "updatedAt": "2026-07-28T03:00:39.000Z",
+              "uid": "35240-ebbaa876-b72a-4148-980c-0239282d296c"
+            },
+            {
+              "id": "863bdf7a-c30b-4f84-a09b-17734a31e58b",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/workspaces?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "workspaces"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return per page",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:00:39.000Z",
+              "updatedAt": "2026-07-28T03:00:39.000Z",
+              "uid": "35240-863bdf7a-c30b-4f84-a09b-17734a31e58b"
+            },
+            {
+              "id": "20f56e51-4d0b-4eac-9ade-f329995006c6",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/workspaces?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "workspaces"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return per page",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:00:39.000Z",
+              "updatedAt": "2026-07-28T03:00:39.000Z",
+              "uid": "35240-20f56e51-4d0b-4eac-9ade-f329995006c6"
+            }
+          ],
+          "createdAt": "2026-07-28T03:00:39.000Z",
+          "updatedAt": "2026-07-28T03:00:39.000Z",
+          "uid": "35240-b504a0bf-8bb0-4933-a911-b1b4b046ce8f"
+        }
+      ],
+      "id": "6b822e7a-bcad-4874-a750-49391424fef0",
+      "createdAt": "2026-07-28T03:00:39.000Z",
+      "updatedAt": "2026-07-28T03:00:39.000Z",
+      "uid": "35240-6b822e7a-bcad-4874-a750-49391424fef0"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.split.io/internal/api/v2"
+    }
+  ]
+}

@@ -1,0 +1,667 @@
+{
+  "info": {
+    "_postman_id": "b22024d7-6ea6-457a-aacc-2083aa00b4ab",
+    "name": "Split Admin Groups API",
+    "description": "The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.\n\nContact Support:\n Name: Split Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:59:59.000Z",
+    "updatedAt": "2026-07-28T02:59:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b22024d7-6ea6-457a-aacc-2083aa00b4ab"
+  },
+  "item": [
+    {
+      "name": "groups",
+      "item": [
+        {
+          "name": "{groupId}",
+          "item": [
+            {
+              "name": "Get group",
+              "id": "5acb036a-8834-413d-bef3-7693ec9b6415",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups/:groupId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups",
+                    ":groupId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8d3b2064-ad84-4b8a-b1e1-f0ebf8d332df",
+                      "key": "groupId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the group"
+                    }
+                  ]
+                },
+                "description": "Retrieves a single group by its unique identifier."
+              },
+              "response": [
+                {
+                  "id": "cdd7e2fc-4035-470d-8b03-0075f31b2420",
+                  "name": "Successful response containing the group",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:00:00.000Z",
+                  "updatedAt": "2026-07-28T03:00:00.000Z",
+                  "uid": "35240-cdd7e2fc-4035-470d-8b03-0075f31b2420"
+                },
+                {
+                  "id": "4fbe5e9e-e350-42e5-8787-bf4f1270c706",
+                  "name": "Unauthorized - invalid or missing API key",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:00:00.000Z",
+                  "updatedAt": "2026-07-28T03:00:00.000Z",
+                  "uid": "35240-4fbe5e9e-e350-42e5-8787-bf4f1270c706"
+                },
+                {
+                  "id": "5c67333c-bb27-4f17-94ed-1394823b68a8",
+                  "name": "Group not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:00:00.000Z",
+                  "updatedAt": "2026-07-28T03:00:00.000Z",
+                  "uid": "35240-5c67333c-bb27-4f17-94ed-1394823b68a8"
+                }
+              ],
+              "createdAt": "2026-07-28T03:00:00.000Z",
+              "updatedAt": "2026-07-28T03:00:00.000Z",
+              "uid": "35240-5acb036a-8834-413d-bef3-7693ec9b6415"
+            },
+            {
+              "name": "Delete group",
+              "id": "1d189214-4975-493f-8f3d-cc31cd96b70b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/groups/:groupId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups",
+                    ":groupId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4d17e9e1-6044-4e08-9d98-0bf4967090a4",
+                      "key": "groupId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the group"
+                    }
+                  ]
+                },
+                "description": "Deletes a group from the account."
+              },
+              "response": [
+                {
+                  "id": "76e8ae2e-f722-4b3f-b9a9-7cb24888b935",
+                  "name": "Group deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:00:00.000Z",
+                  "updatedAt": "2026-07-28T03:00:00.000Z",
+                  "uid": "35240-76e8ae2e-f722-4b3f-b9a9-7cb24888b935"
+                },
+                {
+                  "id": "8998b4c7-7c8c-4725-8eb1-31945ea89088",
+                  "name": "Unauthorized - invalid or missing API key",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:00:00.000Z",
+                  "updatedAt": "2026-07-28T03:00:00.000Z",
+                  "uid": "35240-8998b4c7-7c8c-4725-8eb1-31945ea89088"
+                },
+                {
+                  "id": "589e2a7b-67c0-4b82-89fb-5aa6572ca634",
+                  "name": "Group not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:00:00.000Z",
+                  "updatedAt": "2026-07-28T03:00:00.000Z",
+                  "uid": "35240-589e2a7b-67c0-4b82-89fb-5aa6572ca634"
+                }
+              ],
+              "createdAt": "2026-07-28T03:00:00.000Z",
+              "updatedAt": "2026-07-28T03:00:00.000Z",
+              "uid": "35240-1d189214-4975-493f-8f3d-cc31cd96b70b"
+            }
+          ],
+          "id": "ec169d80-b00f-4ecf-9d2b-c69be784b3de",
+          "createdAt": "2026-07-28T03:00:00.000Z",
+          "updatedAt": "2026-07-28T03:00:00.000Z",
+          "uid": "35240-ec169d80-b00f-4ecf-9d2b-c69be784b3de"
+        },
+        {
+          "name": "List groups",
+          "id": "75896620-480d-4751-9555-25cc46e96761",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/groups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "groups"
+              ]
+            },
+            "description": "Retrieves all active groups in the account. Groups are used to organize users and assign permissions collectively."
+          },
+          "response": [
+            {
+              "id": "46f8287a-06a1-487d-9630-caddefcb9afc",
+              "name": "Successful response containing list of groups",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-07-28T03:00:00.000Z",
+              "updatedAt": "2026-07-28T03:00:00.000Z",
+              "uid": "35240-46f8287a-06a1-487d-9630-caddefcb9afc"
+            },
+            {
+              "id": "0ce98239-c725-45f0-b65f-6a1aa43c43c8",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:00:00.000Z",
+              "updatedAt": "2026-07-28T03:00:00.000Z",
+              "uid": "35240-0ce98239-c725-45f0-b65f-6a1aa43c43c8"
+            }
+          ],
+          "createdAt": "2026-07-28T03:00:00.000Z",
+          "updatedAt": "2026-07-28T03:00:00.000Z",
+          "uid": "35240-75896620-480d-4751-9555-25cc46e96761"
+        },
+        {
+          "name": "Create group",
+          "id": "3fd4b229-dad5-45ef-ab6f-8cc115b83412",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/groups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "groups"
+              ]
+            },
+            "description": "Creates a new group with a name and description. Group names are unique within an account."
+          },
+          "response": [
+            {
+              "id": "80e9e190-00a3-4caf-bb5f-388f57c32e85",
+              "name": "Group created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:00:00.000Z",
+              "updatedAt": "2026-07-28T03:00:00.000Z",
+              "uid": "35240-80e9e190-00a3-4caf-bb5f-388f57c32e85"
+            },
+            {
+              "id": "a9fa7e36-56da-432c-a75b-967c882ddb1b",
+              "name": "Invalid request body or group name already exists",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:00:00.000Z",
+              "updatedAt": "2026-07-28T03:00:00.000Z",
+              "uid": "35240-a9fa7e36-56da-432c-a75b-967c882ddb1b"
+            },
+            {
+              "id": "1b52da7a-5261-4432-9a44-f42c220b6d26",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:00:00.000Z",
+              "updatedAt": "2026-07-28T03:00:00.000Z",
+              "uid": "35240-1b52da7a-5261-4432-9a44-f42c220b6d26"
+            }
+          ],
+          "createdAt": "2026-07-28T03:00:00.000Z",
+          "updatedAt": "2026-07-28T03:00:00.000Z",
+          "uid": "35240-3fd4b229-dad5-45ef-ab6f-8cc115b83412"
+        }
+      ],
+      "id": "097016de-22ba-4eb4-a180-6c02e236cd1b",
+      "createdAt": "2026-07-28T03:00:00.000Z",
+      "updatedAt": "2026-07-28T03:00:00.000Z",
+      "uid": "35240-097016de-22ba-4eb4-a180-6c02e236cd1b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.split.io/internal/api/v2"
+    }
+  ]
+}

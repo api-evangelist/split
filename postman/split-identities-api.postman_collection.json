@@ -1,0 +1,1152 @@
+{
+  "info": {
+    "_postman_id": "c8baf279-1085-443b-9b00-b04df1c3e233",
+    "name": "Split Admin Identities API",
+    "description": "The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.\n\nContact Support:\n Name: Split Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:00:26.000Z",
+    "updatedAt": "2026-07-28T03:00:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c8baf279-1085-443b-9b00-b04df1c3e233"
+  },
+  "item": [
+    {
+      "name": "segments",
+      "item": [
+        {
+          "name": "{environmentId}",
+          "item": [
+            {
+              "name": "{segmentName}",
+              "item": [
+                {
+                  "name": "upload",
+                  "item": [
+                    {
+                      "name": "Update segment keys via CSV",
+                      "id": "1887b979-4242-435f-92d0-701b8f4e6807",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "text/csv"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<string>"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/upload",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "segments",
+                            ":environmentId",
+                            ":segmentName",
+                            "upload"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d187177b-b25c-4f47-b37c-0d7f7f7bfd5b",
+                              "key": "environmentId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the environment"
+                            },
+                            {
+                              "id": "b47773bf-9b18-462d-afc2-de45f3343ea5",
+                              "key": "segmentName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the segment"
+                            }
+                          ]
+                        },
+                        "description": "Replaces all keys in a segment by uploading a CSV file containing the new set of identities."
+                      },
+                      "response": [
+                        {
+                          "id": "350d975e-5a04-4452-a7be-bb143e7edf0f",
+                          "name": "Segment keys updated successfully",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "text/csv"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "<string>"
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/upload",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "upload"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-350d975e-5a04-4452-a7be-bb143e7edf0f"
+                        },
+                        {
+                          "id": "0539680c-36a5-4278-8578-18080189996e",
+                          "name": "Invalid CSV format",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "text/csv"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "<string>"
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/upload",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "upload"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-0539680c-36a5-4278-8578-18080189996e"
+                        },
+                        {
+                          "id": "9fe14021-ac25-4fbe-bea1-cfa1792c9d05",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "text/csv"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "<string>"
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/upload",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "upload"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-9fe14021-ac25-4fbe-bea1-cfa1792c9d05"
+                        },
+                        {
+                          "id": "96aec568-1451-4ab0-abbf-6163308f34ff",
+                          "name": "Segment or environment not found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "text/csv"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "<string>"
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/upload",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "upload"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-96aec568-1451-4ab0-abbf-6163308f34ff"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:00:27.000Z",
+                      "updatedAt": "2026-07-28T03:00:27.000Z",
+                      "uid": "35240-1887b979-4242-435f-92d0-701b8f4e6807"
+                    }
+                  ],
+                  "id": "fe3174cd-55c1-4f0a-be77-57d8790cdb88",
+                  "createdAt": "2026-07-28T03:00:27.000Z",
+                  "updatedAt": "2026-07-28T03:00:27.000Z",
+                  "uid": "35240-fe3174cd-55c1-4f0a-be77-57d8790cdb88"
+                },
+                {
+                  "name": "keys",
+                  "item": [
+                    {
+                      "name": "List segment keys",
+                      "id": "634147b0-8be1-4a93-abf1-da36249d4fb6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "segments",
+                            ":environmentId",
+                            ":segmentName",
+                            "keys"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return per page",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "0e0643a1-a019-4cf5-ad44-9b706c421ea6",
+                              "key": "environmentId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the environment"
+                            },
+                            {
+                              "id": "88755c73-f8b7-41c4-87c5-11ad280c925e",
+                              "key": "segmentName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the segment"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves the identity keys belonging to the specified segment in the given environment."
+                      },
+                      "response": [
+                        {
+                          "id": "e404bd41-b2ce-42b9-a586-22e618f8083b",
+                          "name": "Successful response containing segment keys",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "keys"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results to return per page",
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "description": "Number of results to skip for pagination",
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"keys\": [\n    {\n      \"key\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-e404bd41-b2ce-42b9-a586-22e618f8083b"
+                        },
+                        {
+                          "id": "ab81bfb6-a9c1-49cf-a759-0347c10ebb0a",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "keys"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results to return per page",
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "description": "Number of results to skip for pagination",
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-ab81bfb6-a9c1-49cf-a759-0347c10ebb0a"
+                        },
+                        {
+                          "id": "11bdf655-3cd9-4283-9972-0f92e152ce1e",
+                          "name": "Segment or environment not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "keys"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results to return per page",
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "description": "Number of results to skip for pagination",
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-11bdf655-3cd9-4283-9972-0f92e152ce1e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:00:27.000Z",
+                      "updatedAt": "2026-07-28T03:00:27.000Z",
+                      "uid": "35240-634147b0-8be1-4a93-abf1-da36249d4fb6"
+                    },
+                    {
+                      "name": "Add keys to segment",
+                      "id": "f7eff384-ce34-46ea-b176-3f8e85d6f1eb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "segments",
+                            ":environmentId",
+                            ":segmentName",
+                            "keys"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9114f4a6-4739-462a-a862-a71019df985c",
+                              "key": "environmentId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the environment"
+                            },
+                            {
+                              "id": "e1438db2-90a2-4410-bcb0-2fd6d54e2f68",
+                              "key": "segmentName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the segment"
+                            }
+                          ]
+                        },
+                        "description": "Adds identity keys to the specified segment in the given environment."
+                      },
+                      "response": [
+                        {
+                          "id": "9c50153d-ba4e-47b6-b173-ce227a3c55d0",
+                          "name": "Keys added successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-9c50153d-ba4e-47b6-b173-ce227a3c55d0"
+                        },
+                        {
+                          "id": "0210fff1-f94e-492f-9e80-3034545373a0",
+                          "name": "Invalid request body",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-0210fff1-f94e-492f-9e80-3034545373a0"
+                        },
+                        {
+                          "id": "e37eec71-3fb9-4ee2-8dc5-5d05d0c45c37",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-e37eec71-3fb9-4ee2-8dc5-5d05d0c45c37"
+                        },
+                        {
+                          "id": "0657ab85-40de-4401-b803-fd9a12c62fe0",
+                          "name": "Segment or environment not found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-0657ab85-40de-4401-b803-fd9a12c62fe0"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:00:27.000Z",
+                      "updatedAt": "2026-07-28T03:00:27.000Z",
+                      "uid": "35240-f7eff384-ce34-46ea-b176-3f8e85d6f1eb"
+                    },
+                    {
+                      "name": "Remove keys from segment",
+                      "id": "6480b109-f5cd-4c5e-bb27-94ca91c09b01",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "segments",
+                            ":environmentId",
+                            ":segmentName",
+                            "keys"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1f9299b9-e7a8-4005-80da-b2ed6461f1ab",
+                              "key": "environmentId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the environment"
+                            },
+                            {
+                              "id": "0290cde0-6f54-4811-b26c-78c65d980442",
+                              "key": "segmentName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the segment"
+                            }
+                          ]
+                        },
+                        "description": "Removes identity keys from the specified segment in the given environment."
+                      },
+                      "response": [
+                        {
+                          "id": "12b89637-3e02-4709-8d85-42fdeaf314af",
+                          "name": "Keys removed successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-12b89637-3e02-4709-8d85-42fdeaf314af"
+                        },
+                        {
+                          "id": "c8c8ada9-159e-49f9-a935-e9a2c8457729",
+                          "name": "Invalid request body",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-c8c8ada9-159e-49f9-a935-e9a2c8457729"
+                        },
+                        {
+                          "id": "4c9df118-0b75-462c-90ce-bc5f76d7250b",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-4c9df118-0b75-462c-90ce-bc5f76d7250b"
+                        },
+                        {
+                          "id": "ada18bec-0865-46a3-b017-65e5becf7ba4",
+                          "name": "Segment or environment not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/segments/:environmentId/:segmentName/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "segments",
+                                ":environmentId",
+                                ":segmentName",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "environmentId"
+                                },
+                                {
+                                  "key": "segmentName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:00:27.000Z",
+                          "updatedAt": "2026-07-28T03:00:27.000Z",
+                          "uid": "35240-ada18bec-0865-46a3-b017-65e5becf7ba4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:00:27.000Z",
+                      "updatedAt": "2026-07-28T03:00:27.000Z",
+                      "uid": "35240-6480b109-f5cd-4c5e-bb27-94ca91c09b01"
+                    }
+                  ],
+                  "id": "51c50b02-0bfb-4ebd-8dad-c25edfff5bf4",
+                  "createdAt": "2026-07-28T03:00:27.000Z",
+                  "updatedAt": "2026-07-28T03:00:27.000Z",
+                  "uid": "35240-51c50b02-0bfb-4ebd-8dad-c25edfff5bf4"
+                }
+              ],
+              "id": "8a1d3d1f-da1c-421e-a883-f000dc7aed40",
+              "createdAt": "2026-07-28T03:00:27.000Z",
+              "updatedAt": "2026-07-28T03:00:27.000Z",
+              "uid": "35240-8a1d3d1f-da1c-421e-a883-f000dc7aed40"
+            }
+          ],
+          "id": "3f8d9e22-9d7c-4de6-b0a8-7bb6f39b9850",
+          "createdAt": "2026-07-28T03:00:27.000Z",
+          "updatedAt": "2026-07-28T03:00:27.000Z",
+          "uid": "35240-3f8d9e22-9d7c-4de6-b0a8-7bb6f39b9850"
+        }
+      ],
+      "id": "953958be-dba2-4317-882a-f1e21521da99",
+      "createdAt": "2026-07-28T03:00:27.000Z",
+      "updatedAt": "2026-07-28T03:00:27.000Z",
+      "uid": "35240-953958be-dba2-4317-882a-f1e21521da99"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.split.io/internal/api/v2"
+    }
+  ]
+}

@@ -1,0 +1,427 @@
+{
+  "info": {
+    "_postman_id": "744185ea-6fb2-41f6-8507-436fa936b0c9",
+    "name": "Split Admin Change Requests API",
+    "description": "The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.\n\nContact Support:\n Name: Split Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:59:53.000Z",
+    "updatedAt": "2026-07-28T02:59:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-744185ea-6fb2-41f6-8507-436fa936b0c9"
+  },
+  "item": [
+    {
+      "name": "changeRequests",
+      "item": [
+        {
+          "name": "{changeRequestId}",
+          "item": [
+            {
+              "name": "approve",
+              "item": [
+                {
+                  "name": "Approve change request",
+                  "id": "c4b15fb5-1e86-4c23-9f09-c3b86bfe12a5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"comment\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/changeRequests/:changeRequestId/approve",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "changeRequests",
+                        ":changeRequestId",
+                        "approve"
+                      ],
+                      "variable": [
+                        {
+                          "id": "fc6776fa-680a-4ee0-8804-1f9cc8a045ea",
+                          "key": "changeRequestId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the change request"
+                        }
+                      ]
+                    },
+                    "description": "Approves a pending change request, allowing the proposed feature flag definition changes to be applied."
+                  },
+                  "response": [
+                    {
+                      "id": "1c353b18-9f82-45af-b820-1c9c7b68bd21",
+                      "name": "Change request approved successfully",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"comment\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/changeRequests/:changeRequestId/approve",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "changeRequests",
+                            ":changeRequestId",
+                            "approve"
+                          ],
+                          "variable": [
+                            {
+                              "key": "changeRequestId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-1c353b18-9f82-45af-b820-1c9c7b68bd21"
+                    },
+                    {
+                      "id": "ca04a09f-2d36-4eda-99ea-07f7594cbb55",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"comment\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/changeRequests/:changeRequestId/approve",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "changeRequests",
+                            ":changeRequestId",
+                            "approve"
+                          ],
+                          "variable": [
+                            {
+                              "key": "changeRequestId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-ca04a09f-2d36-4eda-99ea-07f7594cbb55"
+                    },
+                    {
+                      "id": "d534e54b-3e24-42fd-befc-ab99b58e3741",
+                      "name": "Change request not found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"comment\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/changeRequests/:changeRequestId/approve",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "changeRequests",
+                            ":changeRequestId",
+                            "approve"
+                          ],
+                          "variable": [
+                            {
+                              "key": "changeRequestId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-d534e54b-3e24-42fd-befc-ab99b58e3741"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-c4b15fb5-1e86-4c23-9f09-c3b86bfe12a5"
+                }
+              ],
+              "id": "a2f9ab5b-8757-405e-9e6e-e10d001d1fb8",
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-a2f9ab5b-8757-405e-9e6e-e10d001d1fb8"
+            }
+          ],
+          "id": "c11a4bb7-bb2c-4e44-a586-be4a12d5f11c",
+          "createdAt": "2026-07-28T02:59:53.000Z",
+          "updatedAt": "2026-07-28T02:59:53.000Z",
+          "uid": "35240-c11a4bb7-bb2c-4e44-a586-be4a12d5f11c"
+        },
+        {
+          "name": "List change requests",
+          "id": "27f2c6cd-a737-4781-8f1a-c299d3f1518d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/changeRequests?limit=20&offset=0&status=CANCELLED",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "changeRequests"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return per page",
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "description": "Number of results to skip for pagination",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Filter by change request status",
+                  "key": "status",
+                  "value": "CANCELLED"
+                }
+              ]
+            },
+            "description": "Retrieves all change requests, which represent pending modifications to feature flag definitions that require approval before being applied."
+          },
+          "response": [
+            {
+              "id": "66cb0d2f-df91-41ec-b1cb-068c46b32bce",
+              "name": "Successful response containing list of change requests",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/changeRequests?limit=20&offset=0&status=CANCELLED",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "changeRequests"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return per page",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by change request status",
+                      "key": "status",
+                      "value": "CANCELLED"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"OPEN\",\n      \"title\": \"<string>\",\n      \"comment\": \"<string>\",\n      \"split\": \"<string>\",\n      \"environment\": \"<string>\",\n      \"operationType\": \"<string>\",\n      \"createdAt\": \"<long>\",\n      \"approvers\": [\n        {\n          \"id\": \"<string>\",\n          \"email\": \"<email>\",\n          \"name\": \"<string>\",\n          \"status\": \"DEACTIVATED\",\n          \"type\": \"<string>\",\n          \"groups\": [\n            {\n              \"id\": \"<string>\",\n              \"type\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"type\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"email\": \"<email>\",\n          \"name\": \"<string>\",\n          \"status\": \"DEACTIVATED\",\n          \"type\": \"<string>\",\n          \"groups\": [\n            {\n              \"id\": \"<string>\",\n              \"type\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"type\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"OPEN\",\n      \"title\": \"<string>\",\n      \"comment\": \"<string>\",\n      \"split\": \"<string>\",\n      \"environment\": \"<string>\",\n      \"operationType\": \"<string>\",\n      \"createdAt\": \"<long>\",\n      \"approvers\": [\n        {\n          \"id\": \"<string>\",\n          \"email\": \"<email>\",\n          \"name\": \"<string>\",\n          \"status\": \"ACTIVE\",\n          \"type\": \"<string>\",\n          \"groups\": [\n            {\n              \"id\": \"<string>\",\n              \"type\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"type\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"email\": \"<email>\",\n          \"name\": \"<string>\",\n          \"status\": \"DEACTIVATED\",\n          \"type\": \"<string>\",\n          \"groups\": [\n            {\n              \"id\": \"<string>\",\n              \"type\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"type\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"totalCount\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-66cb0d2f-df91-41ec-b1cb-068c46b32bce"
+            },
+            {
+              "id": "41aa2594-9e2e-4614-85b1-0aa4c3de6bdf",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/changeRequests?limit=20&offset=0&status=CANCELLED",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "changeRequests"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return per page",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by change request status",
+                      "key": "status",
+                      "value": "CANCELLED"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-41aa2594-9e2e-4614-85b1-0aa4c3de6bdf"
+            }
+          ],
+          "createdAt": "2026-07-28T02:59:53.000Z",
+          "updatedAt": "2026-07-28T02:59:53.000Z",
+          "uid": "35240-27f2c6cd-a737-4781-8f1a-c299d3f1518d"
+        }
+      ],
+      "id": "095432e0-28ce-46e3-9feb-184554d06d1d",
+      "createdAt": "2026-07-28T02:59:53.000Z",
+      "updatedAt": "2026-07-28T02:59:53.000Z",
+      "uid": "35240-095432e0-28ce-46e3-9feb-184554d06d1d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.split.io/internal/api/v2"
+    }
+  ]
+}

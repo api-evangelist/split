@@ -1,0 +1,334 @@
+{
+  "info": {
+    "_postman_id": "da1d1469-5603-448c-a1d8-fcc80893d8d7",
+    "name": "Split Admin API",
+    "description": "The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.\n\nContact Support:\n Name: Split Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:59:48.000Z",
+    "updatedAt": "2026-07-28T02:59:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-da1d1469-5603-448c-a1d8-fcc80893d8d7"
+  },
+  "item": [
+    {
+      "name": "admin",
+      "item": [
+        {
+          "name": "ping",
+          "item": [
+            {
+              "name": "Ping service",
+              "id": "286a1a72-cc93-45f7-8657-e5b79fff2ebc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/ping",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "ping"
+                  ]
+                },
+                "description": "Checks whether the Split Evaluator service is running. If the service is running, it responds with the text pong and HTTP status code 200."
+              },
+              "response": [
+                {
+                  "id": "d04a18b5-d4f5-4b17-b013-43dd20db671c",
+                  "name": "Service is running",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/ping",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "ping"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-07-28T02:59:49.000Z",
+                  "updatedAt": "2026-07-28T02:59:49.000Z",
+                  "uid": "35240-d04a18b5-d4f5-4b17-b013-43dd20db671c"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:49.000Z",
+              "updatedAt": "2026-07-28T02:59:49.000Z",
+              "uid": "35240-286a1a72-cc93-45f7-8657-e5b79fff2ebc"
+            }
+          ],
+          "id": "126e2a32-b30a-4fc8-b785-c1ba0cee05ee",
+          "createdAt": "2026-07-28T02:59:49.000Z",
+          "updatedAt": "2026-07-28T02:59:49.000Z",
+          "uid": "35240-126e2a32-b30a-4fc8-b785-c1ba0cee05ee"
+        },
+        {
+          "name": "version",
+          "item": [
+            {
+              "name": "Get service version",
+              "id": "a65a16ce-2532-4bca-9ff0-3ca48ba3f05c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/version",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "version"
+                  ]
+                },
+                "description": "Returns the current version of the Split Evaluator service."
+              },
+              "response": [
+                {
+                  "id": "f0658794-8a0b-43a8-a4a0-b6eb981eb20d",
+                  "name": "Service version information",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/version",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "version"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"version\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:49.000Z",
+                  "updatedAt": "2026-07-28T02:59:49.000Z",
+                  "uid": "35240-f0658794-8a0b-43a8-a4a0-b6eb981eb20d"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:49.000Z",
+              "updatedAt": "2026-07-28T02:59:49.000Z",
+              "uid": "35240-a65a16ce-2532-4bca-9ff0-3ca48ba3f05c"
+            }
+          ],
+          "id": "3abaf0fd-b6fd-47a2-9572-a4afcffead92",
+          "createdAt": "2026-07-28T02:59:49.000Z",
+          "updatedAt": "2026-07-28T02:59:49.000Z",
+          "uid": "35240-3abaf0fd-b6fd-47a2-9572-a4afcffead92"
+        },
+        {
+          "name": "healthcheck",
+          "item": [
+            {
+              "name": "Health check",
+              "id": "994c4a06-1cf6-4193-b218-fca89c83483e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/healthcheck",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "healthcheck"
+                  ]
+                },
+                "description": "Checks that the Split Evaluator is connected to Split servers and ready to process evaluation requests. Returns 200 if everything is working as expected or 500 if there is an issue, along with a message explaining the status."
+              },
+              "response": [
+                {
+                  "id": "0d055f76-6258-4f70-b75f-9f90391d2eb4",
+                  "name": "Service is healthy and ready for evaluations",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/healthcheck",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "healthcheck"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"error\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:49.000Z",
+                  "updatedAt": "2026-07-28T02:59:49.000Z",
+                  "uid": "35240-0d055f76-6258-4f70-b75f-9f90391d2eb4"
+                },
+                {
+                  "id": "315e2ef4-df03-420e-b6b3-accf8f6c194c",
+                  "name": "Service is unhealthy",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/healthcheck",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "healthcheck"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"error\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:49.000Z",
+                  "updatedAt": "2026-07-28T02:59:49.000Z",
+                  "uid": "35240-315e2ef4-df03-420e-b6b3-accf8f6c194c"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:49.000Z",
+              "updatedAt": "2026-07-28T02:59:49.000Z",
+              "uid": "35240-994c4a06-1cf6-4193-b218-fca89c83483e"
+            }
+          ],
+          "id": "d349061d-bc99-4d2b-a448-728fbf446c1e",
+          "createdAt": "2026-07-28T02:59:49.000Z",
+          "updatedAt": "2026-07-28T02:59:49.000Z",
+          "uid": "35240-d349061d-bc99-4d2b-a448-728fbf446c1e"
+        }
+      ],
+      "id": "78a6cfa7-85da-48a8-a6a7-7d852c8e61d3",
+      "createdAt": "2026-07-28T02:59:49.000Z",
+      "updatedAt": "2026-07-28T02:59:49.000Z",
+      "uid": "35240-78a6cfa7-85da-48a8-a6a7-7d852c8e61d3"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.split.io/internal/api/v2"
+    }
+  ]
+}

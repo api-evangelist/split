@@ -1,0 +1,1183 @@
+{
+  "info": {
+    "_postman_id": "caca3a25-04b2-48ca-ac39-184497aff857",
+    "name": "Split Admin Environments API",
+    "description": "The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.\n\nContact Support:\n Name: Split Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:59:54.000Z",
+    "updatedAt": "2026-07-28T02:59:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-caca3a25-04b2-48ca-ac39-184497aff857"
+  },
+  "item": [
+    {
+      "name": "environments",
+      "item": [
+        {
+          "name": "ws",
+          "item": [
+            {
+              "name": "{workspaceId}",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "Get environment",
+                      "id": "60059c6b-119d-4e27-97ef-f6a182ad0917",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            "ws",
+                            ":workspaceId",
+                            ":environmentId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "7a6cd74e-ac02-4d90-8421-aa83abe34bea",
+                              "key": "workspaceId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the workspace"
+                            },
+                            {
+                              "id": "18c502a8-69ea-4852-98a2-44dd26808cfe",
+                              "key": "environmentId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier or name of the environment"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a single environment by its identifier within the specified workspace."
+                      },
+                      "response": [
+                        {
+                          "id": "da96e4e7-7f99-42b3-8e0d-efb4012ab297",
+                          "name": "Successful response containing the environment",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                "ws",
+                                ":workspaceId",
+                                ":environmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "environmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-da96e4e7-7f99-42b3-8e0d-efb4012ab297"
+                        },
+                        {
+                          "id": "4747fa7e-1931-419b-baa1-5ab9f958c817",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                "ws",
+                                ":workspaceId",
+                                ":environmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "environmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-4747fa7e-1931-419b-baa1-5ab9f958c817"
+                        },
+                        {
+                          "id": "c7a3fb39-9af5-438c-b4bd-487847a1dc43",
+                          "name": "Environment or workspace not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                "ws",
+                                ":workspaceId",
+                                ":environmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "environmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-c7a3fb39-9af5-438c-b4bd-487847a1dc43"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-60059c6b-119d-4e27-97ef-f6a182ad0917"
+                    },
+                    {
+                      "name": "Update environment",
+                      "id": "c0bd756f-fbff-4461-b5f5-159eacb32f01",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            "ws",
+                            ":workspaceId",
+                            ":environmentId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "99247a5e-e037-4309-8863-67fd642d9531",
+                              "key": "workspaceId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the workspace"
+                            },
+                            {
+                              "id": "ca5f294a-1614-4a75-8e0c-406d6e1cf9f0",
+                              "key": "environmentId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier or name of the environment"
+                            }
+                          ]
+                        },
+                        "description": "Updates an existing environment within the specified workspace."
+                      },
+                      "response": [
+                        {
+                          "id": "6617650c-7ecb-4566-9a55-1d747aa9faec",
+                          "name": "Environment updated successfully",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                "ws",
+                                ":workspaceId",
+                                ":environmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "environmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-6617650c-7ecb-4566-9a55-1d747aa9faec"
+                        },
+                        {
+                          "id": "adf238e1-3b30-4ec6-b4a4-5fe5b6c4da3e",
+                          "name": "Invalid request body",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                "ws",
+                                ":workspaceId",
+                                ":environmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "environmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-adf238e1-3b30-4ec6-b4a4-5fe5b6c4da3e"
+                        },
+                        {
+                          "id": "ffac0736-6009-4db3-b405-df0d2245c0e0",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                "ws",
+                                ":workspaceId",
+                                ":environmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "environmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-ffac0736-6009-4db3-b405-df0d2245c0e0"
+                        },
+                        {
+                          "id": "529e592a-f64e-4094-a556-c4e0cb0af0b7",
+                          "name": "Environment or workspace not found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                "ws",
+                                ":workspaceId",
+                                ":environmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "environmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-529e592a-f64e-4094-a556-c4e0cb0af0b7"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-c0bd756f-fbff-4461-b5f5-159eacb32f01"
+                    },
+                    {
+                      "name": "Delete environment",
+                      "id": "567efbf2-8d24-4fb9-a4bc-0672697277b6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            "ws",
+                            ":workspaceId",
+                            ":environmentId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0b39360c-b635-40b3-859d-4a65c08e3c79",
+                              "key": "workspaceId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the workspace"
+                            },
+                            {
+                              "id": "5e003cab-146c-4207-a0b6-862d895653f2",
+                              "key": "environmentId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier or name of the environment"
+                            }
+                          ]
+                        },
+                        "description": "Deletes an environment from the specified workspace."
+                      },
+                      "response": [
+                        {
+                          "id": "67636510-f4fa-4a9c-b9a2-c563d07a4c75",
+                          "name": "Environment deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                "ws",
+                                ":workspaceId",
+                                ":environmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "environmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-67636510-f4fa-4a9c-b9a2-c563d07a4c75"
+                        },
+                        {
+                          "id": "24d222fb-b2f9-40c3-a24b-3e4a368a98fc",
+                          "name": "Unauthorized - invalid or missing API key",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                "ws",
+                                ":workspaceId",
+                                ":environmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "environmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-24d222fb-b2f9-40c3-a24b-3e4a368a98fc"
+                        },
+                        {
+                          "id": "2758db37-1737-457d-91ab-f9704e42e8d1",
+                          "name": "Environment or workspace not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/ws/:workspaceId/:environmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                "ws",
+                                ":workspaceId",
+                                ":environmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspaceId"
+                                },
+                                {
+                                  "key": "environmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-2758db37-1737-457d-91ab-f9704e42e8d1"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-567efbf2-8d24-4fb9-a4bc-0672697277b6"
+                    }
+                  ],
+                  "id": "5074ab85-03a1-4d96-9360-824d4ccafaea",
+                  "createdAt": "2026-07-28T02:59:54.000Z",
+                  "updatedAt": "2026-07-28T02:59:54.000Z",
+                  "uid": "35240-5074ab85-03a1-4d96-9360-824d4ccafaea"
+                },
+                {
+                  "name": "List environments",
+                  "id": "b6bc52fd-4690-4aad-bd2a-39523e8149a1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/environments/ws/:workspaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "environments",
+                        "ws",
+                        ":workspaceId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5814f085-7308-4481-b5fc-182029a7379e",
+                          "key": "workspaceId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the workspace"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves all environments within the specified workspace. Environments represent deployment stages such as staging and production where feature flag definitions can be configured independently."
+                  },
+                  "response": [
+                    {
+                      "id": "a15a67b7-e0ae-4cf5-b174-a897025a7db2",
+                      "name": "Successful response containing list of environments",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/ws/:workspaceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            "ws",
+                            ":workspaceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workspaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"production\": \"<boolean>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"production\": \"<boolean>\"\n  }\n]",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-a15a67b7-e0ae-4cf5-b174-a897025a7db2"
+                    },
+                    {
+                      "id": "3895e98c-bae6-46ab-807b-562ef380f253",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/ws/:workspaceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            "ws",
+                            ":workspaceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workspaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-3895e98c-bae6-46ab-807b-562ef380f253"
+                    },
+                    {
+                      "id": "9f198a60-5b46-41bb-862e-c1121bcc6e9a",
+                      "name": "Workspace not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/ws/:workspaceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            "ws",
+                            ":workspaceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workspaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-9f198a60-5b46-41bb-862e-c1121bcc6e9a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:59:54.000Z",
+                  "updatedAt": "2026-07-28T02:59:54.000Z",
+                  "uid": "35240-b6bc52fd-4690-4aad-bd2a-39523e8149a1"
+                },
+                {
+                  "name": "Create environment",
+                  "id": "cb19ac1d-f7dd-4b33-9bf4-9b3f07ada326",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/environments/ws/:workspaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "environments",
+                        "ws",
+                        ":workspaceId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "94c2eb1b-2642-458a-8795-e03b1961367e",
+                          "key": "workspaceId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the workspace"
+                        }
+                      ]
+                    },
+                    "description": "Creates a new environment within the specified workspace."
+                  },
+                  "response": [
+                    {
+                      "id": "671025cf-e315-47e7-b78b-bcd247621cb3",
+                      "name": "Environment created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/ws/:workspaceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            "ws",
+                            ":workspaceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workspaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-671025cf-e315-47e7-b78b-bcd247621cb3"
+                    },
+                    {
+                      "id": "6b335318-7c04-4d27-891e-815ab46d2226",
+                      "name": "Invalid request body",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/ws/:workspaceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            "ws",
+                            ":workspaceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workspaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-6b335318-7c04-4d27-891e-815ab46d2226"
+                    },
+                    {
+                      "id": "40fca124-0780-4bbd-9644-357dd795c646",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/ws/:workspaceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            "ws",
+                            ":workspaceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workspaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-40fca124-0780-4bbd-9644-357dd795c646"
+                    },
+                    {
+                      "id": "f66dce67-acfc-4adf-b707-fd029743b5fc",
+                      "name": "Workspace not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"production\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/ws/:workspaceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            "ws",
+                            ":workspaceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workspaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-f66dce67-acfc-4adf-b707-fd029743b5fc"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:59:54.000Z",
+                  "updatedAt": "2026-07-28T02:59:54.000Z",
+                  "uid": "35240-cb19ac1d-f7dd-4b33-9bf4-9b3f07ada326"
+                }
+              ],
+              "id": "e854f789-0f46-4f08-92a5-e16fee6c366e",
+              "createdAt": "2026-07-28T02:59:54.000Z",
+              "updatedAt": "2026-07-28T02:59:54.000Z",
+              "uid": "35240-e854f789-0f46-4f08-92a5-e16fee6c366e"
+            }
+          ],
+          "id": "8d00548b-6d4f-4833-97b9-a48e41380808",
+          "createdAt": "2026-07-28T02:59:54.000Z",
+          "updatedAt": "2026-07-28T02:59:54.000Z",
+          "uid": "35240-8d00548b-6d4f-4833-97b9-a48e41380808"
+        }
+      ],
+      "id": "a7550a09-90b1-4aca-9152-02344b6ac041",
+      "createdAt": "2026-07-28T02:59:54.000Z",
+      "updatedAt": "2026-07-28T02:59:54.000Z",
+      "uid": "35240-a7550a09-90b1-4aca-9152-02344b6ac041"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.split.io/internal/api/v2"
+    }
+  ]
+}
