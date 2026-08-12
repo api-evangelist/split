@@ -405,8 +405,6 @@ common:
     url: json-ld/split-context.jsonld
   - type: SpectralRules
     url: rules/split-rules.yml
-  - type: Capabilities
-    url: capabilities/feature-flag-management.yaml
   - type: Vocabulary
     url: vocabulary/split-vocabulary.yml
   - type: Features
