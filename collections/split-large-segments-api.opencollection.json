@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Split Admin Large Segments API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Large Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List large segments in environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/large-segments/ws/:workspaceId/environments/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves all large segments configured in the specified environment within the given workspace."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

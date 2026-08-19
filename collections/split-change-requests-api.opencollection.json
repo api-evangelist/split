@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Split Admin Change Requests API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Change Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List change requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/changeRequests",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by change request status"
+              }
+            ]
+          },
+          "docs": "Retrieves all change requests, which represent pending modifications to feature flag definitions that require approval before being applied."
+        },
+        {
+          "info": {
+            "name": "Approve change request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.split.io/internal/api/v2/changeRequests/:changeRequestId/approve",
+            "params": [
+              {
+                "name": "changeRequestId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the change request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approves a pending change request, allowing the proposed feature flag definition changes to be applied."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

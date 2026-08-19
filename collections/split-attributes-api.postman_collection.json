@@ -1,0 +1,273 @@
+{
+  "item": [
+    {
+      "id": "3b756aa4-c8a6-47fb-8032-174628e155e9",
+      "name": "Attributes",
+      "description": {
+        "content": "Manage attributes used in targeting rules for feature flag definitions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0a87e86c-1f42-40da-8b9f-5672a740231a",
+          "name": "List attributes",
+          "request": {
+            "name": "List attributes",
+            "description": {
+              "content": "Retrieves all attributes defined for a given traffic type within the specified workspace. Attributes are used in targeting rules for feature flag definitions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "schema",
+                "ws",
+                ":workspaceId",
+                "trafficTypes",
+                ":trafficTypeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) The unique identifier of the workspace"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trafficTypeId",
+                  "description": "(Required) The unique identifier of the traffic type"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "563ea1b4-acbf-4b2b-86e6-a4c5142eb476",
+              "name": "Successful response containing list of attributes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "schema",
+                    "ws",
+                    ":workspaceId",
+                    "trafficTypes",
+                    ":trafficTypeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The unique identifier of the workspace"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trafficTypeId",
+                      "description": "(Required) The unique identifier of the traffic type"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"trafficTypeId\": \"string\",\n    \"displayName\": \"string\",\n    \"dataType\": \"DATETIME\",\n    \"description\": \"string\",\n    \"isSearchable\": true\n  },\n  {\n    \"id\": \"string\",\n    \"trafficTypeId\": \"string\",\n    \"displayName\": \"string\",\n    \"dataType\": \"NUMBER\",\n    \"description\": \"string\",\n    \"isSearchable\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5d046a9-9dd4-40e1-873e-115a53588f12",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "schema",
+                    "ws",
+                    ":workspaceId",
+                    "trafficTypes",
+                    ":trafficTypeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The unique identifier of the workspace"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trafficTypeId",
+                      "description": "(Required) The unique identifier of the traffic type"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8fbbfbf7-e1a8-427f-8211-144f4fbf60c5",
+              "name": "Workspace or traffic type not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "schema",
+                    "ws",
+                    ":workspaceId",
+                    "trafficTypes",
+                    ":trafficTypeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The unique identifier of the workspace"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trafficTypeId",
+                      "description": "(Required) The unique identifier of the traffic type"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.split.io/internal/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "aec10586-5dbf-4969-bdc8-0ff32ba2f7dd",
+    "name": "Split Admin Attributes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.\n\nContact Support:\n Name: Split Support",
+      "type": "text/plain"
+    }
+  }
+}

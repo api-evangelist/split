@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Split Admin Attributes API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/schema/ws/:workspaceId/trafficTypes/:trafficTypeId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "trafficTypeId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the traffic type"
+              }
+            ]
+          },
+          "docs": "Retrieves all attributes defined for a given traffic type within the specified workspace. Attributes are used in targeting rules for feature flag definitions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

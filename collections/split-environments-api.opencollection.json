@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Split Admin Environments API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Environments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/environments/ws/:workspaceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              }
+            ]
+          },
+          "docs": "Retrieves all environments within the specified workspace. Environments represent deployment stages such as staging and production where feature flag definitions can be configured independently."
+        },
+        {
+          "info": {
+            "name": "Create environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.split.io/internal/api/v2/environments/ws/:workspaceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new environment within the specified workspace."
+        },
+        {
+          "info": {
+            "name": "Get environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/environments/ws/:workspaceId/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              }
+            ]
+          },
+          "docs": "Retrieves a single environment by its identifier within the specified workspace."
+        },
+        {
+          "info": {
+            "name": "Update environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.split.io/internal/api/v2/environments/ws/:workspaceId/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing environment within the specified workspace."
+        },
+        {
+          "info": {
+            "name": "Delete environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.split.io/internal/api/v2/environments/ws/:workspaceId/:environmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workspace"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier or name of the environment"
+              }
+            ]
+          },
+          "docs": "Deletes an environment from the specified workspace."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

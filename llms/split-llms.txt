@@ -1,0 +1,131 @@
+# Split docs Documentation
+
+> Documentation for Split docs
+
+## Guides
+- [Split documentation](https://docs.split.io/docs/split-documentation-links.md)
+
+## API Reference
+- [Introduction](https://docs.split.io/reference/introduction.md)
+- [Authentication](https://docs.split.io/reference/authentication.md): Learn how to authenticate your requests to the Split API using API keys, personal access tokens (PATs), or service account tokens (SATs).
+- [Error Codes](https://docs.split.io/reference/error-codes.md)
+- [Rate Limiting](https://docs.split.io/reference/rate-limiting.md)
+- [Postman](https://docs.split.io/reference/postman.md)
+- [API Keys Overview](https://docs.split.io/reference/api-keys-overview.md)
+- [Create an API key](https://docs.split.io/reference/create-an-api-key.md): Create and add an API key to your account.
+- [Delete an API key](https://docs.split.io/reference/delete-an-api-key.md): Delete an API key from your account.
+- [Attributes Overview](https://docs.split.io/reference/attributes-overview.md)
+- [Get Attributes](https://docs.split.io/reference/get-attributes.md): Get all attributes for a traffic type. Non-paginated operation is deprecated, prefer setting the paginate flag to true. When using pagination, the default markerLimit is 50, maximum markerLimit is 200. <br /><br />Pagination examples:<ul><li>Page Forward: Send Next Marker into After Marker parameter</li><li>Reload Page (when paging forward): Send Previous Marker into After Marker parameter</li><li>Page Backwards: Send Previous Marker into Before Marker parameter</li><li>Reload Page (when paging backwards): Send Next Marker into Before Marker parameter</li></ul>
+- [Save Attribute](https://docs.split.io/reference/save-attribute.md): Save an attribute for a traffic type ID. The attribute is created if it does not exist, and is overwritten completely with the provided attribute object if it does. This endpoint also accepts a PUT that behaves identically to the POST, but the POST is preferred. Use the PATCH endpoint for partial updates. The attribute ID must start with a letter followed by a combination of dashes (-), underscores (_), letters (a-z A-Z), or numbers (0-9).
+- [Bulk Upload Attribute via CSV](https://docs.split.io/reference/bulk-save-attribute-via-csv.md): Bulk upload attributes. If an attribute already exists, it is replaced. This endpoints accepts a CSV form upload. If there is an issue parsing any of the attributes, an error is thrown and attributes with issues are sent back with error messages. The maximum size for a CSV file is 1MB, and CSVs must be encoded as UTF-8.  The attribute ID must start with a letter followed by a combination of dashes (-), underscores (_), letters (a-z A-Z), or numbers (0-9).
+- [Bulk Upload Attribute via JSON](https://docs.split.io/reference/bulk-save-attribute-via-json.md): Bulk upload attributes. If an attribute already exists, it is replaced. This endpoint accepts a JSON upload. If there is an issue parsing any of the attributes, an error is thrown and attributes with issues are sent back with error messages. The attribute ID must start with a letter followed by a combination of dashes (-), underscores (_), letters (a-z A-Z), or numbers (0-9).
+- [Update Attribute](https://docs.split.io/reference/update-attribute.md): Partial update of an attribute. Any fields not sent in the body cause no changes, fields sent as null in the body remove them from the attribute.
+- [Delete Attribute](https://docs.split.io/reference/delete-attribute.md): Delete an attribute schema by its traffic type and attribute ID. This removes any stored data for that attribute from all Identities (keys) in the Split application. The change to Identity keys is processed asynchronously for traffic types with many Identities it may take up to a minute. However, the Attribute delete occurs synchronously, and if the http call returns as a success (2XX), then the attribute is successfully deleted.
+- [Change Requests Overview](https://docs.split.io/reference/change-request-overview.md)
+- [List Change Requests](https://docs.split.io/reference/list-change-requests.md): Retrieves change requests scoped to a specific workspace and environment. GET endpoints like List Change Requests do not accept a JSON body—all inputs are provided using query parameters.
+- [Get Change Request](https://docs.split.io/reference/get-change-request.md): Retrieves an open change request given an ID. GET endpoints like Get Change Request do not accept a JSON body—all inputs are provided using query parameters.
+- [Submit Change Request](https://docs.split.io/reference/create-change-request.md): Submit a change to a feature flag or segment for approval. No query parameters are required.
+- [Update Change Request Status](https://docs.split.io/reference/withdraw-change-request-1.md): Update the status of an open change request given an ID.
+- [Environments Overview](https://docs.split.io/reference/environments-overview.md)
+- [Get Environments](https://docs.split.io/reference/get-environments.md): Get a list of FME environments.
+- [Create Environments](https://docs.split.io/reference/create-environment.md): Creates an FME environment. Provide environment details in the JSON body; no query parameters are required.
+- [Update Environments](https://docs.split.io/reference/update-environment.md): Updates an FME environment.
+- [Delete Environments](https://docs.split.io/reference/delete-environment.md): Deletes an FME environment
+- [Events Overview](https://docs.split.io/reference/events-overview.md)
+- [Create an Event](https://docs.split.io/reference/create-event.md): Provide the event details in the JSON body; no query parameters are required.
+- [Create Events](https://docs.split.io/reference/create-events.md): Provide the event details in the JSON body; no query parameters are required.
+- [Feature Flag Overview](https://docs.split.io/reference/feature-flag-overview.md)
+- [Feature flag](https://docs.split.io/reference/feature-flag.md)
+- [Feature flag definition](https://docs.split.io/reference/feature-flag-definition.md)
+- [Treatment](https://docs.split.io/reference/treatment.md)
+- [Rule](https://docs.split.io/reference/rule.md)
+- [Condition](https://docs.split.io/reference/condition-1.md)
+- [Bucket](https://docs.split.io/reference/bucket.md)
+- [Matcher](https://docs.split.io/reference/matcher.md)
+- [Matcher type](https://docs.split.io/reference/matcher-type.md)
+- [Default rule](https://docs.split.io/reference/default-rule.md)
+- [Create feature flag](https://docs.split.io/reference/create-feature-flag.md): Create a feature flag in your account, given a traffic type. This API does not configure the flag in any FME environment. Provide the feature flag details in the JSON body; path parameters specify the project and traffic type.
+- [Update feature flag](https://docs.split.io/reference/update-feature-flag.md): Allows updating the feature flag description, tags, and rollout status.
+- [Update feature flag description](https://docs.split.io/reference/update-feature-flag-description.md): Changes the description of a particular feature flag. Provide the updated feature flag description in the JSON body; path parameters specify the project and feature flag name.
+- [Create feature flag definition in environment](https://docs.split.io/reference/create-feature-flag-definition-in-environment.md): Configures a feature flag definition for a specific environment. Provide the feature flag configuration in the JSON body; path parameters specify the project, feature flag, and environment.
+- [Partial update feature flag definition in environment](https://docs.split.io/reference/partial-update-feature-flag-definition-in-environment.md): Updates a feature flag definition for a specific FME environment.
+- [Full update feature flag definition in environment](https://docs.split.io/reference/full-update-feature-flag-definition-in-environment.md): Performs a full update of a feature flag definition for a specific FME environment. Provide the complete feature flag definition in the JSON body; path parameters specify the project, feature flag, and environment.
+- [Get feature flag](https://docs.split.io/reference/get-feature-flag.md): Retrieves the feature flag.
+- [List feature flags](https://docs.split.io/reference/list-feature-flags.md): Retrieves the feature flags for an account.
+- [List feature flag definitions in environment](https://docs.split.io/reference/list-feature-flag-definitions-in-environment.md): Retrieves the feature flag definitions given an FME environment.
+- [Get feature flag definition in environment](https://docs.split.io/reference/get-feature-flag-definition-in-environment.md): Retrieves a feature flag definition given the name and the FME environment.
+- [Kill feature flag in environment](https://docs.split.io/reference/kill-feature-flag-in-environment.md): Kills a feature in a specific FME environment. Include the feature flag kill details in the JSON body; path parameters specify the project, feature flag, and environment.
+- [Kill feature flag in environment (alternate)](https://docs.split.io/reference/kill-feature-flag-in-environment-alternate.md): Kills a feature in a specific FME environment using POST. Only use this API if PUT does not work. Include the feature flag kill details in the JSON body; path parameters specify the project, feature flag, and environment.
+- [Restore feature flag in environment](https://docs.split.io/reference/restore-feature-flag-in-environment.md): Restore a feature in a specific FME environment. Include the feature flag restore details in the JSON body; path parameters specify the project, feature flag, and environment.
+- [Reallocate traffic (Reseed bucketing)](https://docs.split.io/reference/reallocate-traffic-reseed-bucketing.md): Resets the bucketing seed for a feature flag in a specific environment. This causes all users to be rehashed, reassigned to new buckets, and mapped to treatments based on the existing targeting rules.
+- [Remove feature flag definition from environment](https://docs.split.io/reference/remove-feature-flag-definition-from-environment.md): Unconfigures a feature flag definition for a specific FME environment. Any SDK calling this feature flag returns "control" for the selected FME environment.
+- [Delete a feature flag](https://docs.split.io/reference/delete-feature-flag.md): Deletes a feature flag from your account. This automatically unconfigures the feature flag definition from all FME environments. An SDK calling this feature flag returns "control".
+- [Archive a feature flag](https://docs.split.io/reference/archive-a-feature-flag.md): Archive an existing feature flag. Archived feature flags remain in your account but are no longer active for regular use.
+- [Unarchive a feature flag](https://docs.split.io/reference/unarchive-a-feature-flag.md): Restore an archived feature flag. Unarchived feature flags become active again and are available for regular use.
+- [Create flag set](https://docs.split.io/reference/create-flag-set.md): Create a new flag set in a given project (formerly called workspace). Include the flag set details in the JSON body.
+- [Get flag set](https://docs.split.io/reference/get-flag-set-by-id.md): Get a flag set given its ID.
+- [List flag sets](https://docs.split.io/reference/list-flag-sets.md): List all flag sets for a given project (formerly called workspace).
+- [Delete flag set](https://docs.split.io/reference/delete-flag-set-by-id.md): Delete a flag set given its ID.
+- [Groups Overview](https://docs.split.io/reference/groups-overview.md)
+- [List groups](https://docs.split.io/reference/list-groups.md): List all active groups in the account.
+- [Get group](https://docs.split.io/reference/get-group.md): List all active groups in the account.
+- [Create group](https://docs.split.io/reference/create-group.md): Create a new group in your account.
+- [Update group](https://docs.split.io/reference/update-group.md): List all active groups in the account.
+- [Delete group](https://docs.split.io/reference/delete-group.md): Delete a group from your account.
+- [Identities Overview](https://docs.split.io/reference/identities-overview.md)
+- [Save Identities](https://docs.split.io/reference/save-identities.md): Create or overwrite identities for a given traffic type in an FME environment. The attribute ID must start with a letter followed by a combination of dashes (-), underscores (_), letters (a-z A-Z), or numbers (0-9). Include the list of identities and their attributes to create or overwrite in the JSON body.
+- [Save Identity](https://docs.split.io/reference/save-identity.md): Create or overwrite a single key for a given traffic type in an FME environment. The attribute ID must start with a letter followed by a combination of dashes (-), underscores (_), letters (a-z A-Z), or numbers (0-9). Include the identity attributes to create or overwrite in the JSON body.
+- [Update Identity](https://docs.split.io/reference/update-identity.md): Update a single key for a given traffic type in an FME environment. Any provided attribute values are overwritten, but existing values otherwise remain. The attribute ID must start with a letter followed by a combination of dashes(-), underscores(_), letters(a-z A-Z), or numbers(0-9).
+- [Delete Identity](https://docs.split.io/reference/delete-identitiy.md): Delete a key from a given traffic type and FME environment.
+- [Projects Overview (Workspaces)](https://docs.split.io/reference/workspaces-overview.md)
+- [Get Projects (Workspaces)](https://docs.split.io/reference/get-workspaces.md): Retrieves the projects (formerly known as workspaces) for an account.
+- [Create Projects (Workspaces)](https://docs.split.io/reference/create-workspace.md): Allows you to create projects (formerly known as workspaces). Note: When you create a project from this API, this won't create the default environment. You must use the <a href="https://docs.split.io/reference/create-environment">create environments API</a> to create an environment.
+- [Update Projects (Workspaces)](https://docs.split.io/reference/update-workspace.md): This endpoint provides a partial update for a project (formerly known as workspace).
+- [Delete Projects (Workspaces)](https://docs.split.io/reference/delete-workspace.md): Deletes a project, formerly known as workspace.
+- [Restrictions Overview](https://docs.split.io/reference/restrictions-overview.md)
+- [List restrictions](https://docs.split.io/reference/list-restrictions.md)
+- [Update restrictions](https://docs.split.io/reference/update-restrictions.md)
+- [Get rollout statuses](https://docs.split.io/reference/get-rollout-statuses.md)
+- [Segments Overview](https://docs.split.io/reference/segments-overview.md)
+- [Segment](https://docs.split.io/reference/segment-1.md)
+- [Create Segment](https://docs.split.io/reference/create-segment.md): Create a segment in your account (for a given traffic type). This API does not configure the segment in any FME environment. Include the segment details in the JSON body.
+- [Enable Segment in Environment](https://docs.split.io/reference/enable-segment-in-environment.md): Activate a segment in an FME environment to be able to set its definitions. This endpoint requires an empty JSON body; path parameters are required to activate the segment.
+- [List Segments](https://docs.split.io/reference/list-segments.md): Lists segments in your account for a given project (formerly known as workspace).
+- [Get Segment Keys in Environment](https://docs.split.io/reference/get-segment-keys-in-environment.md): Retrieve segments keys for a given existing segment.
+- [List Segments in Environment](https://docs.split.io/reference/list-segments-in-environment.md): Retrieve the segments in an FME environment.
+- [Update Segment Keys in Environment via CSV](https://docs.split.io/reference/update-segment-keys-in-environment-via-csv.md): Bulk upload a CSV file containing a list of identifiers. The segment must exist before calling this endpoint. Segments are limited to 100,000 members and each call can only include 10,000 new members at a time. This endpoint requires a CSV file in the file form field; path parameters and optional query parameters control which segment and environment are affected. <blockquote class="callout callout_okay" theme="👍"><h4><p style="color:#46b8da;">👍 Tip</p></h4><p style="font-size:15px;">On the <a href="https://www.split.io/pricing/">Enterprise</a> plan, you can create <a href="https://docs.split.io/reference/createlargesegment">large segments</a> (that can contain over 100,000 members).</blockquote>
+- [Update Segment Keys in Environment via JSON](https://docs.split.io/reference/update-segment-keys-in-environment-via-json.md): <p>Bulk upload a list of identifiers via JSON to a segment. The segment must exist before calling this endpoint. Segments are limited to 100,000 members and each call can only include 10,000 new members at a time. This endpoint requires a JSON body with the keys array and optional comment field; path and query parameters define which segment and environment to update. </p> <blockquote class="callout callout_okay" theme="👍"><h4><p style="color:#46b8da;">👍 Tip</p></h4><p style="font-size:15px;">On the <a href="https://www.split.io/pricing/">Enterprise</a> plan, you can create <a href="https://docs.split.io/reference/createlargesegment">large segments</a> (that can contain over 100,000 members).</blockquote>
+- [Remove Segment Keys from Environment](https://docs.split.io/reference/remove-segment-keys-from-environment.md): Delete a list of segment keys via JSON from an existing segment. This endpoint requires a JSON body with a keys array to delete from the specified segment and FME environment.
+- [Deactivate Segment in Environment](https://docs.split.io/reference/deactivate-segment-in-environment.md): Deactivate a segment in an FME environment.
+- [Delete Segment](https://docs.split.io/reference/delete-segment.md): Delete a segment from your account. This automatically unconfigures the segment definition from all FME environments.
+- [Create Large Segment](https://docs.split.io/reference/createlargesegment.md): Create a new large segment metadata in a given project (formerly called workspace)
+- [Create Large Segment Definition for Environment](https://docs.split.io/reference/createlargesegmentinenvironment.md): Create a large segment definition in an FME environment with the given name
+- [Get Large Segment in Project (Workspace) By Name](https://docs.split.io/reference/getlargesegmentbyname.md): Get a large segment metadata in given project (workspace) by name
+- [List Large Segments](https://docs.split.io/reference/listlargesegments.md): List all large segments in a given project (workspace)
+- [List Large Segments in Environment](https://docs.split.io/reference/listlargesegmentsinenvironment.md): Get a list of large segment configurations in a given project (workspace) and FME environment
+- [Update Large Segment Keys in Environment via CSV](https://docs.split.io/reference/update-large-segment-keys-in-environment-via-csv.md)
+- [Delete Large Segment in Environment](https://docs.split.io/reference/deletelargesegmentinenvironment.md)
+- [Delete Large Segment in Project (Workspace)](https://docs.split.io/reference/deletelargesegment.md)
+- [Rule-based Segments Overview](https://docs.split.io/reference/rule-based-segments-overview.md)
+- [Create Change Request for Rule-based Segment](https://docs.split.io/reference/createrbschangerequest.md): Create a change request for a rule-based segment. This endpoint requires a JSON body containing the rule-based segment object, including operation type, title, and optionally comments and approvers.
+- [Create Rule-based Segment](https://docs.split.io/reference/post_internal-api-v2-rule-based-segments-ws-workspace-id-traffictypes-traffic-type-id.md): Create a rule-based segment in your account (for a given traffic type). This API does not configure the rule-based segment in any environment.
+- [Enable Rule-based Segment in Environment](https://docs.split.io/reference/enablerbsinenv.md): Create an empty definition for a rule-based segment and an environment, which is available for flags of the same traffic type within that environment. You can update this definition later with targeting rules and exclusions. This endpoint does not require a JSON body; the POST creates an empty definition for the rule-based segment in the environment.
+- [Get Rule-based Segment by Name](https://docs.split.io/reference/get_internal-api-v2-rule-based-segments-ws-workspace-id-rb-segment-name.md): Retrieve metadata for a Rule-based Segment.
+- [List Rule-based Segments](https://docs.split.io/reference/get_internal-api-v2-rule-based-segments-ws-workspace-id.md): List all rule-based segments in a project (formerly called workspace).
+- [List Rule-based Segments in Environment](https://docs.split.io/reference/get_internal-api-v2-rule-based-segments-ws-workspace-id-environments-environment-id.md): List all rule-based segments in an FME environment. These definitions can be used in feature flags.
+- [Update Rule-based Segment Definition](https://docs.split.io/reference/updaterbsdefinition.md): Set the definition of a rule-based segment for an environment with targeting rules and exclusions for user keys or segments. This endpoint requires a JSON body containing the rule-based segment definition, including title, comment, rules, and optionally, excluded keys and excluded segments.
+- [Delete Rule-based Segment in Environment](https://docs.split.io/reference/deleterbsinenv.md): Delete the definition of a rule-based segment in an environment, which will no longer be available for targeting rules.
+- [Delete Rule-based Segment](https://docs.split.io/reference/delete_internal-api-v2-rule-based-segments-ws-workspace-id-rb-segment-name.md): Delete the metadata for a Rule-based Segment.
+- [Traffic Types Overview](https://docs.split.io/reference/traffic-types-overview.md)
+- [Get Traffic Types](https://docs.split.io/reference/get-traffic-types.md): Gets a list of traffic types.
+- [Create Traffic Types](https://docs.split.io/reference/create-traffic-types.md): This endpoint requires a JSON body containing the name of the traffic type to create.
+- [Delete Trafic Types](https://docs.split.io/reference/delete-trafic-type.md): Deletes traffic type.
+- [Tags Overview](https://docs.split.io/reference/tags-overview.md)
+- [Associate Tags](https://docs.split.io/reference/associate-tags.md): Associate tags with an existing feature flag. This endpoint requires a JSON body containing the tags array to associate with the object.
+- [Users Overview](https://docs.split.io/reference/users-overview.md)
+- [List users](https://docs.split.io/reference/list-users.md): List all active, deactivated, and pending users in the account.
+- [Get user](https://docs.split.io/reference/get-user.md): Get a user by their user Id.
+- [Invite a new user](https://docs.split.io/reference/invite-a-new-user.md): Invite a new user to your account. They are created with a Pending status.
+- [Update user](https://docs.split.io/reference/full-update-user.md): Use this endpoint to update display name, email, disable 2FA, activate, and deactivate a user.
+- [Update user's groups](https://docs.split.io/reference/update-users-groups.md): Use this endpoint to update the groups that a user is part of.
+- [Delete a pending user](https://docs.split.io/reference/delete-a-pending-user.md): You can only delete pending users that have not accepted their invites yet. Once a user is active, you can only deactivate the user via a PUT request.

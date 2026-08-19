@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Split Admin Events API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Track an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.split.io/internal/api/v2/client/track",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "The customer key associated with the event"
+              },
+              {
+                "name": "traffic-type",
+                "value": "",
+                "type": "query",
+                "description": "The traffic type for the event"
+              },
+              {
+                "name": "event-type",
+                "value": "",
+                "type": "query",
+                "description": "The type of event being tracked (e.g., purchase, click, signup)"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Optional numeric value associated with the event"
+              },
+              {
+                "name": "properties",
+                "value": "",
+                "type": "query",
+                "description": "JSON string with up to 15 key-value pairs of event properties. Values must be boolean, string, number, or null."
+              }
+            ]
+          },
+          "docs": "Records a custom event for the given key and event type. Events are used to measure the impact of feature flags on user actions and experimentation metrics."
+        },
+        {
+          "info": {
+            "name": "Track an event with properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.split.io/internal/api/v2/client/track",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "The customer key associated with the event"
+              },
+              {
+                "name": "traffic-type",
+                "value": "",
+                "type": "query",
+                "description": "The traffic type for the event"
+              },
+              {
+                "name": "event-type",
+                "value": "",
+                "type": "query",
+                "description": "The type of event being tracked"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Optional numeric value associated with the event"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Records a custom event with properties passed in the request body. Preferred for events with complex property structures."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
