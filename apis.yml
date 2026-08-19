@@ -22,7 +22,7 @@ description: >-
 url: https://raw.githubusercontent.com/api-evangelist/split/refs/heads/main/apis.yml
 created: '2026-03-20'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 type: Index
 tags:
   - Experimentation
