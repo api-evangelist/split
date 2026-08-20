@@ -29,6 +29,12 @@ tags:
   - Feature Flags
   - Feature Management
   - Rollouts
+  - SDK
+tags_raw:
+  - Experimentation
+  - Feature Flags
+  - Feature Management
+  - Rollouts
   - SDKs
 apis:
 - aid: split:split-admin-api
@@ -77,6 +83,11 @@ apis:
   - Feature Flags
   - Node.js
   - SDK
+  - Server-Side
+  tags_raw:
+  - Feature Flags
+  - Node.js
+  - SDK
   - Server Side
   properties:
   - type: Documentation
@@ -91,6 +102,11 @@ apis:
   - Feature Flags
   - Java
   - SDK
+  - Server-Side
+  tags_raw:
+  - Feature Flags
+  - Java
+  - SDK
   - Server Side
   properties:
   - type: Documentation
@@ -102,6 +118,11 @@ apis:
     for Django, Flask, and other frameworks.
   humanURL: https://help.split.io/hc/en-us/articles/360020359652-Python-SDK
   tags:
+  - Feature Flags
+  - Python
+  - SDK
+  - Server-Side
+  tags_raw:
   - Feature Flags
   - Python
   - SDK
@@ -131,6 +152,8 @@ apis:
     scopes.
   humanURL: https://docs.split.io/reference/introduction
   tags:
+  - APIKeys
+  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI
@@ -211,6 +234,8 @@ apis:
   description: Endpoints for tracking custom events used in experimentation and metrics measurement.
   humanURL: https://docs.split.io/reference/introduction
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -260,6 +285,8 @@ apis:
   description: Manage groups for organizing users and assigning permissions.
   humanURL: https://docs.split.io/reference/introduction
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -337,6 +364,8 @@ apis:
     Manage users within the Split account, including inviting new users and updating user roles.
   humanURL: https://docs.split.io/reference/introduction
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
