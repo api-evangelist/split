@@ -1,44 +1,44 @@
 {
   "provider": "split",
   "sources": [
-    "split-admin-api-openapi.yml",
-    "split-api-keys-api-openapi.yml",
-    "split-attributes-api-openapi.yml",
-    "split-change-requests-api-openapi.yml",
-    "split-environments-api-openapi.yml",
-    "split-evaluation-api-openapi.yml",
-    "split-events-api-openapi.yml",
-    "split-feature-flag-definitions-api-openapi.yml",
-    "split-feature-flags-api-openapi.yml",
-    "split-groups-api-openapi.yml",
-    "split-identities-api-openapi.yml",
-    "split-large-segments-api-openapi.yml",
-    "split-segments-api-openapi.yml",
-    "split-traffic-types-api-openapi.yml",
-    "split-users-api-openapi.yml",
-    "split-workspaces-api-openapi.yml"
+    "_original/split-evaluator-api-openapi.yml",
+    "_original/split-feature-flag-api-openapi.yml"
   ],
   "outputs": [
     "split-admin-api-openapi.yml",
-    "split-api-keys-api-openapi.yml",
-    "split-attributes-api-openapi.yml",
-    "split-change-requests-api-openapi.yml",
-    "split-environments-api-openapi.yml",
     "split-evaluation-api-openapi.yml",
     "split-events-api-openapi.yml",
     "split-feature-flag-definitions-api-openapi.yml",
-    "split-feature-flags-api-openapi.yml",
-    "split-groups-api-openapi.yml",
-    "split-identities-api-openapi.yml",
-    "split-large-segments-api-openapi.yml",
-    "split-segments-api-openapi.yml",
-    "split-traffic-types-api-openapi.yml",
-    "split-users-api-openapi.yml",
-    "split-workspaces-api-openapi.yml"
+    "split-feature-flags-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "split-evaluator-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "split-evaluator-api-openapi.yml: tagged paths GET /admin/ping -> Admin",
+    "split-evaluator-api-openapi.yml: tagged paths GET /admin/version -> Admin",
+    "split-evaluator-api-openapi.yml: tagged paths GET /admin/healthcheck -> Admin",
+    "split-evaluator-api-openapi.yml: declared missing tag: Admin",
+    "split-feature-flag-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "split-admin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-api-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-attributes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-change-requests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-environments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-evaluation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-feature-flag-definitions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-feature-flags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-identities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-large-segments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-segments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-traffic-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "split-workspaces-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

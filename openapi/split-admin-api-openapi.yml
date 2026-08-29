@@ -1,17 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Split Admin API
-  description: The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.
-  version: '2.0'
+  title: Split Evaluator Admin API
+  description: The Split Evaluator is an HTTP service that wraps Split SDKs to provide feature flag evaluation via a REST API. It enables applications that cannot directly embed an SDK to request treatment evaluations over HTTP, making it suitable for architectures where a centralized evaluation service is preferred. The Evaluator can be deployed as a standalone microservice that processes getTreatment calls and returns the appropriate treatments for given users and feature flags. Swagger documentation is available by default at the /api-docs endpoint.
+  version: '1.0'
   contact:
     name: Split Support
     url: https://help.split.io
   termsOfService: https://www.split.io/terms-of-service/
 servers:
-- url: https://api.split.io/internal/api/v2
-  description: Production Server
-security:
-- bearerAuth: []
+- url: http://localhost:7548
+  description: Default local Evaluator instance
 tags:
 - name: Admin
 paths:
@@ -83,11 +81,6 @@ components:
         message:
           type: string
           description: Detailed message about the health status
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      description: Admin API key passed as a Bearer token in the Authorization header.
 externalDocs:
-  description: Split Admin API Documentation
-  url: https://docs.split.io/reference/introduction
+  description: Split Evaluator Documentation
+  url: https://help.split.io/hc/en-us/articles/360020037072-Split-Evaluator

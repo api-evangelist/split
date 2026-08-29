@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Split Admin Feature Flag Definitions API
-  description: The Split Admin API is a REST API that enables programmatic management of workspaces (projects), environments, traffic types, attributes, users, groups, API keys, and change requests within the Split platform (now Harness Feature Management and Experimentation). The API uses resource-oriented URLs, returns JSON responses, and requires Admin API keys for authentication. All endpoints are prefixed with /internal/api/v2 on the api.split.io host.
+  title: Split Feature Flag Feature Flag Definitions API
+  description: The Split Feature Flag API provides endpoints for creating, editing, and deleting feature flags (splits) and their definitions within specific environments. Developers can use this API to define treatments, configure targeting rules, set percentage-based rollouts, and manage feature flag lifecycles programmatically. It supports operations like creating feature flag definitions in environments, updating targeting configurations, and retrieving flag status across workspaces.
   version: '2.0'
   contact:
     name: Split Support
@@ -174,6 +174,210 @@ paths:
           description: Workspace, feature flag, or environment not found
 components:
   schemas:
+    FeatureFlagDefinition:
+      type: object
+      description: The full definition of a feature flag in a specific environment, including treatments, targeting rules, and rollout configuration.
+      properties:
+        name:
+          type: string
+          description: Name of the feature flag
+        environment:
+          $ref: '#/components/schemas/EnvironmentRef'
+        trafficType:
+          $ref: '#/components/schemas/TrafficType'
+        killed:
+          type: boolean
+          description: Whether the flag is killed, forcing all evaluations to return the default treatment
+        treatments:
+          type: array
+          description: List of possible treatments that this feature flag can return
+          items:
+            $ref: '#/components/schemas/Treatment'
+        defaultTreatment:
+          type: string
+          description: The treatment returned when no targeting rules match or when the flag is killed
+        baselineTreatment:
+          type: string
+          description: The control treatment used as a baseline for experimentation
+        rules:
+          type: array
+          description: Ordered list of targeting rules evaluated top to bottom. The first matching rule determines the treatment.
+          items:
+            $ref: '#/components/schemas/TargetingRule'
+        defaultRule:
+          type: array
+          description: The default rule applied when no targeting rules match. Defines the percentage-based rollout for unmatched traffic.
+          items:
+            $ref: '#/components/schemas/Bucket'
+        trafficAllocation:
+          type: integer
+          description: Percentage of traffic that is included in the feature flag evaluation (0-100). Traffic outside this allocation receives the default treatment.
+          minimum: 0
+          maximum: 100
+        lastModified:
+          type: integer
+          format: int64
+          description: Unix timestamp of the last modification
+        creationTime:
+          type: integer
+          format: int64
+          description: Unix timestamp of when the definition was created
+    EnvironmentRef:
+      type: object
+      description: A reference to an environment
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the environment
+        name:
+          type: string
+          description: Name of the environment
+    Condition:
+      type: object
+      description: A condition defining the matching criteria for a targeting rule.
+      properties:
+        combiner:
+          type: string
+          description: Logical combiner for multiple matchers within this condition
+          enum:
+          - AND
+        matchers:
+          type: array
+          description: List of matchers that define the matching criteria
+          items:
+            $ref: '#/components/schemas/Matcher'
+    FeatureFlagDefinitionCreate:
+      type: object
+      description: Request body for creating a feature flag definition in an environment
+      required:
+      - treatments
+      - defaultTreatment
+      - defaultRule
+      properties:
+        treatments:
+          type: array
+          description: List of treatments for this definition
+          items:
+            $ref: '#/components/schemas/Treatment'
+        defaultTreatment:
+          type: string
+          description: The default treatment for unmatched traffic
+        baselineTreatment:
+          type: string
+          description: The baseline treatment for experimentation
+        rules:
+          type: array
+          description: Targeting rules for the definition
+          items:
+            $ref: '#/components/schemas/TargetingRule'
+        defaultRule:
+          type: array
+          description: Default percentage-based rollout rule
+          items:
+            $ref: '#/components/schemas/Bucket'
+        trafficAllocation:
+          type: integer
+          description: Percentage of traffic included in evaluation
+          minimum: 0
+          maximum: 100
+    TargetingRule:
+      type: object
+      description: A targeting rule that matches specific conditions and assigns treatments to matching traffic.
+      properties:
+        condition:
+          $ref: '#/components/schemas/Condition'
+        buckets:
+          type: array
+          description: Percentage-based distribution of treatments for traffic matching this rule
+          items:
+            $ref: '#/components/schemas/Bucket'
+    TrafficType:
+      type: object
+      description: A traffic type defining the kind of entity targeted by feature flags.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the traffic type
+        name:
+          type: string
+          description: Name of the traffic type
+    Bucket:
+      type: object
+      description: A bucket defining the percentage of traffic assigned to a specific treatment within a rule.
+      properties:
+        treatment:
+          type: string
+          description: Name of the treatment assigned to this bucket
+        size:
+          type: integer
+          description: Percentage of traffic allocated to this bucket (0-100)
+          minimum: 0
+          maximum: 100
+    Treatment:
+      type: object
+      description: A treatment representing one of the possible values returned by a feature flag evaluation.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the treatment (e.g., on, off, v1, v2)
+        description:
+          type: string
+          description: Description of what this treatment does
+        configurations:
+          type: string
+          description: JSON string containing dynamic configuration associated with this treatment
+    FeatureFlagDefinitionList:
+      type: object
+      description: Paginated list of feature flag definitions
+      properties:
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeatureFlagDefinition'
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        totalCount:
+          type: integer
+          description: Total number of definitions available
+    FeatureFlagDefinitionUpdate:
+      type: object
+      description: Request body for partially updating a feature flag definition in an environment. Only provided fields are updated.
+      properties:
+        treatments:
+          type: array
+          description: Updated list of treatments
+          items:
+            $ref: '#/components/schemas/Treatment'
+        defaultTreatment:
+          type: string
+          description: Updated default treatment
+        baselineTreatment:
+          type: string
+          description: Updated baseline treatment
+        rules:
+          type: array
+          description: Updated targeting rules
+          items:
+            $ref: '#/components/schemas/TargetingRule'
+        defaultRule:
+          type: array
+          description: Updated default percentage-based rollout rule
+          items:
+            $ref: '#/components/schemas/Bucket'
+        trafficAllocation:
+          type: integer
+          description: Updated traffic allocation percentage
+          minimum: 0
+          maximum: 100
+        comment:
+          type: string
+          description: Comment describing the update
     Matcher:
       type: object
       description: A matcher defining a single matching criterion based on attributes, segments, or key values.
@@ -240,227 +444,7 @@ components:
               description: Treatments that must be returned by the dependency
               items:
                 type: string
-    Treatment:
-      type: object
-      description: A treatment representing one of the possible values returned by a feature flag evaluation.
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the treatment (e.g., on, off, v1, v2)
-        description:
-          type: string
-          description: Description of what this treatment does
-        configurations:
-          type: string
-          description: JSON string containing dynamic configuration associated with this treatment
-    EnvironmentRef:
-      type: object
-      description: A reference to an environment
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the environment
-        name:
-          type: string
-          description: Name of the environment
-    TargetingRule:
-      type: object
-      description: A targeting rule that matches specific conditions and assigns treatments to matching traffic.
-      properties:
-        condition:
-          $ref: '#/components/schemas/Condition'
-        buckets:
-          type: array
-          description: Percentage-based distribution of treatments for traffic matching this rule
-          items:
-            $ref: '#/components/schemas/Bucket'
-    FeatureFlagDefinitionCreate:
-      type: object
-      description: Request body for creating a feature flag definition in an environment
-      required:
-      - treatments
-      - defaultTreatment
-      - defaultRule
-      properties:
-        treatments:
-          type: array
-          description: List of treatments for this definition
-          items:
-            $ref: '#/components/schemas/Treatment'
-        defaultTreatment:
-          type: string
-          description: The default treatment for unmatched traffic
-        baselineTreatment:
-          type: string
-          description: The baseline treatment for experimentation
-        rules:
-          type: array
-          description: Targeting rules for the definition
-          items:
-            $ref: '#/components/schemas/TargetingRule'
-        defaultRule:
-          type: array
-          description: Default percentage-based rollout rule
-          items:
-            $ref: '#/components/schemas/Bucket'
-        trafficAllocation:
-          type: integer
-          description: Percentage of traffic included in evaluation
-          minimum: 0
-          maximum: 100
-    FeatureFlagDefinition:
-      type: object
-      description: The full definition of a feature flag in a specific environment, including treatments, targeting rules, and rollout configuration.
-      properties:
-        name:
-          type: string
-          description: Name of the feature flag
-        environment:
-          $ref: '#/components/schemas/EnvironmentRef'
-        trafficType:
-          $ref: '#/components/schemas/TrafficType'
-        killed:
-          type: boolean
-          description: Whether the flag is killed, forcing all evaluations to return the default treatment
-        treatments:
-          type: array
-          description: List of possible treatments that this feature flag can return
-          items:
-            $ref: '#/components/schemas/Treatment'
-        defaultTreatment:
-          type: string
-          description: The treatment returned when no targeting rules match or when the flag is killed
-        baselineTreatment:
-          type: string
-          description: The control treatment used as a baseline for experimentation
-        rules:
-          type: array
-          description: Ordered list of targeting rules evaluated top to bottom. The first matching rule determines the treatment.
-          items:
-            $ref: '#/components/schemas/TargetingRule'
-        defaultRule:
-          type: array
-          description: The default rule applied when no targeting rules match. Defines the percentage-based rollout for unmatched traffic.
-          items:
-            $ref: '#/components/schemas/Bucket'
-        trafficAllocation:
-          type: integer
-          description: Percentage of traffic that is included in the feature flag evaluation (0-100). Traffic outside this allocation receives the default treatment.
-          minimum: 0
-          maximum: 100
-        lastModified:
-          type: integer
-          format: int64
-          description: Unix timestamp of the last modification
-        creationTime:
-          type: integer
-          format: int64
-          description: Unix timestamp of when the definition was created
-    TrafficType:
-      type: object
-      description: A traffic type defining the kind of entity targeted by feature flags.
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the traffic type
-        name:
-          type: string
-          description: Name of the traffic type
-    Bucket:
-      type: object
-      description: A bucket defining the percentage of traffic assigned to a specific treatment within a rule.
-      properties:
-        treatment:
-          type: string
-          description: Name of the treatment assigned to this bucket
-        size:
-          type: integer
-          description: Percentage of traffic allocated to this bucket (0-100)
-          minimum: 0
-          maximum: 100
-    FeatureFlagDefinitionList:
-      type: object
-      description: Paginated list of feature flag definitions
-      properties:
-        objects:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeatureFlagDefinition'
-        offset:
-          type: integer
-          description: Current offset in the result set
-        limit:
-          type: integer
-          description: Maximum number of results returned
-        totalCount:
-          type: integer
-          description: Total number of definitions available
-    FeatureFlagDefinitionUpdate:
-      type: object
-      description: Request body for partially updating a feature flag definition in an environment. Only provided fields are updated.
-      properties:
-        treatments:
-          type: array
-          description: Updated list of treatments
-          items:
-            $ref: '#/components/schemas/Treatment'
-        defaultTreatment:
-          type: string
-          description: Updated default treatment
-        baselineTreatment:
-          type: string
-          description: Updated baseline treatment
-        rules:
-          type: array
-          description: Updated targeting rules
-          items:
-            $ref: '#/components/schemas/TargetingRule'
-        defaultRule:
-          type: array
-          description: Updated default percentage-based rollout rule
-          items:
-            $ref: '#/components/schemas/Bucket'
-        trafficAllocation:
-          type: integer
-          description: Updated traffic allocation percentage
-          minimum: 0
-          maximum: 100
-        comment:
-          type: string
-          description: Comment describing the update
-    Condition:
-      type: object
-      description: A condition defining the matching criteria for a targeting rule.
-      properties:
-        combiner:
-          type: string
-          description: Logical combiner for multiple matchers within this condition
-          enum:
-          - AND
-        matchers:
-          type: array
-          description: List of matchers that define the matching criteria
-          items:
-            $ref: '#/components/schemas/Matcher'
   parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of results to return per page
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 200
-        default: 20
-    featureFlagNameParam:
-      name: featureFlagName
-      in: path
-      required: true
-      description: The name of the feature flag
-      schema:
-        type: string
     environmentIdParam:
       name: environmentId
       in: path
@@ -483,11 +467,27 @@ components:
       description: The unique identifier of the workspace
       schema:
         type: string
+    featureFlagNameParam:
+      name: featureFlagName
+      in: path
+      required: true
+      description: The name of the feature flag
+      schema:
+        type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: Admin API key passed as a Bearer token in the Authorization header.
 externalDocs:
-  description: Split Admin API Documentation
-  url: https://docs.split.io/reference/introduction
+  description: Split Feature Flag API Documentation
+  url: https://docs.split.io/reference/feature-flag-overview
