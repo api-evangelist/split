@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Split Evaluator Events API
-  description: The Split Evaluator is an HTTP service that wraps Split SDKs to provide feature flag evaluation via a REST API. It enables applications that cannot directly embed an SDK to request treatment evaluations over HTTP, making it suitable for architectures where a centralized evaluation service is preferred. The Evaluator can be deployed as a standalone microservice that processes getTreatment calls and returns the appropriate treatments for given users and feature flags. Swagger documentation is available by default at the /api-docs endpoint.
+  description: The Split Evaluator is an HTTP service that wraps Split SDKs to provide feature flag evaluation via a REST API.
   version: '1.0'
   contact:
     name: Split Support

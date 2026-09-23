@@ -21,24 +21,14 @@
     "split-evaluator-api-openapi.yml: tagged paths GET /admin/version -> Admin",
     "split-evaluator-api-openapi.yml: tagged paths GET /admin/healthcheck -> Admin",
     "split-evaluator-api-openapi.yml: declared missing tag: Admin",
-    "split-feature-flag-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+    "split-feature-flag-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "split-admin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "split-api-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "split-attributes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "split-change-requests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "split-environments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "split-evaluation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "split-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "split-feature-flag-definitions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "split-feature-flags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "split-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "split-identities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "split-large-segments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "split-segments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "split-traffic-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "split-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "split-workspaces-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "split-feature-flags-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }
