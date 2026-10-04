@@ -227,6 +227,9 @@ apis:
   - type: Documentation
     url: https://help.split.io/hc/en-us/articles/360020037072-Split-Evaluator
 common:
+  - type: CapabilityMap
+    url: capabilities/split-capability-edges.yml
+    name: Split Business Capability Map
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/split/overview
   - type: AgenticAccess

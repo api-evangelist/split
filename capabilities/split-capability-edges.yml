@@ -1,0 +1,43 @@
+slug: split
+provider: Split
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Feature Flag Definitions
+  spec_file: split-feature-flag-definitions-api-openapi.yml
+  capability_id: BC-4210.50
+  capability_id_l1: BC-4210
+  capability_name: Feature Flag Management
+  confidence: 0.95
+  evidence: POST /splits/ws/{workspaceId}/{featureFlagName}/environments/{environmentId}  createFeatureFlagDefinition;
+    PUT .../kill  killFeatureFlag; schemas TargetingRule, Treatment
+  reason: CRUD over per-environment feature-flag definitions with targeting rules, percentage buckets,
+    kill and restore — squarely the lifecycle and runtime control of feature flags.
+- tag: Feature Flags
+  spec_file: split-feature-flags-api-openapi.yml
+  capability_id: BC-4210.50
+  capability_id_l1: BC-4210
+  capability_name: Feature Flag Management
+  confidence: 0.95
+  evidence: POST /splits/ws/{workspaceId}/trafficTypes/{trafficTypeId}  createFeatureFlag; DELETE /splits/ws/{workspaceId}/{featureFlagName}  deleteFeatureFlag
+  reason: Create/read/update/delete of feature flags themselves across workspaces — Feature Flag Management
+    lifecycle.
+- tag: Evaluation
+  spec_file: split-evaluation-api-openapi.yml
+  capability_id: BC-4210.50
+  capability_id_l1: BC-4210
+  capability_name: Feature Flag Management
+  confidence: 0.9
+  evidence: GET /client/get-treatment  Get treatment for a feature flag; schemas TreatmentResult, EvaluationAttributes
+  reason: Operations resolve feature-flag treatments at runtime for a given key and attributes, i.e. runtime
+    control/targeting of feature flags, which is Feature Flag Management under Software Release & Deployment.
