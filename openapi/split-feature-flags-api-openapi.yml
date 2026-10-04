@@ -146,6 +146,23 @@ paths:
           description: Feature flag still has active definitions in one or more environments
 components:
   schemas:
+    FeatureFlagList:
+      type: object
+      description: Paginated list of feature flags
+      properties:
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeatureFlag'
+        offset:
+          type: integer
+          description: Current offset in the result set
+        limit:
+          type: integer
+          description: Maximum number of results returned
+        totalCount:
+          type: integer
+          description: Total number of feature flags available
     FeatureFlagUpdate:
       type: object
       description: Request body for updating a feature flag
@@ -158,16 +175,13 @@ components:
           description: Updated tags for the feature flag
           items:
             $ref: '#/components/schemas/Tag'
-    TrafficType:
+    Tag:
       type: object
-      description: A traffic type defining the kind of entity targeted by feature flags.
+      description: A tag associated with a feature flag
       properties:
-        id:
-          type: string
-          description: Unique identifier for the traffic type
         name:
           type: string
-          description: Name of the traffic type
+          description: Name of the tag
     FeatureFlag:
       type: object
       description: A feature flag (split) representing a toggle used to control feature rollouts and experimentation.
@@ -189,30 +203,6 @@ components:
           description: Tags associated with the feature flag
           items:
             $ref: '#/components/schemas/Tag'
-    FeatureFlagList:
-      type: object
-      description: Paginated list of feature flags
-      properties:
-        objects:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeatureFlag'
-        offset:
-          type: integer
-          description: Current offset in the result set
-        limit:
-          type: integer
-          description: Maximum number of results returned
-        totalCount:
-          type: integer
-          description: Total number of feature flags available
-    Tag:
-      type: object
-      description: A tag associated with a feature flag
-      properties:
-        name:
-          type: string
-          description: Name of the tag
     FeatureFlagCreate:
       type: object
       description: Request body for creating a new feature flag
@@ -232,6 +222,16 @@ components:
           description: Tags to associate with the feature flag
           items:
             $ref: '#/components/schemas/Tag'
+    TrafficType:
+      type: object
+      description: A traffic type defining the kind of entity targeted by feature flags.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the traffic type
+        name:
+          type: string
+          description: Name of the traffic type
   parameters:
     limitParam:
       name: limit
@@ -250,18 +250,18 @@ components:
         type: integer
         minimum: 0
         default: 0
-    workspaceIdParam:
-      name: workspaceId
-      in: path
-      required: true
-      description: The unique identifier of the workspace
-      schema:
-        type: string
     featureFlagNameParam:
       name: featureFlagName
       in: path
       required: true
       description: The name of the feature flag
+      schema:
+        type: string
+    workspaceIdParam:
+      name: workspaceId
+      in: path
+      required: true
+      description: The unique identifier of the workspace
       schema:
         type: string
   securitySchemes:
