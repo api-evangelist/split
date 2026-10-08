@@ -227,6 +227,12 @@ apis:
   - type: Documentation
     url: https://help.split.io/hc/en-us/articles/360020037072-Split-Evaluator
 common:
+  - type: Plans
+    url: plans/split-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/split-rate-limits.yml
+  - type: FinOps
+    url: finops/split-finops.yml
   - type: CapabilityMap
     url: capabilities/split-capability-edges.yml
     name: Split Business Capability Map
