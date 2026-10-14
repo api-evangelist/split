@@ -2,6 +2,9 @@ generated: '2026-10-13'
 method: searched
 checked:
 - https://azuremarketplace.microsoft.com/
+- https://docs.mparticle.com/integrations/split/event/
+- https://hightouch.com/docs/destinations/split
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/split
 marketplace_apps: []
 edges:
 - partner_name: Microsoft Azure Marketplace
@@ -19,3 +22,84 @@ edges:
   seller_name: Split Software
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: Twilio Segment
+  partner: segment
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/split
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - split
+      status: PUBLIC
+      partner_owned: true
+      connection_modes:
+      - cloud:mobile
+      - cloud:server
+      - cloud:web
+      accepted_methods:
+      - Identify
+      - Track
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: mParticle
+  partner: mparticle
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/split/event/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - split
+      integration_types:
+      - event
+    source:
+      catalog_entries:
+      - split
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Hightouch
+  partner: hightouch
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/split
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - split
+      status: released
+      sync_types:
+      - Segments
+      - Users
+      sync_modes:
+      - add
+      - insert
+      - remove
+      - update
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+source:
+- https://docs.mparticle.com/integrations/split/event/
+- https://hightouch.com/docs/destinations/split
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/split
