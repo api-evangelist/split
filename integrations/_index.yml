@@ -15,16 +15,28 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: split-atlassian-marketplace
+  label: Atlassian Marketplace
+  partner: atlassian
+  partner_name: Atlassian Marketplace
+  type: marketplace
+  marketplace: atlassian
+  channel: partner-built
+  evidence: https://marketplace.atlassian.com/vendors/1213665/split
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
 - slug: split-twilio-segment
   label: Twilio Segment
   partner: segment
   partner_name: Twilio Segment
-  type: coverage
-  marketplace: coverage
+  type: marketplace
+  marketplace: segment-partner-destinations
   channel: partner-built
   evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/split
   source: edge
-  relationship: connector-coverage
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null
 - slug: split-mparticle
@@ -51,14 +63,28 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
-- slug: split-atlassian-marketplace
-  label: Atlassian Marketplace
-  partner: atlassian
-  partner_name: Atlassian Marketplace
+- slug: split-datadog-own
+  label: Datadog (own)
+  partner: datadog
+  partner_name: Datadog (own)
+  category: Configuration & Deployment
   type: marketplace
-  marketplace: atlassian
+  marketplace: own
   channel: partner-built
-  evidence: https://marketplace.atlassian.com/vendors/1213665/split
+  evidence: https://github.com/DataDog/integrations-extras/tree/master/split-rum
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: split-new-relic-own
+  label: New Relic (own)
+  partner: new-relic
+  partner_name: New Relic (own)
+  category: Community
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://newrelic.com/instant-observability/split
   source: edge
   relationship: platform-app
   status: not-a-workflow
