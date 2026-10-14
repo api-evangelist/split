@@ -4,6 +4,7 @@ checked:
 - https://azuremarketplace.microsoft.com/
 - https://docs.mparticle.com/integrations/split/event/
 - https://hightouch.com/docs/destinations/split
+- https://marketplace.atlassian.com/
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/split
 marketplace_apps: []
 edges:
@@ -99,6 +100,21 @@ edges:
       - update
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: Atlassian Marketplace
+  partner: atlassian
+  partner_match: aggregator
+  type: marketplace
+  marketplace: atlassian
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://marketplace.atlassian.com/vendors/1213665/split
+  listing_count: 1
+  apps:
+  - Split for Jira
+  publisher_name: Split
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
 source:
 - https://docs.mparticle.com/integrations/split/event/
 - https://hightouch.com/docs/destinations/split
