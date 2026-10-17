@@ -252,6 +252,17 @@ paths:
           description: Internal server error during evaluation
 components:
   schemas:
+    EvaluationAttributes:
+      type: object
+      description: Attributes passed in the request body for use in targeting rule evaluation. Attributes can be strings, numbers, booleans, or sets.
+      properties:
+        attributes:
+          type: object
+          description: Key-value pairs of attribute names and their values
+          additionalProperties: true
+        impressionsDisabled:
+          type: boolean
+          description: When set to true, disables impression logging for the evaluation
     TreatmentResult:
       type: object
       description: The result of evaluating a single feature flag for a given key.
@@ -276,17 +287,6 @@ components:
       description: The result of evaluating all feature flags for the given keys. Keyed by feature flag name with treatment result values.
       additionalProperties:
         $ref: '#/components/schemas/TreatmentResult'
-    EvaluationAttributes:
-      type: object
-      description: Attributes passed in the request body for use in targeting rule evaluation. Attributes can be strings, numbers, booleans, or sets.
-      properties:
-        attributes:
-          type: object
-          description: Key-value pairs of attribute names and their values
-          additionalProperties: true
-        impressionsDisabled:
-          type: boolean
-          description: When set to true, disables impression logging for the evaluation
 externalDocs:
   description: Split Evaluator Documentation
   url: https://help.split.io/hc/en-us/articles/360020037072-Split-Evaluator
