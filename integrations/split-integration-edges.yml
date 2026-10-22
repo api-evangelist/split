@@ -15,6 +15,7 @@ checked:
 - https://marketplace.atlassian.com/
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/split
 - new-relic/integrations/new-relic-integration-edges.yml
+- vercel/integrations/vercel-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: Microsoft Azure Marketplace
@@ -47,40 +48,6 @@ edges:
   publisher_name: Split
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
-- partner_name: Datadog (own)
-  partner: datadog
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://github.com/DataDog/integrations-extras/tree/master/split-rum
-  mirror_of: datadog/integrations/datadog-integration-edges.yml
-  apps:
-  - Split - RUM
-  listing_count: 1
-  detected: '2026-10-14'
-  detected_by: mirror-platform-listings.py
-  category: Configuration & Deployment
-- partner_name: New Relic (own)
-  partner: new-relic
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://newrelic.com/instant-observability/split
-  mirror_of: new-relic/integrations/new-relic-integration-edges.yml
-  apps:
-  - Split
-  listing_count: 1
-  detected: '2026-10-14'
-  detected_by: mirror-platform-listings.py
-  category: Community
 - partner_name: Twilio Segment
   partner: segment
   partner_match: aggregator
@@ -247,6 +214,58 @@ edges:
     detected: '2026-10-19'
   detected_by: sweep-cloud-native.py
   first_seen: '2026-10-15'
+- partner_name: Datadog (own)
+  partner: datadog
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://github.com/DataDog/integrations-extras/tree/master/split-rum
+  mirror_of: datadog/integrations/datadog-integration-edges.yml
+  apps:
+  - Split - RUM
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Configuration & Deployment
+- partner_name: New Relic (own)
+  partner: new-relic
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://newrelic.com/instant-observability/split
+  mirror_of: new-relic/integrations/new-relic-integration-edges.yml
+  apps:
+  - Split
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Community
+- partner_name: Vercel (own)
+  partner: vercel
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://vercel.com/marketplace/split
+  mirror_of: vercel/integrations/vercel-integration-edges.yml
+  apps:
+  - Split
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Analytics
+  partner_tier: third-party
 source:
 - https://docs.mparticle.com/integrations/split/event/
 - https://hightouch.com/docs/destinations/split
