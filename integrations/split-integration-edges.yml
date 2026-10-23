@@ -16,6 +16,7 @@ checked:
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/split
 - new-relic/integrations/new-relic-integration-edges.yml
 - vercel/integrations/vercel-integration-edges.yml
+- jenkins/integrations/jenkins-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: Microsoft Azure Marketplace
@@ -266,6 +267,24 @@ edges:
   detected_by: mirror-platform-listings.py
   category: Analytics
   partner_tier: third-party
+- partner_name: Jenkins (own)
+  partner: jenkins
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://plugins.jenkins.io/split-admin/
+  mirror_of: jenkins/integrations/jenkins-integration-edges.yml
+  apps:
+  - Split Admin
+  - Split Admin (split-admin)
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Jenkins plugin
 source:
 - https://docs.mparticle.com/integrations/split/event/
 - https://hightouch.com/docs/destinations/split
